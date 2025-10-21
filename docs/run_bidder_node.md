@@ -1,0 +1,172 @@
+# Bidder operation manual
+
+This manual describes the process of spinning up a bidder node of Brevis Proving Network. A bidder node needs to run a pico proving service to prove a request, and a bidder service to interact with the proving network.
+
+## Up the pico proving service
+
+Follow [!TODO] doc to up a pico proving service. Note down the grpc service endpoint it exposes in format `ip addr:port`.
+
+## Up the bidder service
+
+### Prepare EC2 machine and install dependencies 
+
+1. Start an EC2 machine with the Ubuntu 20.04 LTS image. Use the appropriate security groups and a keypair that you have access to.
+
+2. Install go (at least 1.16):
+
+    ```sh
+    sudo snap install go --classic
+    ```
+
+3. Install CockroachDB:
+
+    ```sh
+    curl -sL https://binaries.cockroachdb.com/cockroach-v21.1.3.linux-amd64.tgz | sudo tar -xz --strip 1 -C /usr/local/bin cockroach-v21.1.3.linux-amd64/cockroach
+    sudo chmod +x /usr/local/bin/cockroach
+    ```
+
+4. Execute below to config crdb as system service
+
+    ```sh
+    sudo mkdir -p /var/log/crdb
+    sudo touch /var/log/crdb/out.log
+    sudo touch /var/log/crdb/err.log
+
+    sudo tee /etc/systemd/system/crdb.service << EOF
+    [Unit]
+    Description=CockroachDB single node
+    After=network-online.target
+
+    [Service]
+    WorkingDirectory=$HOME
+    ExecStart=/usr/local/bin/cockroach start-single-node --insecure --listen-addr=localhost:26257 \
+      --http-addr=localhost:18080 --store=path=$HOME/db
+    StandardOutput=append:/var/log/crdb/out.log
+    StandardError=append:/var/log/crdb/err.log
+    Restart=always
+    User=ubuntu
+    Group=ubuntu
+    RestartSec=10
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+
+    sudo systemctl enable crdb.service
+    sudo systemctl start crdb.service
+    ```
+
+5. Set \$GOBIN and add \$GOBIN to \$PATH. Edit `$HOME/.profile` and add:
+
+    ```sh
+    export GOBIN=$HOME/go/bin; export GOPATH=$HOME/go; export PATH=$PATH:$GOBIN
+    ```
+
+    to the end, then:
+
+    ```sh
+    source $HOME/.profile
+    ```
+
+### Setup binary, db, config and accounts
+
+1. From the `/home/ubuntu` directory, clone the `prover-network-bidder` repository
+
+    ```sh
+    git clone https://github.com/brevis-network/prover-network-bidder
+    git checkout main
+    ```
+
+2. Initialize the db
+
+    ```sh
+    cat $HOME/prover-network-bidder/dal/schema.sql | cockroach sql --insecure
+    ```
+
+3. Install the bidder binary
+
+    ```sh
+    cd prover-network-bidder/cmd/service
+    go build -o bidder
+    cp ./bidder $HOME/go/bin
+    cd ~
+    ```
+
+4. From the `/home/ubuntu` directory, clone the `prover-network-bidder-ops` repository, then copy the config files
+
+    ```sh
+    git clone https://github.com/brevis-network/prover-network-bidder-ops
+    cp -a prover-network-bidder-ops/node-configs ~/.bidder
+    ```
+
+5. Make sure the fields in `~/.bidder/config.toml` have the correct values:
+
+    | Field | Description |
+    | ----- | ----------- |
+    | prover_url | the pico proving service grpc endpoint |
+    | bidder_keystore | The path to your prepared ethereum keystore json (or use AWS KMS) |
+    | bidder_passphrase | The passphrase to the bidder keystore (or apikey:apisec if using AWS KMS) |
+    | bidder_eth_addr | The Ethereum address of the bidder |
+
+### Staking as a bidder
+
+To join the proving network as a bidder, you must stake staking token in [StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract). 
+
+1. Firstly, ask brevis team to get some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074)
+
+2. Use [explorer](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve StakingController 0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0 to spend your staking token
+
+3. Use [explorer](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `initializeProver` with a default commission rate. It will transfer a configured minimum staking amount from your wallet to `StakingController`
+
+4. Use [explorer](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `stake` more as you wish
+
+### Run the bidder node
+
+4. Prepare the bidder system service:
+
+    ```sh
+    sudo mkdir -p /var/log/bidder
+    sudo touch /var/log/bidder/app.log
+    sudo touch /etc/systemd/system/bidder.service
+    ```
+
+    Add the following to `/etc/systemd/system/bidder.service`:
+
+    ```
+    [Unit]
+    Description=bidder daemon
+    After=network-online.target
+
+    [Service]
+    Environment=HOME=/home/ubuntu
+    ExecStart=/home/ubuntu/go/bin/bidder --config /home/ubuntu/.bidder/config.toml
+    StandardOutput=append:/var/log/bidder/app.log
+    StandardError=append:/var/log/bidder/app.log
+    Restart=always
+    RestartSec=3
+    User=ubuntu
+    Group=ubuntu
+    LimitNOFILE=4096
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+5. Create `/etc/logrotate.d/bidder` and add the following:
+
+    ```
+    /var/log/bidder/*.log {
+        compress
+        copytruncate
+        daily
+        maxsize 30M
+        rotate 30
+    }
+    ```
+
+5. Enable and start the service:
+
+    ```sh
+    sudo systemctl enable bidder
+    sudo systemctl start bidder
+    ```
