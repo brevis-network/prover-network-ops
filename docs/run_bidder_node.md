@@ -122,7 +122,7 @@ To join the proving network as a bidder, you must stake staking token in [Stakin
 
 ### Run the bidder node
 
-4. Prepare the bidder system service:
+1. Prepare the bidder system service:
 
     ```sh
     sudo mkdir -p /var/log/bidder
@@ -152,7 +152,7 @@ To join the proving network as a bidder, you must stake staking token in [Stakin
     WantedBy=multi-user.target
     ```
 
-5. Create `/etc/logrotate.d/bidder` and add the following:
+2. Create `/etc/logrotate.d/bidder` and add the following:
 
     ```
     /var/log/bidder/*.log {
@@ -164,7 +164,7 @@ To join the proving network as a bidder, you must stake staking token in [Stakin
     }
     ```
 
-5. Enable and start the service:
+3. Enable and start the service:
 
     ```sh
     sudo systemctl enable bidder
