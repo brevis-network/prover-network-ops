@@ -28,7 +28,10 @@ A unique num to identify a request from you
 
 7. `fee`
 
-Max fee in staking token (for testnet, it's [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074) you wish to pay for the request. 
+In tuple [`maxFee`, `minStake`, `deadline`].
+`maxFee`, the max fee in staking token (for testnet, it's [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074)) you wish to pay for the request.
+`minStake`, only the provers that stake more than the value can bid for the request.
+`deadline`, the proof should be submitted no later than.
 
 Note, Before initiate a proof request, you need to use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve `BrevisMarket` 0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43 to spend your staking token.
 
