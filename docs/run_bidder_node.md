@@ -114,11 +114,11 @@ To join the proving network as a bidder, you must stake staking token in [Stakin
 
 1. Firstly, ask brevis team to get some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074)
 
-2. Use [explorer](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve StakingController 0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0 to spend your staking token
+2. Use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve StakingController 0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0 to spend your staking token
 
-3. Use [explorer](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `initializeProver` with a default commission rate. It will transfer a configured minimum staking amount from your wallet to `StakingController`
+3. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `initializeProver` with a default commission rate. It will transfer a configured minimum staking amount from your wallet to `StakingController`
 
-4. Use [explorer](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `stake` more as you wish
+4. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `stake` more as you wish
 
 ### Run the bidder node
 
