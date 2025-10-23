@@ -51,8 +51,19 @@ If you need to run the pico proving service as a system service, shut down the s
     WantedBy=multi-user.target
     EOF
     ```
+3. Create `/etc/logrotate.d/pico` and add the following:
 
-3. Enable and start the service:
+    ```
+    /var/log/pico/*.log {
+        compress
+        copytruncate
+        daily
+        maxsize 30M
+        rotate 30
+    }
+    ```
+
+4. Enable and start the service:
 
     ```sh
     sudo systemctl enable pico
