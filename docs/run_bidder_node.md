@@ -153,7 +153,7 @@ If you need to run the pico proving service as a system service, shut down the s
 
     | Field | Description |
     | ----- | ----------- |
-    | prover_url | the pico proving service grpc endpoint |
+    | prover_url | the pico proving service grpc endpoint in format `${pico machine ip}:${port}`. the service defaultly starts at port 50052 |
     | bidder_keystore | The path to your prepared ethereum keystore json (or use AWS KMS) |
     | bidder_passphrase | The passphrase to the bidder keystore (or apikey:apisec if using AWS KMS) |
     | bidder_eth_addr | The Ethereum address of the bidder |
