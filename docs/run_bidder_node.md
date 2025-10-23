@@ -22,7 +22,7 @@ If you need to run the pico proving service as a system service, shut down the s
     cp ./pico_proving_service.db $HOME/.pico/pico_proving_service.db
     ```
 
-2. Execute below to config pico as a system service (assume `$Home=/home/ubuntu`, if not, please replace `/home/ubuntu` to your real one)
+2. Execute below to configure pico as a system service (assume `$Home=/home/ubuntu`, if not, please replace `/home/ubuntu` to your real one)
 
     ```sh
     sudo mkdir -p /var/log/pico
