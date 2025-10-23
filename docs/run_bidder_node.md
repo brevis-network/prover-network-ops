@@ -4,11 +4,13 @@ This manual describes the process of spinning up a bidder node of Brevis Proving
 
 ## Up the pico proving service
 
-1. Install required [Prerequisites](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#prerequisites)
+1. Select [Machine and OS](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#machine-and-os)
 
-2. Initialize [Local DB](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#local-db-initialization)
+2. Install required [Prerequisites](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#prerequisites)
 
-3. Start [service](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#service-start)
+3. Initialize [Local DB](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#local-db-initialization)
+
+4. Start [service](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#service-start)
 
 ### Run pico proving service as a system service
 
