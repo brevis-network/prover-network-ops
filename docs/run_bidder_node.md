@@ -26,31 +26,31 @@ If you need to run the pico proving service as a system service, shut down the s
 
 2. Execute below to configure pico as a system service (assume `$Home=/home/ubuntu`, if not, please replace `/home/ubuntu` to your real one)
 
-```sh
-sudo mkdir -p /var/log/pico
-sudo touch /var/log/pico/app.log
+    ```sh
+    sudo mkdir -p /var/log/pico
+    sudo touch /var/log/pico/app.log
 
-sudo tee /etc/systemd/system/pico.service << EOF
-[Unit]
-Description=Pico Proving Service
-After=network-online.target
+    sudo tee /etc/systemd/system/pico.service << EOF
+    [Unit]
+    Description=Pico Proving Service
+    After=network-online.target
 
-[Service]
-WorkingDirectory=/home/ubuntu/.pico
-Environment=DATABASE_URL=sqlite:///home/ubuntu/.pico/pico_proving_service.db?mode=rwc
-Environment=RUST_LOG=debug
-ExecStart=/home/ubuntu/.pico/server
-StandardOutput=append:/var/log/pico/app.log
-StandardError=append:/var/log/pico/app.log
-Restart=always
-User=ubuntu
-Group=ubuntu
-RestartSec=3
+    [Service]
+    WorkingDirectory=/home/ubuntu/.pico
+    Environment=DATABASE_URL=sqlite:///home/ubuntu/.pico/pico_proving_service.db?mode=rwc
+    Environment=RUST_LOG=debug
+    ExecStart=/home/ubuntu/.pico/server
+    StandardOutput=append:/var/log/pico/app.log
+    StandardError=append:/var/log/pico/app.log
+    Restart=always
+    User=ubuntu
+    Group=ubuntu
+    RestartSec=3
 
-[Install]
-WantedBy=multi-user.target
-EOF
-```
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+    ```
 
 3. Enable and start the service:
 
@@ -69,6 +69,7 @@ EOF
 
     ```sh
     sudo snap install go --classic
+    mkdir $HOME/go/bin
     ```
 
 3. Install CockroachDB:
@@ -80,34 +81,34 @@ EOF
 
 4. Execute below to config crdb as system service
 
-```sh
-sudo mkdir -p /var/log/crdb
-sudo touch /var/log/crdb/out.log
-sudo touch /var/log/crdb/err.log
+    ```sh
+    sudo mkdir -p /var/log/crdb
+    sudo touch /var/log/crdb/out.log
+    sudo touch /var/log/crdb/err.log
 
-sudo tee /etc/systemd/system/crdb.service << EOF
-[Unit]
-Description=CockroachDB single node
-After=network-online.target
+    sudo tee /etc/systemd/system/crdb.service << EOF
+    [Unit]
+    Description=CockroachDB single node
+    After=network-online.target
 
-[Service]
-WorkingDirectory=$HOME
-ExecStart=/usr/local/bin/cockroach start-single-node --insecure --listen-addr=localhost:26257 \
-    --http-addr=localhost:18080 --store=path=$HOME/db
-StandardOutput=append:/var/log/crdb/out.log
-StandardError=append:/var/log/crdb/err.log
-Restart=always
-User=ubuntu
-Group=ubuntu
-RestartSec=10
+    [Service]
+    WorkingDirectory=/home/ubuntu
+    ExecStart=/usr/local/bin/cockroach start-single-node --insecure --listen-addr=localhost:26257 \
+        --http-addr=localhost:18080 --store=path=/home/ubuntu/db
+    StandardOutput=append:/var/log/crdb/out.log
+    StandardError=append:/var/log/crdb/err.log
+    Restart=always
+    User=ubuntu
+    Group=ubuntu
+    RestartSec=10
 
-[Install]
-WantedBy=multi-user.target
-EOF
+    [Install]
+    WantedBy=multi-user.target
+    EOF
 
-sudo systemctl enable crdb.service
-sudo systemctl start crdb.service
-```
+    sudo systemctl enable crdb.service
+    sudo systemctl start crdb.service
+    ```
 
 5. Set \$GOBIN and add \$GOBIN to \$PATH. Edit `$HOME/.profile` and add:
 
@@ -127,6 +128,7 @@ sudo systemctl start crdb.service
 
     ```sh
     git clone https://github.com/brevis-network/prover-network-bidder
+    cd prover-network-bidder
     git checkout main
     ```
 
@@ -139,7 +141,7 @@ sudo systemctl start crdb.service
 3. Install the bidder binary
 
     ```sh
-    cd prover-network-bidder/cmd/service
+    cd ./cmd/service
     go build -o bidder
     cp ./bidder $HOME/go/bin
     cd ~
