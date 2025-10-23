@@ -51,6 +51,7 @@ If you need to run the pico proving service as a system service, shut down the s
     WantedBy=multi-user.target
     EOF
     ```
+    
 3. Create `/etc/logrotate.d/pico` and add the following:
 
     ```
@@ -193,12 +194,8 @@ To join the proving network as a bidder, you must stake staking token in [Stakin
     ```sh
     sudo mkdir -p /var/log/bidder
     sudo touch /var/log/bidder/app.log
-    sudo touch /etc/systemd/system/bidder.service
-    ```
-
-    Add the following to `/etc/systemd/system/bidder.service`:
-
-    ```
+    
+    sudo tee /etc/systemd/system/bidder.service << EOF
     [Unit]
     Description=bidder daemon
     After=network-online.target
@@ -216,6 +213,7 @@ To join the proving network as a bidder, you must stake staking token in [Stakin
 
     [Install]
     WantedBy=multi-user.target
+    EOF
     ```
 
 2. Create `/etc/logrotate.d/bidder` and add the following:
