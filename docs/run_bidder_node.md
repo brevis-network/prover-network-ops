@@ -4,7 +4,11 @@ This manual describes the process of spinning up a bidder node of Brevis Proving
 
 ## Up the pico proving service
 
-Follow [!TODO] doc to up a pico proving service. Note down the grpc service endpoint it exposes in format `ip addr:port`.
+1. Install required [Prerequisites](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#prerequisites)
+
+2. Initialize [Local DB](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#local-db-initialization)
+
+3. Start [service](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#service-start)
 
 ## Up the bidder service
 
