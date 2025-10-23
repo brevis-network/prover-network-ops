@@ -10,6 +10,52 @@ This manual describes the process of spinning up a bidder node of Brevis Proving
 
 3. Start [service](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#service-start)
 
+### Run pico proving service as a system service
+
+If you need to run the pico proving service as a system service, shut down the service in above step 3 and continue the follow steps:
+
+1. Under pico-proving-service folder (the repo you cloned), copy release binary and DB to a persistent folder
+
+    ```sh
+    mkdir $HOME/.pico
+    cp ./target/release/server $HOME/.pico/server
+    cp ./pico_proving_service.db $HOME/.pico/pico_proving_service.db
+    ```
+
+2. Execute below to config pico as a system service (assume `$Home=/home/ubuntu`, if not, please replace `/home/ubuntu` to your real one)
+
+    ```sh
+    sudo mkdir -p /var/log/pico
+    sudo touch /var/log/pico/app.log
+
+    sudo tee /etc/systemd/system/pico.service << EOF
+    [Unit]
+    Description=Pico Proving Service
+    After=network-online.target
+
+    [Service]
+    WorkingDirectory=/home/ubuntu/.pico
+    Environment=DATABASE_URL=sqlite:///home/ubuntu/.pico/pico_proving_service.db?mode=rwc
+    ExecStart=/home/ubuntu/.pico/server
+    StandardOutput=append:/var/log/pico/app.log
+    StandardError=append:/var/log/pico/app.log
+    Restart=always
+    User=ubuntu
+    Group=ubuntu
+    RestartSec=3
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+    ```
+
+3. Enable and start the service:
+
+    ```sh
+    sudo systemctl enable pico
+    sudo systemctl start pico
+    ```
+
 ## Up the bidder service
 
 ### Prepare EC2 machine and install dependencies 
