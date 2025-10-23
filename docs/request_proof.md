@@ -52,6 +52,6 @@ It's optional, either `inputData` or `inputURL` should be provided.
 In tuple [`maxFee`, `minStake`, `deadline`].
 `maxFee`, the max fee in staking token (for testnet, it's [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074)) you wish to pay for the request.
 `minStake`, only the provers that stake more than the value can bid for the request.
-`deadline`, the proof should be submitted no later than.
+`deadline`, the proof should be submitted no later than (in unix seconds), note that the maximum deadline duration from request time can not exceed 30 days.
 
 Note, Before initiate a proof request, you need to use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve `BrevisMarket` 0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43 to spend your staking token. Please use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074).
