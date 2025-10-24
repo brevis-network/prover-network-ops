@@ -10,9 +10,9 @@ blk_delay=1
 max_blk_delta=5000
 forward_blk_delay=500
 brevis_market_addr="0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43"
-bidder_eth_addr=""
-bidder_keystore=""
-bidder_passphrase=""
+prover_eth_addr=""
+submitter_keystore=""
+submitter_passphrase=""
 
 [rule]
 max_fee="1000000000000000000000000000000000"

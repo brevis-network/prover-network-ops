@@ -51,7 +51,7 @@ If you need to run the pico proving service as a system service, shut down the s
     WantedBy=multi-user.target
     EOF
     ```
-    
+
 3. Create `/etc/logrotate.d/pico` and add the following:
 
     ```
@@ -168,16 +168,20 @@ If you need to run the pico proving service as a system service, shut down the s
 
 5. Make sure the fields in `~/.bidder/config.toml` have the correct values:
 
+A bidder can use different accounts to `stake` and `bid & submit proof` seprately. The former we call it `prover` account and later `submitter` account. You can use a same ETH account for both of them.
+
     | Field | Description |
     | ----- | ----------- |
     | prover_url | the pico proving service grpc endpoint in format `${pico machine ip}:${port}`. the service defaultly starts at port 50052 |
-    | bidder_keystore | The path to your prepared ethereum keystore json (or use AWS KMS) |
-    | bidder_passphrase | The passphrase to the bidder keystore (or apikey:apisec if using AWS KMS) |
-    | bidder_eth_addr | The Ethereum address of the bidder |
+    | prover_eth_addr | The Ethereum address of the prover |
+    | submitter_keystore | The path to your prepared submitter ethereum keystore json (or use AWS KMS) |
+    | submitter_passphrase | The passphrase to the submitter keystore (or apikey:apisec if using AWS KMS) |
 
 ### Staking as a bidder
 
 To join the proving network as a bidder, you must stake staking token in [StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract). 
+
+Please operate below steps using your `Prover` account.
 
 1. Firstly, use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074)
 
@@ -186,6 +190,8 @@ To join the proving network as a bidder, you must stake staking token in [Stakin
 3. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `initializeProver` with a default commission rate. It will transfer a configured minimum staking amount from your wallet to `StakingController`
 
 4. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `stake` more as you wish
+
+5. If you use different account for submitter, please use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to `registerSubmitter`.
 
 ### Run the bidder node
 
