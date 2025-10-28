@@ -81,7 +81,7 @@ If you need to run the pico proving service as a system service, shut down the s
 
     ```sh
     sudo snap install go --classic
-    mkdir $HOME/go/bin
+    mkdir -p $HOME/go/bin
     ```
 
 3. Install CockroachDB:
