@@ -74,3 +74,9 @@ Note, Before initiate a proof request, you need to use [explorer StakingToken](h
 
 Update the param values in `[[request]]` section accordingly. Provide multile `[[request]]` sections to send multiple requests.
 
+3. Execute below command to send the requsets:
+
+    ```
+    ./tools request-proof --config ./req_config.toml
+    ```
+
