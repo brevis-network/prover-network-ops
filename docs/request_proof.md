@@ -55,3 +55,22 @@ In tuple [`maxFee`, `minStake`, `deadline`].
 `deadline`, the proof should be submitted no later than (in unix seconds), note that the maximum deadline duration from request time can not exceed 30 days.
 
 Note, Before initiate a proof request, you need to use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve `BrevisMarket` 0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43 to spend your staking token. Please use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074).
+
+## A tool to send batch requests
+
+1. A tool is provided for sending batch requests. Under `tools` folder in this repo, run `go build` to build the tool.
+
+    ```
+    cd tools
+    go build
+    ```
+
+2. Then update the `req_config.toml` to fill in:
+
+    | Field | Description |
+    | ----- | ----------- |
+    | keystore | The path to your ethereum account keystore json |
+    | passphrase | The passphrase to the keystore |
+
+Update the param values in `[[request]]` section accordingly. Provide multile `[[request]]` sections to send multiple requests.
+

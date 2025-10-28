@@ -168,8 +168,8 @@ If you need to run the pico proving service as a system service, shut down the s
 
 5. Make sure the fields in `~/.bidder/config.toml` have the correct values:
 
-A bidder can use different accounts to `stake` and `bid & submit proof` seprately. The former we call it `prover` account and later `submitter` account. You can use a same ETH account for both of them.
-
+    A bidder can use different accounts to `stake` and `bid & submit proof` seprately. The former we call it `prover` account and later `submitter` account. You can use a same ETH account for both of them.
+    
     | Field | Description |
     | ----- | ----------- |
     | prover_url | the pico proving service grpc endpoint in format `${pico machine ip}:${port}`. the service defaultly starts at port 50052 |
