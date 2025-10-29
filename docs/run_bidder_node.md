@@ -191,7 +191,9 @@ Please operate below steps using your `Prover` account.
 
 4. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `stake` more as you wish
 
-5. If you use different account for submitter, please use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to `registerSubmitter`.
+5. If you use different account for submitter, please:
+ * Firstly as a submitter, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to `setSubmitterConsent` (submitter grants consent).
+ * And then as a prover, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to `registerSubmitter` (prover registers the submitter).
 
 ### Run the bidder node
 
