@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/celer-network/goutils/eth"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
@@ -16,6 +17,24 @@ import (
 var ZeroAddr common.Address
 
 func CreateTransactOpts(ksfilePath, passphrase string, chainid *big.Int) (*bind.TransactOpts, common.Address, error) {
+	if strings.HasPrefix(ksfilePath, "awskms") {
+		kmskeyinfo := strings.SplitN(ksfilePath, ":", 3)
+		if len(kmskeyinfo) != 3 {
+			return nil, ZeroAddr, fmt.Errorf("%s has wrong format", ksfilePath)
+		}
+		awskeysec := []string{"", ""}
+		if passphrase != "" {
+			awskeysec = strings.SplitN(passphrase, ":", 2)
+			if len(awskeysec) != 2 {
+				return nil, ZeroAddr, fmt.Errorf("%s has wrong format", passphrase)
+			}
+		}
+		kmsSigner, err := eth.NewKmsSigner(kmskeyinfo[1], kmskeyinfo[2], awskeysec[0], awskeysec[1], chainid)
+		if err != nil {
+			return nil, ZeroAddr, err
+		}
+		return kmsSigner.NewTransactOpts(), kmsSigner.Addr, nil
+	}
 	ksBytes, err := os.ReadFile(ksfilePath)
 	if err != nil {
 		return nil, ZeroAddr, err
@@ -26,13 +45,13 @@ func CreateTransactOpts(ksfilePath, passphrase string, chainid *big.Int) (*bind.
 		return nil, ZeroAddr, err
 	}
 
-	submitChainAuth, err :=
+	auth, err :=
 		bind.NewTransactorWithChainID(strings.NewReader(string(ksBytes)), passphrase, chainid)
 	if err != nil {
 		return nil, ZeroAddr, err
 	}
 
-	return submitChainAuth, key.Address, err
+	return auth, key.Address, err
 }
 
 func chkErr(err error, msg string) {
