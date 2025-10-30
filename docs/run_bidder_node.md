@@ -195,6 +195,34 @@ Please operate below steps using your `Prover` account.
  * Firstly as a submitter, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to `setSubmitterConsent` (submitter grants consent).
  * And then as a prover, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to `registerSubmitter` (prover registers the submitter).
 
+You can also use below tool to do the job.
+
+#### A tool to stake as a bidder
+
+1. Under `tools` folder in this repo, run `go build` to build the tool.
+
+    ```
+    cd tools
+    go build
+    ```
+
+2. Then update the `stake_config.toml` to fill in:
+
+    | Field | Description |
+    | ----- | ----------- |
+    | prover_keystore | The path to your prover ethereum account keystore json |
+    | prover_passphrase | The passphrase to the prover keystore |
+    | submitter_keystore | Fill in if you need a differnt account as the submitter |
+    | submitter_passphrase | Fill in if you need a differnt account as the submitter |
+    | staking_amt | A non-zero value if you want to stake more in addition to `minSelfStake` |
+    | commission_rate_bps | commission rate for delegators who add staking on you |
+
+3. Execute below command to send the requsets:
+
+    ```
+    ./tools stake --config ./stake_config.toml --init true
+    ```
+
 ### Run the bidder node
 
 1. Prepare the bidder system service:
