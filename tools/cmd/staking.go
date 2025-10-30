@@ -18,6 +18,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+var Zero_Addr = common.Address{}
+
 type StakingConfig struct {
 	ChainID               uint64 `mapstructure:"chain_id"`
 	ChainRpc              string `mapstructure:"chain_rpc"`
@@ -95,8 +97,10 @@ func stake() error {
 	var submitter common.Address
 	var brevisMarket *bindings.BrevisMarket
 	if initialize {
-		submitterAuth, submitter, err = CreateTransactOpts(c.SubmitterKeystore, c.SubmitterKeystore, chid)
-		chkErr(err, "CreateTransactOpts")
+		if c.SubmitterKeystore != "" {
+			submitterAuth, submitter, err = CreateTransactOpts(c.SubmitterKeystore, c.SubmitterKeystore, chid)
+			chkErr(err, "CreateTransactOpts")
+		}
 		brevisMarket, err = bindings.NewBrevisMarket(common.HexToAddress(c.BrevisMarketAddr), ec)
 		chkErr(err, "NewBrevisMarket")
 		minSelfStake, err := stakingController.MinSelfStake(nil)
@@ -140,7 +144,7 @@ func stake() error {
 			}
 		}
 
-		if initialize && prover != submitter {
+		if initialize && prover != submitter && submitter != Zero_Addr {
 			tx, err := brevisMarket.SetSubmitterConsent(submitterAuth, prover)
 			chkErr(err, "SetSubmitterConsent")
 			log.Printf("SetSubmitterConsent tx: %s", tx.Hash())
