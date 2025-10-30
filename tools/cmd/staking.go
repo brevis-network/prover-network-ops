@@ -80,7 +80,7 @@ func stake() error {
 	}
 
 	proverAuth, prover, err := CreateTransactOpts(c.ProverKeystore, c.ProverPassphrase, chid)
-	chkErr(err, "CreateTransactOpts")
+	chkErr(err, "prover CreateTransactOpts")
 
 	stakingToken, err := bindings.NewIERC20(common.HexToAddress(c.StakingTokenAddr), ec)
 	chkErr(err, "NewIERC20")
@@ -98,8 +98,8 @@ func stake() error {
 	var brevisMarket *bindings.BrevisMarket
 	if initialize {
 		if c.SubmitterKeystore != "" {
-			submitterAuth, submitter, err = CreateTransactOpts(c.SubmitterKeystore, c.SubmitterKeystore, chid)
-			chkErr(err, "CreateTransactOpts")
+			submitterAuth, submitter, err = CreateTransactOpts(c.SubmitterKeystore, c.SubmitterPassphrase, chid)
+			chkErr(err, "submitter CreateTransactOpts")
 		}
 		brevisMarket, err = bindings.NewBrevisMarket(common.HexToAddress(c.BrevisMarketAddr), ec)
 		chkErr(err, "NewBrevisMarket")
@@ -109,7 +109,7 @@ func stake() error {
 	}
 
 	if approveAmt.Sign() == 1 {
-		tx, err := stakingToken.Approve(proverAuth, common.HexToAddress(c.BrevisMarketAddr), approveAmt)
+		tx, err := stakingToken.Approve(proverAuth, common.HexToAddress(c.StakingControllerAddr), approveAmt)
 		chkErr(err, "Approve")
 		log.Printf("approve tx: %s", tx.Hash())
 		receipt, err := bind.WaitMined(context.Background(), ec, tx)
