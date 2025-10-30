@@ -1,0 +1,14 @@
+[stake]
+chain_id=421614
+chain_rpc="https://arbitrum-sepolia-rpc.publicnode.com"
+brevis_market_addr="0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43"
+staking_token_addr="0x46b07178907650afc855763a8f83e65afec24074"
+staking_controller_addr="0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0"
+
+prover_keystore=""
+prover_passphrase=""
+submitter_keystore=""
+submitter_passphrase=""
+
+staking_amt = "0"
+commission_rate_bps = "600"
