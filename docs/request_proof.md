@@ -1,6 +1,6 @@
 # How to request proof
 
-Use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to request proof. Follow below instructions to obtain each param of a request.
+Use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to request proof. Follow below instructions to obtain each param of a request.
 
 1. `nonce`
 
@@ -54,7 +54,7 @@ In tuple [`maxFee`, `minStake`, `deadline`].
 `minStake`, only the provers that stake more than the value can bid for the request.
 `deadline`, the proof should be submitted no later than (in unix seconds), note that the maximum deadline duration from request time can not exceed 30 days.
 
-Note, Before initiate a proof request, you need to use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve `BrevisMarket` 0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43 to spend your staking token. Please use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074).
+Note, Before initiate a proof request, you need to use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve `BrevisMarket` 0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa to spend your staking token. Please use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074).
 
 ## A tool to send batch requests
 

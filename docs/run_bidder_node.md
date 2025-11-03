@@ -179,21 +179,21 @@ If you need to run the pico proving service as a system service, shut down the s
 
 ### Staking as a bidder
 
-To join the proving network as a bidder, you must stake staking token in [StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract). 
+To join the proving network as a bidder, you must stake staking token in [StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract). 
 
 Please operate below steps using your `Prover` account.
 
 1. Firstly, use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074)
 
-2. Use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to `approve` StakingController 0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0 to spend your staking token
+2. Use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to `approve` StakingController 0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069 to spend your staking token
 
-3. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `initializeProver` with a default commission rate. It will transfer a configured minimum staking amount from your wallet to `StakingController`
+3. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `initializeProver` with a default commission rate. It will transfer a configured minimum staking amount from your wallet to `StakingController`
 
-4. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x8B83b9808DE79D5EEE97417bB14f82c41bCcD6F0#writeProxyContract) to `stake` more as you wish
+4. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `stake` more as you wish
 
 5. If you use different account for submitter, please:
- * Firstly as a submitter, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to `setSubmitterConsent` (submitter grants consent).
- * And then as a prover, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x7c968e3b1FaE6599958104cbf40d17A4ba0c1d43#writeProxyContract) to `registerSubmitter` (prover registers the submitter).
+ * Firstly as a submitter, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to `setSubmitterConsent` (submitter grants consent).
+ * And then as a prover, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to `registerSubmitter` (prover registers the submitter).
 
 You can also use below tool to do the job.
 
