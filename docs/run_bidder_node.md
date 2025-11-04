@@ -39,6 +39,7 @@ If you need to run the pico proving service as a system service, shut down the s
     WorkingDirectory=/home/ubuntu/.pico
     Environment=DATABASE_URL=sqlite:///home/ubuntu/.pico/pico_proving_service.db?mode=rwc
     Environment=RUST_LOG=debug
+    Environment=NUM_THREADS=8
     ExecStart=/home/ubuntu/.pico/server
     StandardOutput=append:/var/log/pico/app.log
     StandardError=append:/var/log/pico/app.log
@@ -189,9 +190,11 @@ Please operate below steps using your `Prover` account.
 
 3. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `initializeProver` with a default commission rate. It will transfer a configured minimum staking amount from your wallet to `StakingController`
 
-4. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `stake` more as you wish
+4. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `setProverProfile`
 
-5. If you use different account for submitter, please:
+5. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `stake` more as you wish
+
+6. If you use different account for submitter, please:
  * Firstly as a submitter, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to `setSubmitterConsent` (submitter grants consent).
  * And then as a prover, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to `registerSubmitter` (prover registers the submitter).
 
@@ -214,6 +217,8 @@ You can also use below tool to do the job.
     | prover_passphrase | The passphrase to the prover keystore |
     | submitter_keystore | Fill in if you need a differnt account as the submitter |
     | submitter_passphrase | Fill in if you need a differnt account as the submitter |
+    | prover_name | a name to identify you or your organization |
+    | prover_icon | the url of the icon that represents you or your organization |
     | staking_amt | A non-zero value if you want to stake more in addition to `minSelfStake` |
     | commission_rate_bps | commission rate for delegators who add staking on you |
 
