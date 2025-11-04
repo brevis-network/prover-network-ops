@@ -42,6 +42,13 @@ type IBrevisMarketFeeParams struct {
 	Deadline uint64
 }
 
+// IBrevisMarketGlobalStats is an auto generated low-level Go binding around an user-defined struct.
+type IBrevisMarketGlobalStats struct {
+	TotalRequests  uint64
+	TotalFulfilled uint64
+	TotalFees      *big.Int
+}
+
 // IBrevisMarketProofRequest is an auto generated low-level Go binding around an user-defined struct.
 type IBrevisMarketProofRequest struct {
 	Nonce              uint64
@@ -51,6 +58,16 @@ type IBrevisMarketProofRequest struct {
 	InputData          []byte
 	InputURL           string
 	Fee                IBrevisMarketFeeParams
+}
+
+// IBrevisMarketProverStats is an auto generated low-level Go binding around an user-defined struct.
+type IBrevisMarketProverStats struct {
+	Bids              uint64
+	Reveals           uint64
+	RequestsFulfilled uint64
+	RequestsRefunded  uint64
+	LastActiveAt      uint64
+	FeeReceived       *big.Int
 }
 
 // IStakingControllerUnstakeRequest is an auto generated low-level Go binding around an user-defined struct.
@@ -1709,8 +1726,8 @@ func (_Arrays *ArraysTransactorRaw) Transact(opts *bind.TransactOpts, method str
 
 // BrevisMarketMetaData contains all meta data concerning the BrevisMarket contract.
 var BrevisMarketMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"_picoVerifier\",\"type\":\"address\"},{\"internalType\":\"contractIStakingController\",\"name\":\"_stakingController\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"_biddingPhaseDuration\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"_revealPhaseDuration\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"_minMaxFee\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"AccessControlAccountAlreadyHasRole\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"AccessControlAccountDoesNotHaveRole\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedAdmin\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedRole\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketBeforeDeadline\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"expected\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"actual\",\"type\":\"bytes32\"}],\"name\":\"MarketBidRevealMismatch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketCannotRefundYet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketCannotRegisterProverAsSubmitter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketCannotRegisterSelf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineBeforeRevealPhaseEnd\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineMustBeInFuture\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlinePassed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAllowed\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlineTooFar\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"}],\"name\":\"MarketFeeExceedsMaximum\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidProtocolFeeBps\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"MarketInvalidRequestStatus\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidSlashBps\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidStakingController\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMinStakeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketNoAssignedProverToSlash\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoProtocolFeeToWithdraw\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNotAuthorized\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"actual\",\"type\":\"address\"}],\"name\":\"MarketNotExpectedProver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requiredStake\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"actualStake\",\"type\":\"uint256\"}],\"name\":\"MarketProverNotEligible\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketProverNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestAlreadyExists\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestNotFound\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"slashWindowEnd\",\"type\":\"uint256\"}],\"name\":\"MarketSlashWindowExpired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketSubmitterAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterConsentRequired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterNotRegistered\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketZeroAddress\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"currentOwner\",\"type\":\"address\"}],\"name\":\"OwnerAlreadySet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnerUnauthorized\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"OwnerZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ReentrancyGuardReentrantCall\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"SafeERC20FailedOperation\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"BidRevealed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"BiddingPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldToken\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newToken\",\"type\":\"address\"}],\"name\":\"FeeTokenUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MinMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"NewBid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"indexed\":false,\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"NewRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferCanceled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferStarted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldVerifier\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"PicoVerifierUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"actualFee\",\"type\":\"uint256\"}],\"name\":\"ProofSubmitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"slashAmount\",\"type\":\"uint256\"}],\"name\":\"ProverSlashed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Refunded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"RevealPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"SlashBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldWindow\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"SlashWindowUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldProver\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newProver\",\"type\":\"address\"}],\"name\":\"SubmitterConsentUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterUnregistered\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"BPS_DENOMINATOR\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEADLINE_DURATION\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"bid\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"biddingPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cancelOwnershipTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeToken\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getBidHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getBidders\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"winnerFee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"secondPlace\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"secondFee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getProof\",\"outputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProtocolFeeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"feeBps\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getRequest\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getSubmittersForProver\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"}],\"name\":\"grantRoles\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"_picoVerifier\",\"type\":\"address\"},{\"internalType\":\"contractIStakingController\",\"name\":\"_stakingController\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"_biddingPhaseDuration\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"_revealPhaseDuration\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"_minMaxFee\",\"type\":\"uint256\"}],\"name\":\"init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minMaxFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"picoVerifier\",\"outputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"protocolFeeBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"protocolFeeBps\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"refund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"registerSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"name\":\"registerSubmitters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"requestProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"requests\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"bidCount\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.Bidder\",\"name\":\"winner\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.Bidder\",\"name\":\"second\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"reveal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revealPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"}],\"name\":\"revokeRoles\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"roleAdmin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"roleMemberCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"roleMembers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setBiddingPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMinFee\",\"type\":\"uint256\"}],\"name\":\"setMinMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"setPicoVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setProtocolFeeBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setRevealPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"name\":\"setRoleAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setSlashBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"setSlashWindow\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"setSubmitterConsent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"slash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"slashBps\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"slashWindow\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingController\",\"outputs\":[{\"internalType\":\"contractIStakingController\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"startOwnershipTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"name\":\"submitProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterConsent\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterToProver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"name\":\"unregisterSubmitters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"withdrawProtocolFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
-	Bin: "0x6080806040523461020a5760a081613c48803803809161001f828561029a565b83398101031261020a5780516001600160a01b0381169081900361020a5760208201516001600160a01b038116919082900361020a57610061604084016102d3565b608061006f606086016102d3565b940151600480546001600160a01b031981163317909155600554919390916001600160a01b038116610287575b506040519133906001600160a01b03167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0600080a360016008558015158061027e575b6100f3575b60405161396090816102e88239f35b841561026d57600f80546001600160a01b031990811692909217905560008054909116851790556372f702f360e01b8152602081600481875afa90811561021757600091610223575b50601080546001600160a01b0319166001600160a01b039092169182179055600980546001600160801b0319166001600160401b0390931692909217604095861b6fffffffffffffffff00000000000000001617909155600a91909155915163095ea7b360e01b81526004810191909152600019602482015290602090829060449082906000905af18015610217576101da575b80808080806100e4565b6020813d60201161020f575b816101f36020938361029a565b8101031261020a57518015150361020a57386101d0565b600080fd5b3d91506101e6565b6040513d6000823e3d90fd5b6020813d602011610265575b8161023c6020938361029a565b810103126102615751906001600160a01b038216820361025e5750600061013c565b80fd5b5080fd5b3d915061022f565b632836ef1560e01b60005260046000fd5b508415156100df565b6001600160a01b0319166005553861009c565b601f909101601f19168101906001600160401b038211908210176102bd57604052565b634e487b7160e01b600052604160045260246000fd5b51906001600160401b038216820361020a5756fe608080604052600436101561001357600080fd5b600090813560e01c908163020ebc3514612a38575080630681e65114612a1a57806306cfcbda146129fd5780630a22d68c146129df57806312d62d35146129a4578063196f0f62146129595780631b80bb3a146128c35780631cde352b146128515780631ecfdb631461283457806323452b9c146127b65780632cf5d279146124785780632f2ff15d1461244957806335659fb81461242b578063390e226d1461240d578063434f967c146122585780635039cb0b146121e457806358c4a5bd14612111578063647846a5146120ea578063668fb6dc14612009578063695639b714611fe45780636dd5bd6014611f82578063713e6a0914611f5c5780637249fbb614611d815780637322ae3714611d6357806379ba509714611d075780637d9b715814611c635780637e3804c714611b7c5780637e88b1a0146117c957806383d860a01461176657806384d111f11461172c5780638619ae6e146116c95780638894a097146116a25780638bb9c5bf146116845780638da5cb5b1461165d57806391d1485414611606578063955919661461154657806396f6fe911461151e5780639d866985146113b2578063ad763192146112db578063ae5fd121146112a8578063b6ba1ca71461127e578063b844bb0014610f9c578063c0417e5814610f08578063c983b188146109ad578063d2b8f2fc14610919578063d547741f146108ea578063d5e44164146108aa578063deb9a3a21461085b578063dfc7537214610830578063e1a4521814610813578063e30c1fc3146107b0578063e30c397814610789578063eaf57ad7146106bd578063f2fde38b1461061d578063f415ed14146103a7578063f628d88d1461035c578063fafe42011461033e5763fb1e61ca1461029f57600080fd5b3461033b57602060031936011261033b576040610100916004358152601160205220805460ff8116916001810154600282015467ffffffffffffffff600384015416916001600160a01b0360056004860154950154956040519761030281612caf565b885267ffffffffffffffff8160081c16602089015260481c1660408701526060860152608085015260a084015260c083015260e0820152f35b80fd5b503461033b578060031936011261033b576020600a54604051908152f35b503461033b57604060031936011261033b576001600160a01b0360066040610382612a85565b9360043581526011602052200191166000526020526020604060002054604051908152f35b503461033b57602060031936011261033b576004358082526011602052604082209060ff8254166103d781612caf565b600281036105e8575067ffffffffffffffff60038301541691824211156105b85760088101906001600160a01b0382541693841561058c57600c549061041d8282613144565b4211610553575050610499602061271061043e6002850154600b5490613151565b0480966001600160a01b0389541690896040518096819582947f3046198c00000000000000000000000000000000000000000000000000000000845260048401602090939291936001600160a01b0360408201951681520152565b03925af180156105485761050c575b506001600160a01b037f6371a7077bd5be10ad8186ac347e7acd8fed70c411b5f223f01fcc9190f42ac69260209260037fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00825416179055541693604051908152a380f35b6020813d602011610540575b8161052560209383612b3a565b8101031261053b57506001600160a01b036104a8565b600080fd5b3d9150610518565b6040513d88823e3d90fd5b6105606044928892613144565b7f2ac29f3000000000000000000000000000000000000000000000000000000000825242600452602452fd5b602486857f8a0c2863000000000000000000000000000000000000000000000000000000008252600452fd5b604484847f0c821b2900000000000000000000000000000000000000000000000000000000825242600452602452fd5b836024917f40d41d8900000000000000000000000000000000000000000000000000000000825261061881612caf565b600452fd5b503461033b57602060031936011261033b57610637612a6f565b6001600160a01b036004541633810361068e57506001600160a01b038116156106665761066390613617565b80f35b6004827f12c44af2000000000000000000000000000000000000000000000000000000008152fd5b7fe4cae21a00000000000000000000000000000000000000000000000000000000835233600452602452604482fd5b503461033b57602060031936011261033b576106d7612c5c565b6001600160a01b036004541633810361068e575067ffffffffffffffff7ffbc83668acd4181d31302d42027aaf88afe3917743b0f5c6935fec9a7583afda91610783600954916fffffffffffffffff00000000000000008160401b167fffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff84161760095560405193849360401c168390929167ffffffffffffffff60209181604085019616845216910152565b0390a180f35b503461033b578060031936011261033b5760206001600160a01b0360055416604051908152f35b503461033b57602060031936011261033b576004356001600160a01b036004541633810361068e575060407fbed878bea5faee24f1f99a52bda105fcd767c49edb25248985fa0838e5a92f9f91600a549080600a5582519182526020820152a180f35b503461033b578060031936011261033b5760206040516127108152f35b503461033b578060031936011261033b57602067ffffffffffffffff60095460401c16604051908152f35b503461033b5761086a36612b7b565b610875829392613295565b815b81518110156108a657806108a06001600160a01b0361089860019486612dce565b5116866134e1565b01610877565b8280f35b503461033b576108b936612a9b565b825b8181106108c6578380f35b806108e46108df6108da6001948688612d7b565b612dba565b612dfa565b016108bb565b503461033b57604060031936011261033b5761066360043561090a612a85565b9061091481613295565b613314565b503461033b57602060031936011261033b576004356001600160a01b036004541633810361068e575061271081116109855760407f7a9645161550a715662c2036d7ff1b7089f139727f6aa3be8d26a8c55a1ee38891600b549080600b5582519182526020820152a180f35b6004827f0b642bcc000000000000000000000000000000000000000000000000000000008152fd5b503461033b57602060031936011261033b576004359067ffffffffffffffff821161033b57816004016101206003198436030112610f04576101048301926109f484613171565b67ffffffffffffffff4291161115610edc57610a0f84613171565b62278d00420190814211610eaf5767ffffffffffffffff82911611610e6d5750610a3884613171565b67ffffffffffffffff610a5f60095482610a5481831642613144565b9160401c1690613144565b911610610e455760c4810135600a54808210610e1557509060049160206001600160a01b03865416604051948580927fc5f530af0000000000000000000000000000000000000000000000000000000082525afa928315610e0a578593610dd6575b5060e482013592808410610da65750610ad984613171565b926024830135926044810135946040517fffffffffffffffff000000000000000000000000000000000000000000000000602082019260c01b16825285602882015286604882015260488152610b30606882612b3a565b5190209586885260116020526040882067ffffffffffffffff815460081c16610d7a5792610d5c610d6d93610d2c8b9c948a600567ffffffffffffffff997f4a380d27b724d2c274af1ef3a9d097d77e5397545ae07edc0bc91d61da00b6749e9f610bf08d6001600160a01b0360105416604051917f23b872dd000000000000000000000000000000000000000000000000000000006020840152336024840152306044840152606483015260648252610beb608483612b3a565b613756565b5080547cffffffffffffffffffffffffffffffffffffffff0000000000000000003360481b16907fffffff000000000000000000000000000000000000000000000000000000000068ffffffffffffffff004260081b169116171781558b6001820155876002820155600381018b610c678b613171565b167fffffffffffffffffffffffffffffffffffffffffffffffff00000000000000008254161790558c600482015501556040519a8b9a60208c5289610cab84612c73565b1660208d015260408c015260608b015260a4610d24610ce68c610140610cd46064890187613186565b919092610120608082015201916131d6565b8c610cf46084880186613186565b9160a07fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0828603019101526131d6565b930190613186565b907fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe08a84030160c08b01526131d6565b9460e0870152610100860152612c73565b166101208301520390a280f35b602489897f3b2433e1000000000000000000000000000000000000000000000000000000008252600452fd5b85604491857fb932475a000000000000000000000000000000000000000000000000000000008352600452602452fd5b9092506020813d602011610e02575b81610df260209383612b3a565b8101031261053b57519138610ac1565b3d9150610de5565b6040513d87823e3d90fd5b84906044927f4c1beb62000000000000000000000000000000000000000000000000000000008352600452602452fd5b6004837ffc254531000000000000000000000000000000000000000000000000000000008152fd5b8360449167ffffffffffffffff610e8388613171565b7fb81cc27b00000000000000000000000000000000000000000000000000000000845216600452602452fd5b6024857f4e487b710000000000000000000000000000000000000000000000000000000081526011600452fd5b6004837f1b755fb7000000000000000000000000000000000000000000000000000000008152fd5b5080fd5b503461033b57602060031936011261033b576004356001600160a01b036004541633810361068e57506127108111610f745760407ff247e7445763d3e9a01aee4b64de35f02273d6a1d7264694bb9298109319c8be91600d549080600d5582519182526020820152a180f35b6004827fadacaded000000000000000000000000000000000000000000000000000000008152fd5b503461033b5760a060031936011261033b57610fb6612a6f565b906024356001600160a01b038116809103610f045760443567ffffffffffffffff811680910361127a576064359167ffffffffffffffff8316830361127657801561124e576001600160a01b038495167fffffffffffffffffffffffff0000000000000000000000000000000000000000600f541617600f55807fffffffffffffffffffffffff00000000000000000000000000000000000000008554161784556040517f72f702f3000000000000000000000000000000000000000000000000000000008152602081600481855afa908115610e0a578591611205575b50906020936001600160a01b036044931693847fffffffffffffffffffffffff000000000000000000000000000000000000000060105416176010557fffffffffffffffffffffffffffffffff000000000000000000000000000000006fffffffffffffffff00000000000000006009549360401b1692161717600955608435600a5560405194859384927f095ea7b300000000000000000000000000000000000000000000000000000000845260048401527fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff60248401525af180156111fa576111c1575b506001600160a01b036004541680611196575061066333613617565b7f62c92612000000000000000000000000000000000000000000000000000000008252600452602490fd5b6020813d6020116111f2575b816111da60209383612b3a565b81010312610f04576111eb906133ea565b503861117a565b3d91506111cd565b6040513d84823e3d90fd5b90506020813d602011611246575b8161122060209383612b3a565b810103126112425751906001600160a01b038216820361124257906020611094565b8480fd5b3d9150611213565b6004847f2836ef15000000000000000000000000000000000000000000000000000000008152fd5b8380fd5b8280fd5b503461033b57602060031936011261033b5760406020916004358152600683522054604051908152f35b503461033b57602060031936011261033b576001600160a01b036040602092600435815260078452205416604051908152f35b503461033b57604060031936011261033b576004356112f8612a85565b6001600160a01b0360045416338103611383575081835260076020526001600160a01b0380604085205416918385526007602052604085208282167fffffffffffffffffffffffff000000000000000000000000000000000000000082541617905516917f327b6795344e20c23a3a9a2f2f2479f3746296db1666a6818cdad4afbf247d888480a480f35b7fe4cae21a00000000000000000000000000000000000000000000000000000000845233600452602452604483fd5b503461033b57602060031936011261033b5760043581526011602052604081209081549160ff83169160405190606082019082821067ffffffffffffffff8311176114f157506114ef926101a095926114d2926040526001820154815260028201546020820190815267ffffffffffffffff6003840154166040830190815267ffffffffffffffff6004850154916005860154936007870154956001600160a01b0361146c600a61146560088c01612c88565b9a01612c88565b9a6040519d8e61147b82612caf565b528d6020878360081c1691015260481c1660408d01525160608c01525160808b0152511660a089015260c088015260e0870152610100860152610120850190602080916001600160a01b0381511684520151910152565b80516001600160a01b031661016084015260200151610180830152565bf35b807f4e487b7100000000000000000000000000000000000000000000000000000000602492526041600452fd5b503461033b578060031936011261033b57602067ffffffffffffffff60095416604051908152f35b503461033b57602060031936011261033b57611560612a6f565b6001600160a01b036004541633810361068e57506001600160a01b031680156115de576001600160a01b03600f54827fffffffffffffffffffffffff0000000000000000000000000000000000000000821617600f55167f289e68b8f41113af2cd98bcf4fd4369937169415c5c43937f1d9a7aea3270a808380a380f35b6004827f72085081000000000000000000000000000000000000000000000000000000008152fd5b503461033b57604060031936011261033b576116536020916001600160a01b036040611630612a85565b926004358152600686522091169060019160005201602052604060002054151590565b6040519015158152f35b503461033b578060031936011261033b5760206001600160a01b0360045416604051908152f35b503461033b57602060031936011261033b5761066333600435613314565b503461033b578060031936011261033b5760206001600160a01b03600f5416604051908152f35b503461033b578060031936011261033b5733815260016020526001600160a01b036040822054168015611700576106639033613215565b6024827fe1dba53f00000000000000000000000000000000000000000000000000000000815233600452fd5b503461033b57602060031936011261033b576001600160a01b03604060209282611754612a6f565b16815260018452205416604051908152f35b503461033b57602060031936011261033b576004356001600160a01b036004541633810361068e575060407fc7bb9641822e3c3318570dd58e519090e9189272549564b4644822309e8e6e9f91600c549080600c5582519182526020820152a180f35b503461033b5761012060031936011261033b576004353661012411610f04576117f06135dc565b8082526011602052604082209081549167ffffffffffffffff61182c60095482611821818316828960081c166130f3565b9160401c16906130f3565b1680421115611b4d575067ffffffffffffffff600382015416804211611b1e5750611856336133bb565b906001600160a01b03600882015416936001600160a01b03831694808603611aef575060ff1661188581612caf565b80611abf57506001600160a01b03600f5416856004830154600584015490833b1561127a576101449060405194859384927ff39751a800000000000000000000000000000000000000000000000000000000845260048401526024830152610100602460448401375afa801561054857611aab575b506024855b60088110611a9457505060017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00825416178155600b810154916001600160a01b03600a8301541615611a88575b61271061195b600d5485613151565b04906119678285613164565b9180611a73575b50816119e9575b50507f859954befd38b6b306ee0105f3d1e765aa65e922a7190c8d9f9a3003b60fac34916119cf610120926001600160a01b0360105416906119c98460016001600160a01b03845460481c16930154613164565b91613587565b6040519061010060248337610100820152a3600160085580f35b8654604080517fa9fc507b0000000000000000000000000000000000000000000000000000000081526001600160a01b039384166004820152602481019490945291839160449183918b91165af1801561054857611a48575b80611975565b604090813d8311611a6c575b611a5e8183612b3a565b810103126112425738611a42565b503d611a54565b611a7f90600e54613144565b600e553861196e565b6009820154925061194c565b60019060208335930192600c8286010155016118ff565b85611ab891969296612b3a565b93386118fa565b856024917f40d41d8900000000000000000000000000000000000000000000000000000000825261061881612caf565b7f5186daa400000000000000000000000000000000000000000000000000000000875260045233602452604486fd5b7f5cc404fa00000000000000000000000000000000000000000000000000000000855242600452602452604484fd5b7f53dfa38c00000000000000000000000000000000000000000000000000000000855242600452602452604484fd5b503461033b57602060031936011261033b57611b96612a6f565b6001600160a01b036004541690338203611c33576001600160a01b0316908115611c0b57817fffffffffffffffffffffffff000000000000000000000000000000000000000060055416176005557f38d16b8cac22d99fc7c124b9cd0de2d3fa1faef420bfe791d8c362d765e227008380a380f35b6004837f12c44af2000000000000000000000000000000000000000000000000000000008152fd5b604483837fe4cae21a00000000000000000000000000000000000000000000000000000000825233600452602452fd5b503461033b57602060031936011261033b57611c7d612c5c565b6001600160a01b036004541633810361068e5750600980547fffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000811667ffffffffffffffff9384169081179092556040805191909316815260208101919091527fae2a85369654bba2b48f3887a0b5c87ccef1022b39a5e25fd30d599edc93ad6e9181908101610783565b503461033b578060031936011261033b576001600160a01b0360055416803303611d345761066390613617565b7fe4cae21a00000000000000000000000000000000000000000000000000000000825233600452602452604490fd5b503461033b578060031936011261033b57602060405162278d008152f35b503461033b57602060031936011261033b57600435611d9e6135dc565b8082526011602052604082209081549160ff8316611dbb81612caf565b80611f2c575060095492611def67ffffffffffffffff80611de3818816828660081c166130f3565b169560401c1685613144565b8590600184019567ffffffffffffffff60038601541692834211600014611edf575060015b15611e9d575050506001600160a01b037ff552ca82e113ac3c539c3d617f29fcd19c172a0c75dad017555c9e109f7fe18392611e8760027fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00602095161780835583601054168489549260481c1690613587565b5460481c169354604051908152a3600160085580f35b60849350604051927ffc8988cb000000000000000000000000000000000000000000000000000000008452426004850152602484015260448301526064820152fd5b81421180611f20575b15611ef557506001611e14565b82421180611f0b575b15611e1457506001611e14565b506001600160a01b0360088701541615611efe565b50600786015415611ee8565b846024917f40d41d8900000000000000000000000000000000000000000000000000000000825261061881612caf565b503461033b578060031936011261033b576001600160a01b036020915416604051908152f35b503461033b57602060031936011261033b57604060809160043581526011602052206001600160a01b0360088201541690600981015490600b6001600160a01b03600a8301541691015491604051938452602084015260408301526060820152f35b503461033b578060031936011261033b576040600d54600e5482519182526020820152f35b503461033b57602060031936011261033b57612023612a6f565b6001600160a01b036004541633810361068e57506001600160a01b0381169081156120c257600e5490811561209a57816120907f052c2c1904fab85ddafadaeeae6731433f2cba1bcb770a300d25a40d989acf739360209387600e556001600160a01b0360105416613587565b604051908152a280f35b6004847f24f94102000000000000000000000000000000000000000000000000000000008152fd5b6004837f72085081000000000000000000000000000000000000000000000000000000008152fd5b503461033b578060031936011261033b5760206001600160a01b0360105416604051908152f35b503461033b57602060031936011261033b576001600160a01b03612133612a6f565b16801515806121db575b6121b35733825260036020526001600160a01b03604083205416338352600360205260408320827fffffffffffffffffffffffff0000000000000000000000000000000000000000825416179055337f9b1a900deddd1166b5fc6cb337fa3e48911e0bcb56ee3c848e8eb05b13af85328480a480f35b6004827ffc117a28000000000000000000000000000000000000000000000000000000008152fd5b5033811461213d565b503461033b57602060031936011261033b576004358152600660205260408120604051918260208354918281520192825260208220915b8181106122425761223e8561223281870382612b3a565b60405191829182612c19565b0390f35b825484526020909301926001928301920161221b565b503461033b57604060031936011261033b5760043560243590808352601160205260408320805467ffffffffffffffff8160081c169081156123e15760ff166122a081612caf565b80611abf57506122be67ffffffffffffffff918260095416906130f3565b168042116123b257506122d0336133bb565b906122df6002820154836133f7565b600681016001600160a01b038316865280602052604086205415906001600160a01b038416875260205284604087205561234d575b5060206001600160a01b037fe3b42b8d48a26fbc202ccd924bc9c016974833ac32de0a612cf9eb6160e5f45e926040519586521693a380f35b60070180547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff81146123855760010190556020612314565b6024867f4e487b710000000000000000000000000000000000000000000000000000000081526011600452fd5b7fc5fed12100000000000000000000000000000000000000000000000000000000855242600452602452604484fd5b602486857ff72a3af1000000000000000000000000000000000000000000000000000000008252600452fd5b503461033b578060031936011261033b576020600c54604051908152f35b503461033b578060031936011261033b576020600d54604051908152f35b503461033b57604060031936011261033b57610663600435612469612a85565b9061247381613295565b6134e1565b503461033b57606060031936011261033b5760043560243590808352601160205260408320805467ffffffffffffffff8160081c169081156123e15760ff166124c081612caf565b80611abf57506009549067ffffffffffffffff82169067ffffffffffffffff6124e983836130f3565b168042111561278757509167ffffffffffffffff61182161250b9382956130f3565b16804211612758575061251d336133bb565b9061252c6002820154836133f7565b604051602081019085825260443560408201526040815261254e606082612b3a565b519020600682016001600160a01b0384168752806020528160408820540361271357505060018101548085116126e357506001600160a01b037f9c253a2ca87d91c2658cfbfcc3d6081283acc3cf95c2961667a858b531ec491f928583600860209501848154161580156126d6575b1561265d5790600991600a8201818103612622575b50856040516125e081612aef565b8589838916928381520152167fffffffffffffffffffffffff000000000000000000000000000000000000000082541617905501555b6040519586521693a380f35b815481547fffffffffffffffffffffffff00000000000000000000000000000000000000001690881617905581830154600b830155386125d2565b50600a810190848254161580156126c9575b61267c575b505050612616565b600b918560405161268c81612aef565b8589838916928381520152167fffffffffffffffffffffffff00000000000000000000000000000000000000008254161790550155853880612674565b50600b810154831061266f565b50600982015483106125bd565b85604491867f2365c724000000000000000000000000000000000000000000000000000000008352600452602452fd5b8692506001600160a01b036044941683526020526040822054907ff83ac0ed000000000000000000000000000000000000000000000000000000008352600452602452fd5b7f680fb09700000000000000000000000000000000000000000000000000000000855242600452602452604484fd5b7f290cc1aa00000000000000000000000000000000000000000000000000000000885242600452602452604487fd5b503461033b578060031936011261033b576001600160a01b0360045416338103611d34576001600160a01b036005547fffffffffffffffffffffffff0000000000000000000000000000000000000000811660055516907fe83a760af9d3c86797ea13c8979010086f067cfe3c985b2d03d951248600c50f8380a380f35b503461033b57602060031936011261033b576106636108df612a6f565b503461033b57602060031936011261033b576001600160a01b03612873612a6f565b168152600260205260408120604051918260208354918281520192825260208220915b8181106128ad5761223e8561223281870382612b3a565b8254845260209093019260019283019201612896565b503461033b57602060031936011261033b5761010090816040516128e78282612b3a565b36903760043581526011602052600c6040822001604051908183905b6008821061294357505050906129198383612b3a565b6040519190825b6008821061292d57505050f35b6020806001928551815201930191019091612920565b6001602081928554815201930191019091612903565b503461033b5761296836612b7b565b612973829392613295565b815b81518110156108a6578061299e6001600160a01b0361299660019486612dce565b511686613314565b01612975565b503461033b576129b336612a9b565b825b8181106129c0578380f35b806129d96129d46108da6001948688612d7b565b612ce8565b016129b5565b503461033b578060031936011261033b576020600e54604051908152f35b503461033b57602060031936011261033b576106636129d4612a6f565b503461033b578060031936011261033b576020600b54604051908152f35b905034610f04576020600319360112610f04576001600160a01b03604060209382612a61612a6f565b168152600385522054168152f35b600435906001600160a01b038216820361053b57565b602435906001600160a01b038216820361053b57565b90602060031983011261053b5760043567ffffffffffffffff811161053b578260238201121561053b5780600401359267ffffffffffffffff841161053b5760248460051b8301011161053b576024019190565b6040810190811067ffffffffffffffff821117612b0b57604052565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b90601f7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0910116810190811067ffffffffffffffff821117612b0b57604052565b90604060031983011261053b576004359160243567ffffffffffffffff811161053b578160238201121561053b5780600401359167ffffffffffffffff8311612b0b578260051b9160405193612bd46020850186612b3a565b84526024602085019382010191821161053b57602401915b818310612bf95750505090565b82356001600160a01b038116810361053b57815260209283019201612bec565b602060408183019282815284518094520192019060005b818110612c3d5750505090565b82516001600160a01b0316845260209384019390920191600101612c30565b6004359067ffffffffffffffff8216820361053b57565b359067ffffffffffffffff8216820361053b57565b90604051612c9581612aef565b6020600182946001600160a01b0381541684520154910152565b60041115612cb957565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602160045260246000fd5b6001600160a01b0381168060005260016020526001600160a01b0360406000205416908115612d4e5750338103612d2457612d2291613215565b565b7f9b24ecc70000000000000000000000000000000000000000000000000000000060005260046000fd5b7fe1dba53f0000000000000000000000000000000000000000000000000000000060005260045260246000fd5b9190811015612d8b5760051b0190565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b356001600160a01b038116810361053b5790565b8051821015612d8b5760209160051b010190565b9081602091031261053b5751600481101561053b5790565b6001600160a01b031680156130c95733811461309f576001600160a01b03600054166040517fb7a87463000000000000000000000000000000000000000000000000000000008152336004820152602081602481855afa90811561300f57600091613080575b50612e6a81612caf565b15613056578160005260016020526001600160a01b03604060002054168015158061304c575b61301b57506020602491604051928380927fb7a874630000000000000000000000000000000000000000000000000000000082528660048301525afa90811561300f57600091612fe0575b50612ee581612caf565b612fb357806000526003602052336001600160a01b036040600020541603612f865780600052600160205260406000206001600160a01b0333167fffffffffffffffffffffffff0000000000000000000000000000000000000000825416179055336000526002602052612f5d8160406000206136c5565b50337fa8e16fb275971bccac4fb180f9a7848b7e774b662cd924dfe44bf08a77629260600080a3565b7f59264e500000000000000000000000000000000000000000000000000000000060005260045260246000fd5b7f71957a480000000000000000000000000000000000000000000000000000000060005260045260246000fd5b613002915060203d602011613008575b612ffa8183612b3a565b810190612de2565b38612edb565b503d612ff0565b6040513d6000823e3d90fd5b827fa45b92500000000000000000000000000000000000000000000000000000000060005260045260245260446000fd5b5033811415612e90565b7f49baeaad0000000000000000000000000000000000000000000000000000000060005260046000fd5b613099915060203d60201161300857612ffa8183612b3a565b38612e60565b7ffc117a280000000000000000000000000000000000000000000000000000000060005260046000fd5b7f720850810000000000000000000000000000000000000000000000000000000060005260046000fd5b9067ffffffffffffffff8091169116019067ffffffffffffffff821161311557565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b9190820180921161311557565b8181029291811591840414171561311557565b9190820391821161311557565b3567ffffffffffffffff8116810361053b5790565b90357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe18236030181121561053b57016020813591019167ffffffffffffffff821161053b57813603831361053b57565b601f82602094937fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0938186528686013760008582860101520116010190565b6001600160a01b038091169182600052600160205260406000207fffffffffffffffffffffffff000000000000000000000000000000000000000081541690551680600052600260205261326d8260406000206137c7565b507f68149012e4644815489a47d9c13256794a7e5ce16ddad87a9727b57fb4ac3e9b600080a3565b908160005260076020526001600160a01b03604060002054166001600160a01b0360045416331461330f578015159081613305575b5061330157507f2ab78087000000000000000000000000000000000000000000000000000000006000523360045260245260446000fd5b9050565b90503314386132ca565b509050565b8060005260066020526133466001600160a01b0360406000209316809360019160005201602052604060002054151590565b1561338a578060005260066020526133628260406000206137c7565b507f155aaafb6329a2098580462df33ec4b7441b19729b9601c5fc17ae1cf99a8a52600080a3565b907f5c6b51c90000000000000000000000000000000000000000000000000000000060005260045260245260446000fd5b6001600160a01b03811660005260016020526001600160a01b0360406000205416806133e5575090565b905090565b5190811515820361053b57565b600054604080517fad732cc10000000000000000000000000000000000000000000000000000000081526001600160a01b038481166004830152602482018690529094939285916044918391165afa92831561300f576000906000946134a0575b501561346357505050565b6001600160a01b03907f8c60a9e3000000000000000000000000000000000000000000000000000000006000521660045260245260445260646000fd5b9350506040833d6040116134d9575b816134bc60409383612b3a565b8101031261053b5760206134cf846133ea565b9301519238613458565b3d91506134af565b8060005260066020526135136001600160a01b0360406000209316809360019160005201602052604060002054151590565b6135565780600052600660205261352e8260406000206136c5565b507f2ae6a113c0ed5b78a53413ffbb7679881f11145ccfba4fb92e863dfcd5a1d2f3600080a3565b907f6b75226d0000000000000000000000000000000000000000000000000000000060005260045260245260446000fd5b6040517fa9059cbb0000000000000000000000000000000000000000000000000000000060208201526001600160a01b03929092166024830152604480830193909352918152612d2291610beb606483612b3a565b6002600854146135ed576002600855565b7f3ee5aeb50000000000000000000000000000000000000000000000000000000060005260046000fd5b6001600160a01b0380600454921691827fffffffffffffffffffffffff0000000000000000000000000000000000000000821617600455600554828116613682575b50167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0600080a3565b7fffffffffffffffffffffffff00000000000000000000000000000000000000001660055538613659565b8054821015612d8b5760005260206000200190600090565b600082815260018201602052604090205461374f5780549068010000000000000000821015612b0b57826137386137038460018096018555846136ad565b81939154907fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff9060031b92831b921b19161790565b905580549260005201602052604060002055600190565b5050600090565b906000602091828151910182855af11561300f576000513d6137be57506001600160a01b0381163b155b6137875750565b6001600160a01b03907f5274afe7000000000000000000000000000000000000000000000000000000006000521660045260246000fd5b60011415613780565b9060018201918160005282602052604060002054801515600014613921577fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8101818111613115578254907fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8201918211613115578181036138ea575b505050805480156138bb577fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff019061387c82826136ad565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff82549160031b1b191690555560005260205260006040812055600190565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603160045260246000fd5b61390a6138fa61370393866136ad565b90549060031b1c928392866136ad565b905560005283602052604060002055388080613844565b5050505060009056fea26469706673582212207b5ea06bfa0b5ad348688674cbfa94b3e2ec8d8f30758b8fa5a116b341bc864f64736f6c634300081d0033",
+	ABI: "[{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"_picoVerifier\",\"type\":\"address\"},{\"internalType\":\"contractIStakingController\",\"name\":\"_stakingController\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"_biddingPhaseDuration\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"_revealPhaseDuration\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"_minMaxFee\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"AccessControlAccountAlreadyHasRole\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"AccessControlAccountDoesNotHaveRole\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedAdmin\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedRole\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketBeforeDeadline\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"expected\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"actual\",\"type\":\"bytes32\"}],\"name\":\"MarketBidRevealMismatch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"currentTime\",\"type\":\"uint64\"}],\"name\":\"MarketCannotPopStartedEpoch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketCannotRefundYet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketCannotRegisterProverAsSubmitter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketCannotRegisterSelf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineBeforeRevealPhaseEnd\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineMustBeInFuture\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlinePassed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAllowed\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlineTooFar\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"}],\"name\":\"MarketFeeExceedsMaximum\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidBps\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"MarketInvalidRequestStatus\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidStakingController\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"lastStartAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"newStartAt\",\"type\":\"uint64\"}],\"name\":\"MarketInvalidStatsEpochStart\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maximum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooHigh\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMinStakeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketNoAssignedProverToSlash\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoFutureEpochToPop\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoProtocolFeeToWithdraw\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNotAuthorized\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"actual\",\"type\":\"address\"}],\"name\":\"MarketNotExpectedProver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requiredStake\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"actualStake\",\"type\":\"uint256\"}],\"name\":\"MarketProverNotEligible\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketProverNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestAlreadyExists\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestNotFound\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"slashWindowEnd\",\"type\":\"uint256\"}],\"name\":\"MarketSlashWindowExpired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketSubmitterAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterConsentRequired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterNotRegistered\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketZeroAddress\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"currentOwner\",\"type\":\"address\"}],\"name\":\"OwnerAlreadySet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnerUnauthorized\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"OwnerZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ReentrancyGuardReentrantCall\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"SafeERC20FailedOperation\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"BidRevealed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"BiddingPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldToken\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newToken\",\"type\":\"address\"}],\"name\":\"FeeTokenUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MaxMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MinMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"NewBid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"indexed\":false,\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"NewRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"OvercommitBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferCanceled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferStarted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldVerifier\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"PicoVerifierUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"actualFee\",\"type\":\"uint256\"}],\"name\":\"ProofSubmitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"slashAmount\",\"type\":\"uint256\"}],\"name\":\"ProverSlashed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Refunded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"RevealPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"SlashBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldWindow\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"SlashWindowUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"poppedStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsEpochPopped\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"scheduledStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsEpochScheduled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newEpochId\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"statsStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsReset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldProver\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newProver\",\"type\":\"address\"}],\"name\":\"SubmitterConsentUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterUnregistered\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"BPS_DENOMINATOR\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_DEADLINE_DURATION\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"acceptOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"assignedStake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"bid\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"biddingPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"cancelOwnershipTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeToken\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getBidHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getBidders\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"winnerFee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"secondPlace\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"secondFee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getGlobalRecentStats\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"name\":\"getGlobalStatsForStatsEpoch\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getGlobalStatsTotal\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getProof\",\"outputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProtocolFeeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"feeBps\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverPendingRequests\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"reqids\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverRecentStats\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"name\":\"getProverStatsForStatsEpoch\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverStatsTotal\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRecentStatsInfo\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getRequest\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"getSenderPendingRequests\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"reqids\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getSubmittersForProver\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"name\":\"globalStats\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"}],\"name\":\"grantRoles\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"_picoVerifier\",\"type\":\"address\"},{\"internalType\":\"contractIStakingController\",\"name\":\"_stakingController\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"_biddingPhaseDuration\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"_revealPhaseDuration\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"_minMaxFee\",\"type\":\"uint256\"}],\"name\":\"init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxMaxFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minMaxFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"overcommitBps\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"picoVerifier\",\"outputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"popStatsEpoch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"protocolFeeBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"protocolFeeBps\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"name\":\"proverStats\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"refund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"registerSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"name\":\"registerSubmitters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"requestProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"requests\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"bidCount\",\"type\":\"uint64\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.Bidder\",\"name\":\"winner\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.Bidder\",\"name\":\"second\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"reveal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revealPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"}],\"name\":\"revokeRoles\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"roleAdmin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"roleMemberCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"roleMembers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"name\":\"scheduleStatsEpoch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setBiddingPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMaxFee\",\"type\":\"uint256\"}],\"name\":\"setMaxMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMinFee\",\"type\":\"uint256\"}],\"name\":\"setMinMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setOvercommitBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"setPicoVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setProtocolFeeBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setRevealPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"name\":\"setRoleAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setSlashBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"setSlashWindow\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"setSubmitterConsent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"slash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"slashBps\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"slashWindow\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingController\",\"outputs\":[{\"internalType\":\"contractIStakingController\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"startOwnershipTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"statsEpochId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"statsEpochs\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"statsEpochsLength\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"name\":\"submitProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterConsent\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterToProver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"name\":\"unregisterSubmitters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"withdrawProtocolFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	Bin: "0x608080604052346103055760a081615e76803803809161001f8285610395565b8339810103126103055780516001600160a01b038116908190036103055760208201516001600160a01b038116919082900361030557610061604084016103b8565b608061006f606086016103b8565b940151600480546001600160a01b031981163317909155600554919390916001600160a01b038116610382575b506040519133906001600160a01b03167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0600080a3600160085580151580610379575b6100f3575b604051615aa990816103cd8239f35b841561036857601180546001600160a01b031990811692909217905560008054909116851790556372f702f360e01b8152602081600481875afa9081156103125760009161031e575b50601280546001600160a01b0319166001600160a01b039092169182179055600980546001600160801b0319166001600160401b0390931692909217604095861b6fffffffffffffffff00000000000000001617909155600a91909155915163095ea7b360e01b81526004810191909152600019602482015290602090829060449082906000905af18015610312576102d9575b506101f4600f55604080519081016001600160401b038111828210176102c357604052426001600160401b03168152600060208201908152601654680100000000000000008110156102c35760018101806016558110156102ad57601660005291517fd833147d7dc355ba459fc788f669e58cfaf9dc25ddcd0702e87d69c7b512428992909201805491516001600160801b03199092166001600160401b03939093169290921760409190911b6fffffffffffffffff000000000000000016179055601780546001600160401b03191690553880808080806100e4565b634e487b7160e01b600052603260045260246000fd5b634e487b7160e01b600052604160045260246000fd5b6020813d60201161030a575b816102f260209383610395565b81010312610305575180151581146101d0575b600080fd5b3d91506102e5565b6040513d6000823e3d90fd5b6020813d602011610360575b8161033760209383610395565b8101031261035c5751906001600160a01b03821682036103595750600061013c565b80fd5b5080fd5b3d915061032a565b632836ef1560e01b60005260046000fd5b508415156100df565b6001600160a01b0319166005553861009c565b601f909101601f19168101906001600160401b038211908210176102c357604052565b51906001600160401b03821682036103055756fe608080604052600436101561001357600080fd5b600090813560e01c908163020ebc3514614010575080630681e65114613ff257806306cfcbda14613fd557806308ea7ea214613e355780630a22d68c14613e175780630bf46c2c14613d25578063107736fe14613c9057806312d62d3514613c55578063196f0f6214613b9e5780631b80bb3a14613b085780631cde352b14613a965780631ecfdb6314613a7957806323452b9c146139fb5780632cf5d279146135905780632f2ff15d146134f457806335659fb8146134d6578063377ae95914613473578063390389ea1461344b578063390e226d1461342d5780633e8fcff6146133d957806340f518c714613363578063434f967c146131375780635039cb0b146130c7578063559fa96e146130195780635750df0814612fc757806358c4a5bd14612ef4578063647846a514612ecd578063668fb6dc14612dec578063672de28914612be5578063695639b714612bc05780636dbb179b14612b545780636dd5bd6014612af2578063713e6a0914612acc5780637249fbb61461281f5780637322ae371461280157806379ba5097146127d45780637d9b7158146127475780637e3804c7146126605780637e88b1a01461211057806383d1509214611f5f57806383d860a014611efc57806384d111f114611ec25780638619ae6e14611e5f5780638894a09714611e385780638bb9c5bf14611e1a5780638da5cb5b14611df35780639006a27714611dd557806391d1485414611d7e5780639559196614611cbe57806396f6fe9114611c965780639c3644e114611c3c5780639d86698514611b17578063ad76319214611a40578063ae5fd12114611a0d578063b6ba1ca7146119e3578063b844bb00146116c2578063bed87eb6146116a4578063c0417e5814611638578063c983b1881461105e578063d2b8f2fc14610fca578063d547741f14610f2e578063d5e4416414610eee578063de3c65fc14610c6e578063deb9a3a214610bb3578063dfc7537214610b88578063e1a4521814610b6b578063e20a0e7c14610af1578063e30c1fc314610a8e578063e30c397814610a67578063e844bd4814610a2f578063e8497cea146109dd578063eaf57ad714610911578063ecbd09ae146107cc578063f09b6c80146107ae578063f2fde38b1461070e578063f415ed141461048e578063f628d88d14610443578063fafe4201146104255763fb1e61ca1461038657600080fd5b34610422576020600319360112610422576040610100916004358152601360205220805460ff8116916001810154600282015467ffffffffffffffff600384015416916001600160a01b036005600486015495015495604051976103e981614381565b885267ffffffffffffffff8160081c16602089015260481c1660408701526060860152608085015260a084015260c083015260e0820152f35b80fd5b50346104225780600319360112610422576020600a54604051908152f35b5034610422576040600319360112610422576001600160a01b036006604061046961405d565b9360043581526013602052200191166000526020526020604060002054604051908152f35b5034610422576020600319360112610422576004358082526013602052604082209060ff8254166104be81614381565b600281036106d9575067ffffffffffffffff60038301541691824211156106a95760088101906001600160a01b0382541693841561067d57600d54906105048282614af4565b421161064457505061058060206127106105256002850154600c5490614ae1565b0480966001600160a01b0389541690896040518096819582947f3046198c00000000000000000000000000000000000000000000000000000000845260048401602090939291936001600160a01b0360408201951681520152565b03925af18015610639576105fb575b506001600160a01b037f6371a7077bd5be10ad8186ac347e7acd8fed70c411b5f223f01fcc9190f42ac6926105ee60209360037fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00825416178155615653565b541693604051908152a380f35b906020823d602011610631575b816106156020938361418d565b8101031261062c5790506001600160a01b0361058f565b600080fd5b3d9150610608565b6040513d88823e3d90fd5b6106516044928892614af4565b7f2ac29f3000000000000000000000000000000000000000000000000000000000825242600452602452fd5b602486857f8a0c2863000000000000000000000000000000000000000000000000000000008252600452fd5b604484847f0c821b2900000000000000000000000000000000000000000000000000000000825242600452602452fd5b836024917f40d41d8900000000000000000000000000000000000000000000000000000000825261070981614381565b600452fd5b503461042257602060031936011261042257610728614047565b6001600160a01b036004541633810361077f57506001600160a01b0381161561075757610754906155bd565b80f35b6004827f12c44af2000000000000000000000000000000000000000000000000000000008152fd5b7fe4cae21a00000000000000000000000000000000000000000000000000000000835233600452602452604482fd5b50346104225780600319360112610422576020601654604051908152f35b50346104225760206003193601126104225760a09061089a6107ec614073565b916107f561454a565b5067ffffffffffffffff8316908181526014602052604081209160016040519361081e85614155565b67ffffffffffffffff8154818116875260401c1660208601520154604084015215156000146109025760409067ffffffffffffffff61085c86614569565b16815260146020522060016040519161087483614155565b67ffffffffffffffff8154818116855260401c1660208401520154604082015290614e1f565b9067ffffffffffffffff6108ba816108b1846142be565b505416926142be565b505460401c16906108f660405180946040809167ffffffffffffffff815116845267ffffffffffffffff60208201511660208501520151910152565b60608301526080820152f35b5061090b61454a565b90614e1f565b50346104225760206003193601126104225761092b614073565b6001600160a01b036004541633810361077f575067ffffffffffffffff7ffbc83668acd4181d31302d42027aaf88afe3917743b0f5c6935fec9a7583afda916109d7600954916fffffffffffffffff00000000000000008160401b167fffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff84161760095560405193849360401c168390929167ffffffffffffffff60209181604085019616845216910152565b0390a180f35b503461042257806003193601126104225760606109f8614bf4565b610a2d60405180926040809167ffffffffffffffff815116845267ffffffffffffffff60208201511660208501520151910152565bf35b50346104225760206003193601126104225760406020916001600160a01b03610a56614047565b168152601883522054604051908152f35b503461042257806003193601126104225760206001600160a01b0360055416604051908152f35b5034610422576020600319360112610422576004356001600160a01b036004541633810361077f575060407fbed878bea5faee24f1f99a52bda105fcd767c49edb25248985fa0838e5a92f9f91600a549080600a5582519182526020820152a180f35b5034610422576020600319360112610422576001600160a01b03610b13614047565b168152601a60205260408120805490610b2b82614b01565b925b828110610b465760405180610b428682614320565b0390f35b80610b5360019284614308565b90549060031b1c610b64828761477a565b5201610b2d565b503461042257806003193601126104225760206040516127108152f35b5034610422578060031936011261042257602067ffffffffffffffff60095460401c16604051908152f35b503461042257610bc2366141e6565b6001600160a01b03600493929354163303610c0d575b815b8151811015610c095780610c036001600160a01b03610bfb6001948661477a565b511686615276565b01610bda565b8280f35b82825260076020526001600160a01b036040832054168015908115610c63575b5015610bd857506044917f2ab7808700000000000000000000000000000000000000000000000000000000825233600452602452fd5b905033141538610c2d565b50346104225780600319360112610422576001600160a01b0360045416338103610ebf57506016546001811115610e97577fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8101818111610e3c57610cd2906142be565b509060405191610ce18361410a565b5467ffffffffffffffff8082169182855260401c16602084015267ffffffffffffffff42169081811115610e695750507ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe8101908111610e3c57610d44906142be565b507fffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff81541690556016548015610e0f577fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff01610d9f816142be565b610de3577ff6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3926020928567ffffffffffffffff93556016555116604051908152a180f35b6024847f4e487b7100000000000000000000000000000000000000000000000000000000815280600452fd5b6024837f4e487b710000000000000000000000000000000000000000000000000000000081526031600452fd5b6024837f4e487b710000000000000000000000000000000000000000000000000000000081526011600452fd5b7fe2d43b73000000000000000000000000000000000000000000000000000000008552600452602452604483fd5b6004827ff2e71a26000000000000000000000000000000000000000000000000000000008152fd5b7fe4cae21a00000000000000000000000000000000000000000000000000000000825233600452602452604490fd5b503461042257610efd366140b6565b825b818110610f0a578380f35b80610f28610f23610f1e6001948688614756565b614766565b6147a6565b01610eff565b50346104225760406003193601126104225760043590610f4c61405d565b6001600160a01b03600454163303610f69575b6107549192614ee8565b82825260076020526001600160a01b036040832054168015908115610fbf575b5015610f5f57506044917f2ab7808700000000000000000000000000000000000000000000000000000000825233600452602452fd5b905033141538610f89565b5034610422576020600319360112610422576004356001600160a01b036004541633810361077f575061271081116110365760407f7a9645161550a715662c2036d7ff1b7089f139727f6aa3be8d26a8c55a1ee38891600c549080600c5582519182526020820152a180f35b6004827fd418377a000000000000000000000000000000000000000000000000000000008152fd5b5034610422576020600319360112610422576004359067ffffffffffffffff8211610422578160040161012060031984360301126116345761109e614d33565b6101048301926110ad84614b50565b67ffffffffffffffff429116111561160c576110c884614b50565b62278d004201908142116115df5767ffffffffffffffff8291161161159d57506110f184614b50565b67ffffffffffffffff6111186009548261110d81831642614af4565b9160401c1690614af4565b9116106115755760c4810135600a548082106115455750600b548015158061153c575b61150c57509060049160206001600160a01b03865416604051948580927fc5f530af0000000000000000000000000000000000000000000000000000000082525afa9283156115015785936114cd575b5060e48201359280841061149d57506111a384614b50565b926024830135926044810135946040517fffffffffffffffff000000000000000000000000000000000000000000000000602082019260c01b168252856028820152866048820152604881526111fa60688261418d565b5190209586885260136020526040882067ffffffffffffffff815460081c166114715792611453611464936114238c9461138d8c8e9f7f4a380d27b724d2c274af1ef3a9d097d77e5397545ae07edc0bc91d61da00b6749e9f8e60058f9d8f9e67ffffffffffffffff9f6040968e611333926112ca6001600160a01b03601254168b51907f23b872dd000000000000000000000000000000000000000000000000000000006020830152336024830152306044830152836064830152606482526112c560848361418d565b61589f565b85547fffffff0000000000000000000000000000000000000000000000000000000000164260081b68ffffffffffffffff0016173360481b7cffffffffffffffffffffffffffffffffffffffff0000000000000000001617865560018601556002850155614b50565b67ffffffffffffffff60038401911667ffffffffffffffff19825416179055600482015501556113616156b8565b8c61136e81835416614a9f565b1667ffffffffffffffff19825416179055338152601a6020522061580e565b506040519a8b9a60208c52896113a2846140a1565b1660208d015260408c015260608b015260a461141b6113dd8c6101406113cb6064890187614b65565b91909261012060808201520191614bb5565b8c6113eb6084880186614b65565b9160a07fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe082860301910152614bb5565b930190614b65565b907fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe08a84030160c08b0152614bb5565b9460e08701526101008601526140a1565b166101208301520390a280f35b602489897f3b2433e1000000000000000000000000000000000000000000000000000000008252600452fd5b85604491857fb932475a000000000000000000000000000000000000000000000000000000008352600452602452fd5b9092506020813d6020116114f9575b816114e96020938361418d565b8101031261062c5751913861118b565b3d91506114dc565b6040513d87823e3d90fd5b84906044927fadf85688000000000000000000000000000000000000000000000000000000008352600452602452fd5b5080821161113b565b84906044927f4c1beb62000000000000000000000000000000000000000000000000000000008352600452602452fd5b6004837ffc254531000000000000000000000000000000000000000000000000000000008152fd5b8360449167ffffffffffffffff6115b388614b50565b7fb81cc27b00000000000000000000000000000000000000000000000000000000845216600452602452fd5b6024857f4e487b710000000000000000000000000000000000000000000000000000000081526011600452fd5b6004837f1b755fb7000000000000000000000000000000000000000000000000000000008152fd5b5080fd5b5034610422576020600319360112610422576004356001600160a01b036004541633810361077f575061271081116110365760407ff247e7445763d3e9a01aee4b64de35f02273d6a1d7264694bb9298109319c8be91600e549080600e5582519182526020820152a180f35b50346104225780600319360112610422576020600b54604051908152f35b50346104225760a0600319360112610422576116dc614047565b906024356001600160a01b0381168091036116345760443567ffffffffffffffff81168091036119df576064359167ffffffffffffffff831683036119db5780156119b3576001600160a01b038495167fffffffffffffffffffffffff00000000000000000000000000000000000000006011541617601155807fffffffffffffffffffffffff00000000000000000000000000000000000000008554161784556040517f72f702f3000000000000000000000000000000000000000000000000000000008152602081600481855afa90811561150157859161196a575b50906020936001600160a01b036044931693847fffffffffffffffffffffffff000000000000000000000000000000000000000060125416176012557fffffffffffffffffffffffffffffffff000000000000000000000000000000006fffffffffffffffff00000000000000006009549360401b1692161717600955608435600a5560405194859384927f095ea7b300000000000000000000000000000000000000000000000000000000845260048401527fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff60248401525af1801561195f57611928575b506101f4600f556001600160a01b0360045416806118fd57506118c2336155bd565b6118e96040516118d18161410a565b67ffffffffffffffff42168152826020820152614489565b67ffffffffffffffff196017541660175580f35b7f62c92612000000000000000000000000000000000000000000000000000000008252600452602490fd5b6020813d602011611957575b816119416020938361418d565b810103126116345761195290614fbe565b6118a0565b3d9150611934565b6040513d84823e3d90fd5b90506020813d6020116119ab575b816119856020938361418d565b810103126119a75751906001600160a01b03821682036119a7579060206117ba565b8480fd5b3d9150611978565b6004847f2836ef15000000000000000000000000000000000000000000000000000000008152fd5b8380fd5b8280fd5b50346104225760206003193601126104225760406020916004358152600683522054604051908152f35b5034610422576020600319360112610422576001600160a01b036040602092600435815260078452205416604051908152f35b503461042257604060031936011261042257600435611a5d61405d565b6001600160a01b0360045416338103611ae8575081835260076020526001600160a01b0380604085205416918385526007602052604085208282167fffffffffffffffffffffffff000000000000000000000000000000000000000082541617905516917f327b6795344e20c23a3a9a2f2f2479f3746296db1666a6818cdad4afbf247d888480a480f35b7fe4cae21a00000000000000000000000000000000000000000000000000000000845233600452602452604483fd5b50346104225760206003193601126104225760406101a0916004358152601360205220610a2d8154611c1f60ff821693604051611b5381614155565b6001820154815260028201546020820190815267ffffffffffffffff6003840154166040830190815267ffffffffffffffff60048501549160058601549382600788015416956001600160a01b03611bb9600a611bb260088c0161435a565b9a0161435a565b9a6040519d8e611bc882614381565b528d6020878360081c1691015260481c1660408d01525160608c01525160808b0152511660a089015260c088015260e0870152610100860152610120850190602080916001600160a01b0381511684520151910152565b80516001600160a01b031661016084015260200151610180830152565b503461042257602060031936011261042257604060609167ffffffffffffffff611c64614073565b1681526014602052206001815491015467ffffffffffffffff60405192818116845260401c1660208301526040820152f35b5034610422578060031936011261042257602067ffffffffffffffff60095416604051908152f35b503461042257602060031936011261042257611cd8614047565b6001600160a01b036004541633810361077f57506001600160a01b03168015611d56576001600160a01b03601154827fffffffffffffffffffffffff0000000000000000000000000000000000000000821617601155167f289e68b8f41113af2cd98bcf4fd4369937169415c5c43937f1d9a7aea3270a808380a380f35b6004827f72085081000000000000000000000000000000000000000000000000000000008152fd5b503461042257604060031936011261042257611dcb6020916001600160a01b036040611da861405d565b926004358152600686522091169060019160005201602052604060002054151590565b6040519015158152f35b50346104225780600319360112610422576020600f54604051908152f35b503461042257806003193601126104225760206001600160a01b0360045416604051908152f35b50346104225760206003193601126104225761075433600435614ee8565b503461042257806003193601126104225760206001600160a01b0360115416604051908152f35b503461042257806003193601126104225733815260016020526001600160a01b036040822054168015611e96576107549033614cb3565b6024827fe1dba53f00000000000000000000000000000000000000000000000000000000815233600452fd5b5034610422576020600319360112610422576001600160a01b03604060209282611eea614047565b16815260018452205416604051908152f35b5034610422576020600319360112610422576004356001600160a01b036004541633810361077f575060407fc7bb9641822e3c3318570dd58e519090e9189272549564b4644822309e8e6e9f91600d549080600d5582519182526020820152a180f35b50346104225760206003193601126104225760e09067ffffffffffffffff61208561207f611f8b614047565b93611f946145ca565b506001600160a01b0384601754169516908181526015602052604080822060009087891682526020522091600260405193611fce85614171565b80548881168652888160401c166020870152888160801c16604087015260c01c6060860152876001820154166080860152015460a0840152861515600014612100578152601560205260409081902061202687614569565b90866000921682526020522060026040519161204183614171565b80548781168452878160401c166020850152878160801c16604085015260c01c6060840152866001820154166080840152015460a082015290615371565b926142be565b5054166120f9604051809360a0809167ffffffffffffffff815116845267ffffffffffffffff602082015116602085015267ffffffffffffffff604082015116604085015267ffffffffffffffff606082015116606085015267ffffffffffffffff60808201511660808501520151910152565b60c0820152f35b505061210a6145ca565b90615371565b50346104225761012060031936011261042257600435366101241161163457612137615582565b61213f614d33565b8082526013602052604082209081549167ffffffffffffffff61217b60095482612170818316828960081c16614abf565b9160401c1690614abf565b1680421115612631575067ffffffffffffffff60038201541680421161260257506121a533614f8f565b6001600160a01b03600883015416936001600160a01b038216948086036125d3575060ff166121d381614381565b806125a357506001600160a01b0360115416856004840154600585015490833b156119df576101449060405194859384927ff39751a800000000000000000000000000000000000000000000000000000000845260048401526024830152610100602460448401375afa80156106395761258f575b506024855b6008811061257857505060017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0083541617825561228982615653565b600b820154906001600160a01b03600a840154161561256c575b6127106122b2600e5484614ae1565b046122bd818461444d565b9080612557575b5080612463575b50906001600160a01b037f859954befd38b6b306ee0105f3d1e765aa65e922a7190c8d9f9a3003b60fac3493600161232761012095612322856012541686865460481c1661231c898789015461444d565b9161531c565b6150b5565b61238a61234167ffffffffffffffff835460801c16614a9f565b82547fffffffffffffffff0000000000000000ffffffffffffffffffffffffffffffff1660809190911b77ffffffffffffffff0000000000000000000000000000000016178255565b01805467ffffffffffffffff19164267ffffffffffffffff1617905560016123b06156b8565b61240b6123ca67ffffffffffffffff835460401c16614a9f565b82547fffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff1660409190911b6fffffffffffffffff000000000000000016178255565b01612417848254614af4565b9055868852601960205261242e8660408a20615910565b505460481c168652601a6020526124488460408820615910565b506040519061010060248337610100820152a3600160085580f35b8654604080517fa9fc507b0000000000000000000000000000000000000000000000000000000081526001600160a01b038581166004830152602482018590529092839160449183918d91165af1801561254c57612517575b507f859954befd38b6b306ee0105f3d1e765aa65e922a7190c8d9f9a3003b60fac34936001612327846001600160a01b039461250960026125006101209a996150b5565b01918254614af4565b9055949550505093506122cb565b604090819493943d8311612545575b612530818361418d565b8101031261254157389291926124bc565b8680fd5b503d612526565b6040513d8a823e3d90fd5b61256390601054614af4565b601055386122c4565b600983015491506122a3565b60019060208335930192600c82870101550161224d565b8561259c9196929661418d565b9338612248565b856024917f40d41d8900000000000000000000000000000000000000000000000000000000825261070981614381565b7f5186daa400000000000000000000000000000000000000000000000000000000875260045233602452604486fd5b7f5cc404fa00000000000000000000000000000000000000000000000000000000855242600452602452604484fd5b7f53dfa38c00000000000000000000000000000000000000000000000000000000855242600452602452604484fd5b50346104225760206003193601126104225761267a614047565b6001600160a01b036004541690338203612717576001600160a01b03169081156126ef57817fffffffffffffffffffffffff000000000000000000000000000000000000000060055416176005557f38d16b8cac22d99fc7c124b9cd0de2d3fa1faef420bfe791d8c362d765e227008380a380f35b6004837f12c44af2000000000000000000000000000000000000000000000000000000008152fd5b604483837fe4cae21a00000000000000000000000000000000000000000000000000000000825233600452602452fd5b503461042257602060031936011261042257612761614073565b6001600160a01b036004541633810361077f57506009805467ffffffffffffffff19811667ffffffffffffffff9384169081179092556040805191909316815260208101919091527fae2a85369654bba2b48f3887a0b5c87ccef1022b39a5e25fd30d599edc93ad6e91819081016109d7565b50346104225780600319360112610422576001600160a01b0360055416803303610ebf57610754906155bd565b5034610422578060031936011261042257602060405162278d008152f35b50346104225760206003193601126104225760043561283c615582565b8082526013602052604082209081549160ff831661285981614381565b80612a9c575060095461288c67ffffffffffffffff80612880818516828960081c16614abf565b169260401c1682614af4565b93856001840195600385019367ffffffffffffffff85541692834211600014612a45575060015b15612a03575050507ff552ca82e113ac3c539c3d617f29fcd19c172a0c75dad017555c9e109f7fe1839267ffffffffffffffff60209361293060027fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff006001600160a01b039616178085558560125416868b549260481c169061531c565b54164211806129f4575b612970575b81815460481c168752601a83526129598560408920615910565b505460481c169354604051908152a3600160085580f35b81600882016129d9612984838354166150b5565b612991815460c01c614a9f565b77ffffffffffffffffffffffffffffffffffffffffffffffff7fffffffffffffffff00000000000000000000000000000000000000000000000083549260c01b169116179055565b54168752601983526129ee8560408920615910565b5061293f565b5081600882015416151561293a565b60849350604051927ffc8988cb000000000000000000000000000000000000000000000000000000008452426004850152602484015260448301526064820152fd5b81421180612a86575b15612a5b575060016128b3565b82421180612a71575b156128b3575060016128b3565b506001600160a01b0360088801541615612a64565b5067ffffffffffffffff60078801541615612a4e565b846024917f40d41d8900000000000000000000000000000000000000000000000000000000825261070981614381565b50346104225780600319360112610422576001600160a01b036020915416604051908152f35b503461042257602060031936011261042257604060809160043581526013602052206001600160a01b0360088201541690600981015490600b6001600160a01b03600a8301541691015491604051938452602084015260408301526060820152f35b5034610422576020600319360112610422576004356001600160a01b036004541633810361077f575061271081116110365760407f722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe2491600f549080600f5582519182526020820152a180f35b50346104225780600319360112610422576040600e5460105482519182526020820152f35b50346104225760406003193601126104225761010090612d51612c06614047565b916001600160a01b03612c1761408a565b93612c206145ca565b501680825260156020526040822067ffffffffffffffff851683526020526040822091600260405193612c5285614171565b805467ffffffffffffffff8116865267ffffffffffffffff8160401c16602087015267ffffffffffffffff8160801c16604087015260c01c606086015267ffffffffffffffff6001820154166080860152015460a084015267ffffffffffffffff85161515600014612100576040918152601560205281812067ffffffffffffffff612cdd87614569565b16825260205220600260405191612cf383614171565b805467ffffffffffffffff8116845267ffffffffffffffff8160401c16602085015267ffffffffffffffff8160801c16604085015260c01c606084015267ffffffffffffffff6001820154166080840152015460a082015290615371565b9067ffffffffffffffff612d68816108b1846142be565b505460401c1690612de0604051809460a0809167ffffffffffffffff815116845267ffffffffffffffff602082015116602085015267ffffffffffffffff604082015116604085015267ffffffffffffffff606082015116606085015267ffffffffffffffff60808201511660808501520151910152565b60c083015260e0820152f35b503461042257602060031936011261042257612e06614047565b6001600160a01b036004541633810361077f57506001600160a01b038116908115612ea557601054908115612e7d5781612e737f052c2c1904fab85ddafadaeeae6731433f2cba1bcb770a300d25a40d989acf7393602093876010556001600160a01b036012541661531c565b604051908152a280f35b6004847f24f94102000000000000000000000000000000000000000000000000000000008152fd5b6004837f72085081000000000000000000000000000000000000000000000000000000008152fd5b503461042257806003193601126104225760206001600160a01b0360125416604051908152f35b5034610422576020600319360112610422576001600160a01b03612f16614047565b1680151580612fbe575b612f965733825260036020526001600160a01b03604083205416338352600360205260408320827fffffffffffffffffffffffff0000000000000000000000000000000000000000825416179055337f9b1a900deddd1166b5fc6cb337fa3e48911e0bcb56ee3c848e8eb05b13af85328480a480f35b6004827ffc117a28000000000000000000000000000000000000000000000000000000008152fd5b50338114612f20565b503461042257806003193601126104225767ffffffffffffffff6017541667ffffffffffffffff612ff7826142be565b50546040805167ffffffffffffffff9390921683168252929091166020820152f35b503461042257604060031936011261042257604060c091613038614047565b6001600160a01b0361304861408a565b91168252601560205267ffffffffffffffff8383209116825260205220805490600267ffffffffffffffff600183015416910154906040519267ffffffffffffffff8116845267ffffffffffffffff8160401c16602085015267ffffffffffffffff8160801c166040850152841c6060840152608083015260a0820152f35b5034610422576020600319360112610422576004358152600660205260408120604051918260208354918281520192825260208220915b81811061312157610b42856131158187038261418d565b6040519182918261427b565b82548452602090930192600192830192016130fe565b503461042257604060031936011261042257602435600435613157614d33565b80835260136020526040832091825467ffffffffffffffff8160081c169081156133375760ff1661318781614381565b806125a357506131a567ffffffffffffffff91826009541690614abf565b1680421161330857506131b733614f8f565b6002840154936131f76131f16001600160a01b0384169687895260186020526127106131ea60408b2054600f5490614ae1565b0490614af4565b83614fcb565b600681019085875281602052604087205415613298575b5091600161324a6020937fe3b42b8d48a26fbc202ccd924bc9c016974833ac32de0a612cf9eb6160e5f45e95888a5285528360408a20556150b5565b67ffffffffffffffff61325f81835416614a9f565b1667ffffffffffffffff198254161781550167ffffffffffffffff8042161667ffffffffffffffff19825416179055604051908152a380f35b60070167ffffffffffffffff81541667ffffffffffffffff81146132db57815467ffffffffffffffff1916600191820167ffffffffffffffff161790915561320e565b6024887f4e487b710000000000000000000000000000000000000000000000000000000081526011600452fd5b7fc5fed12100000000000000000000000000000000000000000000000000000000855242600452602452604484fd5b602486857ff72a3af1000000000000000000000000000000000000000000000000000000008252600452fd5b5034610422576020600319360112610422576001600160a01b03613385614047565b16815260196020526040812080549061339d82614b01565b925b8281106133b45760405180610b428682614320565b806133c160019284614308565b90549060031b1c6133d2828761477a565b520161339f565b5034610422576020600319360112610422576004359060165482101561042257610b42613405836142be565b50546040805167ffffffffffffffff808416825292821c909216602083015290918291820190565b50346104225780600319360112610422576020600d54604051908152f35b5034610422578060031936011261042257602067ffffffffffffffff60175416604051908152f35b5034610422576020600319360112610422576004356001600160a01b036004541633810361077f575060407f0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df3791600b549080600b5582519182526020820152a180f35b50346104225780600319360112610422576020600e54604051908152f35b5034610422576040600319360112610422576004359061351261405d565b6001600160a01b0360045416330361352f575b6107549192615276565b82825260076020526001600160a01b036040832054168015908115613585575b501561352557506044917f2ab7808700000000000000000000000000000000000000000000000000000000825233600452602452fd5b90503314153861354f565b5034610422576060600319360112610422576024356004356135b0614d33565b80835260136020526040832091825467ffffffffffffffff8160081c169081156133375760ff166135e081614381565b806125a357506009549067ffffffffffffffff82169067ffffffffffffffff6136098383614abf565b16804211156139cc57509167ffffffffffffffff61217061362b938295614abf565b1680421161399d575061363d33614f8f565b6002840154936136706131f16001600160a01b0384169687895260186020526127106131ea60408b2054600f5490614ae1565b604051602081019084825260443560408201526040815261369260608261418d565b5190206006820186885280602052816040892054036139615750506001015480831161393157507f9c253a2ca87d91c2658cfbfcc3d6081283acc3cf95c2961667a858b531ec491f91600161377f6020938689526013855260408920600881018a6001600160a01b03825416926001600160a01b038415938d85159586613924575b156138b0578290600a8501838103613874575b508b8d6040516137368161410a565b8381520152167fffffffffffffffffffffffff00000000000000000000000000000000000000008254161781558960098401555b5416908482036137bf575b50505050506150b5565b6137996123ca67ffffffffffffffff835460401c16614a9f565b01805467ffffffffffffffff19164267ffffffffffffffff16179055604051908152a380f35b6002015491829084613831575b505080613813575b5050898b52601987526137ea8960408d2061580e565b506137f9575b808a8180613775565b89526019855261380c8760408b20615910565b50386137f0565b8c526018885261382860408d20918254614af4565b905538806137d4565b85815260188b5260409020541061386257838d526018895260408d2061385883825461444d565b90555b818d6137cc565b838d52601889528c604081205561385b565b835481547fffffffffffffffffffffffff0000000000000000000000000000000000000000169084161790556009850154600b86015538613727565b600a84019083825416158015613917575b6138cd575b505061376a565b83908c8e6040516138dd8161410a565b8381520152167fffffffffffffffffffffffff000000000000000000000000000000000000000082541617905589600b840155388e6138c6565b50600b8501548c106138c1565b5060098401548b10613714565b85604491847f2365c724000000000000000000000000000000000000000000000000000000008352600452602452fd5b60449188918883526020526040822054907ff83ac0ed000000000000000000000000000000000000000000000000000000008352600452602452fd5b7f680fb09700000000000000000000000000000000000000000000000000000000855242600452602452604484fd5b7f290cc1aa00000000000000000000000000000000000000000000000000000000885242600452602452604487fd5b50346104225780600319360112610422576001600160a01b0360045416338103610ebf576001600160a01b036005547fffffffffffffffffffffffff0000000000000000000000000000000000000000811660055516907fe83a760af9d3c86797ea13c8979010086f067cfe3c985b2d03d951248600c50f8380a380f35b503461042257602060031936011261042257610754610f23614047565b5034610422576020600319360112610422576001600160a01b03613ab8614047565b168152600260205260408120604051918260208354918281520192825260208220915b818110613af257610b42856131158187038261418d565b8254845260209093019260019283019201613adb565b5034610422576020600319360112610422576101009081604051613b2c828261418d565b36903760043581526013602052600c6040822001604051908183905b60088210613b885750505090613b5e838361418d565b6040519190825b60088210613b7257505050f35b6020806001928551815201930191019091613b65565b6001602081928554815201930191019091613b48565b503461042257613bad366141e6565b6001600160a01b03600493929354163303613bf4575b815b8151811015610c095780613bee6001600160a01b03613be66001948661477a565b511686614ee8565b01613bc5565b82825260076020526001600160a01b036040832054168015908115613c4a575b5015613bc357506044917f2ab7808700000000000000000000000000000000000000000000000000000000825233600452602452fd5b905033141538613c14565b503461042257613c64366140b6565b825b818110613c71578380f35b80613c8a613c85610f1e6001948688614756565b6143ba565b01613c66565b50346104225760206003193601126104225760c0613cb4613caf614047565b6145fb565b610a2d604051809260a0809167ffffffffffffffff815116845267ffffffffffffffff602082015116602085015267ffffffffffffffff604082015116604085015267ffffffffffffffff606082015116606085015267ffffffffffffffff60808201511660808501520151910152565b5034610422578060031936011261042257608090613d4161454a565b5067ffffffffffffffff613dd861207f82601754169384815260146020526040812090600160405192613d7384614155565b868154818116865260401c166020850152015460408301528515156000146109025760409085613da288614569565b168152601460205220600160405191613dba83614155565b868154818116855260401c1660208401520154604082015290614e1f565b505416613e1060405180936040809167ffffffffffffffff815116845267ffffffffffffffff60208201511660208501520151910152565b6060820152f35b50346104225780600319360112610422576020601054604051908152f35b503461042257602060031936011261042257613e4f614073565b6001600160a01b036004541633810361077f575067ffffffffffffffff8116613fd0575067ffffffffffffffff42165b60165480613ef8575b50613eb267ffffffffffffffff60405192613ea28461410a565b1691828152836020820152614489565b7ffc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c556020604051838152a167ffffffffffffffff42161015613ef05780f35b610754614d33565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8101908111610e3c5767ffffffffffffffff613f34826142be565b50541667ffffffffffffffff83169080821115613fa257505081613f5a613f9c926142be565b50907fffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff6fffffffffffffffff000000000000000083549260401b169116179055565b38613e88565b7f182e67cb000000000000000000000000000000000000000000000000000000008552600452602452604483fd5b613e7f565b503461042257602060031936011261042257610754613c85614047565b50346104225780600319360112610422576020600c54604051908152f35b905034611634576020600319360112611634576001600160a01b03604060209382614039614047565b168152600385522054168152f35b600435906001600160a01b038216820361062c57565b602435906001600160a01b038216820361062c57565b6004359067ffffffffffffffff8216820361062c57565b6024359067ffffffffffffffff8216820361062c57565b359067ffffffffffffffff8216820361062c57565b90602060031983011261062c5760043567ffffffffffffffff811161062c578260238201121561062c5780600401359267ffffffffffffffff841161062c5760248460051b8301011161062c576024019190565b6040810190811067ffffffffffffffff82111761412657604052565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b6060810190811067ffffffffffffffff82111761412657604052565b60c0810190811067ffffffffffffffff82111761412657604052565b90601f7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0910116810190811067ffffffffffffffff82111761412657604052565b67ffffffffffffffff81116141265760051b60200190565b90604060031983011261062c57600435916024359067ffffffffffffffff821161062c578060238301121561062c57816004013590614224826141ce565b92614232604051948561418d565b8284526024602085019360051b82010191821161062c57602401915b81831061425b5750505090565b82356001600160a01b038116810361062c5781526020928301920161424e565b602060408183019282815284518094520192019060005b81811061429f5750505090565b82516001600160a01b0316845260209384019390920191600101614292565b6016548110156142d957601660005260206000200190600090565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b80548210156142d95760005260206000200190600090565b602060408183019282815284518094520192019060005b8181106143445750505090565b8251845260209384019390920191600101614337565b906040516143678161410a565b6020600182946001600160a01b0381541684520154910152565b6004111561438b57565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602160045260246000fd5b6001600160a01b0381168060005260016020526001600160a01b036040600020541690811561442057503381036143f6576143f491614cb3565b565b7f9b24ecc70000000000000000000000000000000000000000000000000000000060005260046000fd5b7fe1dba53f0000000000000000000000000000000000000000000000000000000060005260045260246000fd5b9190820391821161445a57565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60165468010000000000000000811015614126578060016144af92016016556016614308565b61451b5767ffffffffffffffff60208382806143f49651161667ffffffffffffffff198554161784550151167fffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff6fffffffffffffffff000000000000000083549260401b169116179055565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b6040519061455782614155565b60006040838281528260208201520152565b67ffffffffffffffff7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff9116019067ffffffffffffffff821161445a57565b9067ffffffffffffffff8091169116039067ffffffffffffffff821161445a57565b604051906145d782614171565b600060a0838281528260208201528260408201528260608201528260808201520152565b6146036145ca565b506001600160a01b0367ffffffffffffffff6017541691169081600052601560205260408060002060009067ffffffffffffffff8416825260205220916040519261464d84614171565b805467ffffffffffffffff8116855267ffffffffffffffff8160401c16602086015267ffffffffffffffff8160801c16604086015260c01c6060850152600267ffffffffffffffff60018301541691826080870152015460a0850152821561475057156146b957505090565b6040925060005260156020526146d28260002091614569565b9067ffffffffffffffff600092168252602052206002604051916146f583614171565b805467ffffffffffffffff8116845267ffffffffffffffff8160401c16602085015267ffffffffffffffff8160801c16604085015260c01c606084015267ffffffffffffffff6001820154166080840152015460a082015290565b50505090565b91908110156142d95760051b0190565b356001600160a01b038116810361062c5790565b80518210156142d95760209160051b010190565b9081602091031261062c5751600481101561062c5790565b6001600160a01b03168015614a7557338114614a4b576001600160a01b03600054166040517fb7a87463000000000000000000000000000000000000000000000000000000008152336004820152602081602481855afa9081156149bb57600091614a2c575b5061481681614381565b15614a02578160005260016020526001600160a01b0360406000205416801515806149f8575b6149c757506020602491604051928380927fb7a874630000000000000000000000000000000000000000000000000000000082528660048301525afa9081156149bb5760009161498c575b5061489181614381565b61495f57806000526003602052336001600160a01b0360406000205416036149325780600052600160205260406000206001600160a01b0333167fffffffffffffffffffffffff000000000000000000000000000000000000000082541617905533600052600260205261490981604060002061580e565b50337fa8e16fb275971bccac4fb180f9a7848b7e774b662cd924dfe44bf08a77629260600080a3565b7f59264e500000000000000000000000000000000000000000000000000000000060005260045260246000fd5b7f71957a480000000000000000000000000000000000000000000000000000000060005260045260246000fd5b6149ae915060203d6020116149b4575b6149a6818361418d565b81019061478e565b38614887565b503d61499c565b6040513d6000823e3d90fd5b827fa45b92500000000000000000000000000000000000000000000000000000000060005260045260245260446000fd5b503381141561483c565b7f49baeaad0000000000000000000000000000000000000000000000000000000060005260046000fd5b614a45915060203d6020116149b4576149a6818361418d565b3861480c565b7ffc117a280000000000000000000000000000000000000000000000000000000060005260046000fd5b7f720850810000000000000000000000000000000000000000000000000000000060005260046000fd5b67ffffffffffffffff60019116019067ffffffffffffffff821161445a57565b9067ffffffffffffffff8091169116019067ffffffffffffffff821161445a57565b8181029291811591840414171561445a57565b9190820180921161445a57565b90614b0b826141ce565b614b18604051918261418d565b8281527fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0614b4682946141ce565b0190602036910137565b3567ffffffffffffffff8116810361062c5790565b90357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe18236030181121561062c57016020813591019167ffffffffffffffff821161062c57813603831361062c57565b601f82602094937fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0938186528686013760008582860101520116010190565b614bfc61454a565b5067ffffffffffffffff6017541680600052601460205260406000209060405191614c2683614155565b600181549167ffffffffffffffff8084169384875260401c166020860152015460408401528115614cae5715614c5a575090565b67ffffffffffffffff9150614c6e90614569565b1660005260146020526040600020600160405191614c8b83614155565b67ffffffffffffffff8154818116855260401c1660208401520154604082015290565b505090565b6001600160a01b038091169182600052600160205260406000207fffffffffffffffffffffffff0000000000000000000000000000000000000000815416905516806000526002602052614d0b826040600020615910565b507f68149012e4644815489a47d9c13256794a7e5ce16ddad87a9727b57fb4ac3e9b600080a3565b67ffffffffffffffff42165b60175467ffffffffffffffff8116614d5681614a9f565b67ffffffffffffffff60165491161015614e1a5767ffffffffffffffff614d84614d7f83614a9f565b6142be565b5054168310614e1a577fa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d5108189167ffffffffffffffff614dcb67ffffffffffffffff1993614a9f565b16918291161760175567ffffffffffffffff614de6826142be565b50541690614e126040519283928390929167ffffffffffffffff60209181604085019616845216910152565b0390a1614d3f565b505050565b9190604080614e2c61454a565b9467ffffffffffffffff81511667ffffffffffffffff8551169081811015600014614ed65767ffffffffffffffff91614e64916145a8565b1686526020818101519085015167ffffffffffffffff9081169116818110614ec45767ffffffffffffffff91614e99916145a8565b1660208701520151910151808210614ebb57614eb49161444d565b6040830152565b50506000614eb4565b505067ffffffffffffffff6000614e99565b505067ffffffffffffffff6000614e64565b806000526006602052614f1a6001600160a01b0360406000209316809360019160005201602052604060002054151590565b15614f5e57806000526006602052614f36826040600020615910565b507f155aaafb6329a2098580462df33ec4b7441b19729b9601c5fc17ae1cf99a8a52600080a3565b907f5c6b51c90000000000000000000000000000000000000000000000000000000060005260045260245260446000fd5b6001600160a01b03811660005260016020526001600160a01b036040600020541680614fb9575090565b905090565b5190811515820361062c57565b600054604080517fad732cc10000000000000000000000000000000000000000000000000000000081526001600160a01b038481166004830152602482018690529094939285916044918391165afa9283156149bb57600090600094615074575b501561503757505050565b6001600160a01b03907f8c60a9e3000000000000000000000000000000000000000000000000000000006000521660045260245260445260646000fd5b9350506040833d6040116150ad575b816150906040938361418d565b8101031261062c5760206150a384614fbe565b930151923861502c565b3d9150615083565b906001600160a01b0367ffffffffffffffff60175416921680600052601560205260408060002060009067ffffffffffffffff861682526020522090819380151580615260575b61510557505050565b604091600052601560205261511d8260002091614569565b9067ffffffffffffffff600092168252602052206001810167ffffffffffffffff81541661514a57505050565b8154835467ffffffffffffffff91821667ffffffffffffffff1982168117865584546fffffffffffffffff0000000000000000167fffffffffffffffffffffffffffffffff0000000000000000000000000000000090921617178455916001918391600290805487547fffffffffffffffff0000000000000000ffffffffffffffffffffffffffffffff16608091821c861690911b77ffffffffffffffff00000000000000000000000000000000161787558054875477ffffffffffffffffffffffffffffffffffffffffffffffff167fffffffffffffffff0000000000000000000000000000000000000000000000009091161787550154600286015554169201911667ffffffffffffffff19825416179055565b5067ffffffffffffffff600184015416156150fc565b8060005260066020526152a86001600160a01b0360406000209316809360019160005201602052604060002054151590565b6152eb578060005260066020526152c382604060002061580e565b507f2ae6a113c0ed5b78a53413ffbb7679881f11145ccfba4fb92e863dfcd5a1d2f3600080a3565b907f6b75226d0000000000000000000000000000000000000000000000000000000060005260045260245260446000fd5b6040517fa9059cbb0000000000000000000000000000000000000000000000000000000060208201526001600160a01b039290921660248301526044808301939093529181526143f4916112c560648361418d565b91909161537c6145ca565b9267ffffffffffffffff82511667ffffffffffffffff82511690818110156000146155705767ffffffffffffffff916153b4916145a8565b16845267ffffffffffffffff60208301511667ffffffffffffffff60208301511680821015600014615566576153e9916145a8565b905b67ffffffffffffffff602086019216825267ffffffffffffffff60408401511667ffffffffffffffff6040830151168082101560001461555c5761542e916145a8565b905b67ffffffffffffffff604087019216825267ffffffffffffffff60608501511667ffffffffffffffff6060830151168082101560001461555257615473916145a8565b905b67ffffffffffffffff606088019216825260a08086015191015180821015600014615548576154a39161444d565b915b8260a088015267ffffffffffffffff8751161593841594615533575b50831561551e575b508215615509575b5081156154ff575b50156154f557608067ffffffffffffffff910151166080830152565b5060006080830152565b90501515386154d9565b5167ffffffffffffffff1615159150386154d1565b5167ffffffffffffffff1615159250386154c9565b5167ffffffffffffffff1615159350386154c1565b50506000916154a5565b5050600090615475565b5050600090615430565b50506000906153eb565b505067ffffffffffffffff60006153b4565b600260085414615593576002600855565b7f3ee5aeb50000000000000000000000000000000000000000000000000000000060005260046000fd5b6001600160a01b0380600454921691827fffffffffffffffffffffffff0000000000000000000000000000000000000000821617600455600554828116615628575b50167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0600080a3565b7fffffffffffffffffffffffff000000000000000000000000000000000000000016600555386155ff565b6001600160a01b03600882015416908161566b575050565b60020154908060005260186020528160406000205410156000146156a55760005260186020526156a1604060002091825461444d565b9055565b9050600052601860205260006040812055565b67ffffffffffffffff6017541690816000526014602052604060002091801515806157fb575b806157e5575b806157d9575b6156f15750565b61570367ffffffffffffffff91614569565b166000526014602052604060002080549067ffffffffffffffff8216918215908115916157c2575b5080156157b5575b61573b575050565b67ffffffffffffffff6001921667ffffffffffffffff198554161784556157ac67ffffffffffffffff825460401c1685907fffffffffffffffffffffffffffffffff0000000000000000ffffffffffffffff6fffffffffffffffff000000000000000083549260401b169116179055565b01546001830155565b5060018101541515615733565b67ffffffffffffffff915060401c1615153861572b565b506001830154156156ea565b5067ffffffffffffffff835460401c16156156e4565b5067ffffffffffffffff835416156156de565b60008281526001820160205260409020546158985780549068010000000000000000821015614126578261588161584c846001809601855584614308565b81939154907fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff9060031b92831b921b19161790565b905580549260005201602052604060002055600190565b5050600090565b906000602091828151910182855af1156149bb576000513d61590757506001600160a01b0381163b155b6158d05750565b6001600160a01b03907f5274afe7000000000000000000000000000000000000000000000000000000006000521660045260246000fd5b600114156158c9565b9060018201918160005282602052604060002054801515600014615a6a577fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff810181811161445a578254907fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff820191821161445a57818103615a33575b50505080548015615a04577fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff01906159c58282614308565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff82549160031b1b191690555560005260205260006040812055600190565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603160045260246000fd5b615a53615a4361584c9386614308565b90549060031b1c92839286614308565b90556000528360205260406000205538808061598d565b5050505060009056fea2646970667358221220acbca91223e289d67f5feab32bdc55889724baa9e5b476b8f9cf6c6e32e424dd64736f6c634300081d0033",
 }
 
 // BrevisMarketABI is the input ABI used to generate the binding from.
@@ -1942,6 +1959,37 @@ func (_BrevisMarket *BrevisMarketCallerSession) MAXDEADLINEDURATION() (*big.Int,
 	return _BrevisMarket.Contract.MAXDEADLINEDURATION(&_BrevisMarket.CallOpts)
 }
 
+// AssignedStake is a free data retrieval call binding the contract method 0xe844bd48.
+//
+// Solidity: function assignedStake(address ) view returns(uint256)
+func (_BrevisMarket *BrevisMarketCaller) AssignedStake(opts *bind.CallOpts, arg0 common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "assignedStake", arg0)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// AssignedStake is a free data retrieval call binding the contract method 0xe844bd48.
+//
+// Solidity: function assignedStake(address ) view returns(uint256)
+func (_BrevisMarket *BrevisMarketSession) AssignedStake(arg0 common.Address) (*big.Int, error) {
+	return _BrevisMarket.Contract.AssignedStake(&_BrevisMarket.CallOpts, arg0)
+}
+
+// AssignedStake is a free data retrieval call binding the contract method 0xe844bd48.
+//
+// Solidity: function assignedStake(address ) view returns(uint256)
+func (_BrevisMarket *BrevisMarketCallerSession) AssignedStake(arg0 common.Address) (*big.Int, error) {
+	return _BrevisMarket.Contract.AssignedStake(&_BrevisMarket.CallOpts, arg0)
+}
+
 // BiddingPhaseDuration is a free data retrieval call binding the contract method 0x96f6fe91.
 //
 // Solidity: function biddingPhaseDuration() view returns(uint64)
@@ -2090,6 +2138,132 @@ func (_BrevisMarket *BrevisMarketCallerSession) GetBidders(reqid [32]byte) (stru
 	return _BrevisMarket.Contract.GetBidders(&_BrevisMarket.CallOpts, reqid)
 }
 
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_BrevisMarket *BrevisMarketCaller) GetGlobalRecentStats(opts *bind.CallOpts) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getGlobalRecentStats")
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketGlobalStats
+		StartAt uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_BrevisMarket *BrevisMarketSession) GetGlobalRecentStats() (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	return _BrevisMarket.Contract.GetGlobalRecentStats(&_BrevisMarket.CallOpts)
+}
+
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_BrevisMarket *BrevisMarketCallerSession) GetGlobalRecentStats() (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	return _BrevisMarket.Contract.GetGlobalRecentStats(&_BrevisMarket.CallOpts)
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketCaller) GetGlobalStatsForStatsEpoch(opts *bind.CallOpts, epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getGlobalStatsForStatsEpoch", epochId)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketGlobalStats
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[2], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketSession) GetGlobalStatsForStatsEpoch(epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _BrevisMarket.Contract.GetGlobalStatsForStatsEpoch(&_BrevisMarket.CallOpts, epochId)
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketCallerSession) GetGlobalStatsForStatsEpoch(epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _BrevisMarket.Contract.GetGlobalStatsForStatsEpoch(&_BrevisMarket.CallOpts, epochId)
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_BrevisMarket *BrevisMarketCaller) GetGlobalStatsTotal(opts *bind.CallOpts) (IBrevisMarketGlobalStats, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getGlobalStatsTotal")
+
+	if err != nil {
+		return *new(IBrevisMarketGlobalStats), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+
+	return out0, err
+
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_BrevisMarket *BrevisMarketSession) GetGlobalStatsTotal() (IBrevisMarketGlobalStats, error) {
+	return _BrevisMarket.Contract.GetGlobalStatsTotal(&_BrevisMarket.CallOpts)
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_BrevisMarket *BrevisMarketCallerSession) GetGlobalStatsTotal() (IBrevisMarketGlobalStats, error) {
+	return _BrevisMarket.Contract.GetGlobalStatsTotal(&_BrevisMarket.CallOpts)
+}
+
 // GetProof is a free data retrieval call binding the contract method 0x1b80bb3a.
 //
 // Solidity: function getProof(bytes32 reqid) view returns(uint256[8] proof)
@@ -2164,6 +2338,208 @@ func (_BrevisMarket *BrevisMarketCallerSession) GetProtocolFeeInfo() (struct {
 	Balance *big.Int
 }, error) {
 	return _BrevisMarket.Contract.GetProtocolFeeInfo(&_BrevisMarket.CallOpts)
+}
+
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_BrevisMarket *BrevisMarketCaller) GetProverPendingRequests(opts *bind.CallOpts, prover common.Address) ([][32]byte, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getProverPendingRequests", prover)
+
+	if err != nil {
+		return *new([][32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([][32]byte)).(*[][32]byte)
+
+	return out0, err
+
+}
+
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_BrevisMarket *BrevisMarketSession) GetProverPendingRequests(prover common.Address) ([][32]byte, error) {
+	return _BrevisMarket.Contract.GetProverPendingRequests(&_BrevisMarket.CallOpts, prover)
+}
+
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_BrevisMarket *BrevisMarketCallerSession) GetProverPendingRequests(prover common.Address) ([][32]byte, error) {
+	return _BrevisMarket.Contract.GetProverPendingRequests(&_BrevisMarket.CallOpts, prover)
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_BrevisMarket *BrevisMarketCaller) GetProverRecentStats(opts *bind.CallOpts, prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getProverRecentStats", prover)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketProverStats
+		StartAt uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_BrevisMarket *BrevisMarketSession) GetProverRecentStats(prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	return _BrevisMarket.Contract.GetProverRecentStats(&_BrevisMarket.CallOpts, prover)
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_BrevisMarket *BrevisMarketCallerSession) GetProverRecentStats(prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	return _BrevisMarket.Contract.GetProverRecentStats(&_BrevisMarket.CallOpts, prover)
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketCaller) GetProverStatsForStatsEpoch(opts *bind.CallOpts, prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getProverStatsForStatsEpoch", prover, epochId)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketProverStats
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[2], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketSession) GetProverStatsForStatsEpoch(prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _BrevisMarket.Contract.GetProverStatsForStatsEpoch(&_BrevisMarket.CallOpts, prover, epochId)
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketCallerSession) GetProverStatsForStatsEpoch(prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _BrevisMarket.Contract.GetProverStatsForStatsEpoch(&_BrevisMarket.CallOpts, prover, epochId)
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_BrevisMarket *BrevisMarketCaller) GetProverStatsTotal(opts *bind.CallOpts, prover common.Address) (IBrevisMarketProverStats, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getProverStatsTotal", prover)
+
+	if err != nil {
+		return *new(IBrevisMarketProverStats), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+
+	return out0, err
+
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_BrevisMarket *BrevisMarketSession) GetProverStatsTotal(prover common.Address) (IBrevisMarketProverStats, error) {
+	return _BrevisMarket.Contract.GetProverStatsTotal(&_BrevisMarket.CallOpts, prover)
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_BrevisMarket *BrevisMarketCallerSession) GetProverStatsTotal(prover common.Address) (IBrevisMarketProverStats, error) {
+	return _BrevisMarket.Contract.GetProverStatsTotal(&_BrevisMarket.CallOpts, prover)
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_BrevisMarket *BrevisMarketCaller) GetRecentStatsInfo(opts *bind.CallOpts) (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getRecentStatsInfo")
+
+	outstruct := new(struct {
+		StartAt uint64
+		EpochId uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.StartAt = *abi.ConvertType(out[0], new(uint64)).(*uint64)
+	outstruct.EpochId = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_BrevisMarket *BrevisMarketSession) GetRecentStatsInfo() (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	return _BrevisMarket.Contract.GetRecentStatsInfo(&_BrevisMarket.CallOpts)
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_BrevisMarket *BrevisMarketCallerSession) GetRecentStatsInfo() (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	return _BrevisMarket.Contract.GetRecentStatsInfo(&_BrevisMarket.CallOpts)
 }
 
 // GetRequest is a free data retrieval call binding the contract method 0xfb1e61ca.
@@ -2241,6 +2617,37 @@ func (_BrevisMarket *BrevisMarketCallerSession) GetRequest(reqid [32]byte) (stru
 	return _BrevisMarket.Contract.GetRequest(&_BrevisMarket.CallOpts, reqid)
 }
 
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_BrevisMarket *BrevisMarketCaller) GetSenderPendingRequests(opts *bind.CallOpts, sender common.Address) ([][32]byte, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "getSenderPendingRequests", sender)
+
+	if err != nil {
+		return *new([][32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([][32]byte)).(*[][32]byte)
+
+	return out0, err
+
+}
+
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_BrevisMarket *BrevisMarketSession) GetSenderPendingRequests(sender common.Address) ([][32]byte, error) {
+	return _BrevisMarket.Contract.GetSenderPendingRequests(&_BrevisMarket.CallOpts, sender)
+}
+
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_BrevisMarket *BrevisMarketCallerSession) GetSenderPendingRequests(sender common.Address) ([][32]byte, error) {
+	return _BrevisMarket.Contract.GetSenderPendingRequests(&_BrevisMarket.CallOpts, sender)
+}
+
 // GetSubmittersForProver is a free data retrieval call binding the contract method 0x1cde352b.
 //
 // Solidity: function getSubmittersForProver(address prover) view returns(address[] submitters)
@@ -2270,6 +2677,56 @@ func (_BrevisMarket *BrevisMarketSession) GetSubmittersForProver(prover common.A
 // Solidity: function getSubmittersForProver(address prover) view returns(address[] submitters)
 func (_BrevisMarket *BrevisMarketCallerSession) GetSubmittersForProver(prover common.Address) ([]common.Address, error) {
 	return _BrevisMarket.Contract.GetSubmittersForProver(&_BrevisMarket.CallOpts, prover)
+}
+
+// GlobalStats is a free data retrieval call binding the contract method 0x9c3644e1.
+//
+// Solidity: function globalStats(uint64 ) view returns(uint64 totalRequests, uint64 totalFulfilled, uint256 totalFees)
+func (_BrevisMarket *BrevisMarketCaller) GlobalStats(opts *bind.CallOpts, arg0 uint64) (struct {
+	TotalRequests  uint64
+	TotalFulfilled uint64
+	TotalFees      *big.Int
+}, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "globalStats", arg0)
+
+	outstruct := new(struct {
+		TotalRequests  uint64
+		TotalFulfilled uint64
+		TotalFees      *big.Int
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.TotalRequests = *abi.ConvertType(out[0], new(uint64)).(*uint64)
+	outstruct.TotalFulfilled = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.TotalFees = *abi.ConvertType(out[2], new(*big.Int)).(**big.Int)
+
+	return *outstruct, err
+
+}
+
+// GlobalStats is a free data retrieval call binding the contract method 0x9c3644e1.
+//
+// Solidity: function globalStats(uint64 ) view returns(uint64 totalRequests, uint64 totalFulfilled, uint256 totalFees)
+func (_BrevisMarket *BrevisMarketSession) GlobalStats(arg0 uint64) (struct {
+	TotalRequests  uint64
+	TotalFulfilled uint64
+	TotalFees      *big.Int
+}, error) {
+	return _BrevisMarket.Contract.GlobalStats(&_BrevisMarket.CallOpts, arg0)
+}
+
+// GlobalStats is a free data retrieval call binding the contract method 0x9c3644e1.
+//
+// Solidity: function globalStats(uint64 ) view returns(uint64 totalRequests, uint64 totalFulfilled, uint256 totalFees)
+func (_BrevisMarket *BrevisMarketCallerSession) GlobalStats(arg0 uint64) (struct {
+	TotalRequests  uint64
+	TotalFulfilled uint64
+	TotalFees      *big.Int
+}, error) {
+	return _BrevisMarket.Contract.GlobalStats(&_BrevisMarket.CallOpts, arg0)
 }
 
 // HasRole is a free data retrieval call binding the contract method 0x91d14854.
@@ -2303,6 +2760,37 @@ func (_BrevisMarket *BrevisMarketCallerSession) HasRole(role [32]byte, account c
 	return _BrevisMarket.Contract.HasRole(&_BrevisMarket.CallOpts, role, account)
 }
 
+// MaxMaxFee is a free data retrieval call binding the contract method 0xbed87eb6.
+//
+// Solidity: function maxMaxFee() view returns(uint256)
+func (_BrevisMarket *BrevisMarketCaller) MaxMaxFee(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "maxMaxFee")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// MaxMaxFee is a free data retrieval call binding the contract method 0xbed87eb6.
+//
+// Solidity: function maxMaxFee() view returns(uint256)
+func (_BrevisMarket *BrevisMarketSession) MaxMaxFee() (*big.Int, error) {
+	return _BrevisMarket.Contract.MaxMaxFee(&_BrevisMarket.CallOpts)
+}
+
+// MaxMaxFee is a free data retrieval call binding the contract method 0xbed87eb6.
+//
+// Solidity: function maxMaxFee() view returns(uint256)
+func (_BrevisMarket *BrevisMarketCallerSession) MaxMaxFee() (*big.Int, error) {
+	return _BrevisMarket.Contract.MaxMaxFee(&_BrevisMarket.CallOpts)
+}
+
 // MinMaxFee is a free data retrieval call binding the contract method 0xfafe4201.
 //
 // Solidity: function minMaxFee() view returns(uint256)
@@ -2332,6 +2820,37 @@ func (_BrevisMarket *BrevisMarketSession) MinMaxFee() (*big.Int, error) {
 // Solidity: function minMaxFee() view returns(uint256)
 func (_BrevisMarket *BrevisMarketCallerSession) MinMaxFee() (*big.Int, error) {
 	return _BrevisMarket.Contract.MinMaxFee(&_BrevisMarket.CallOpts)
+}
+
+// OvercommitBps is a free data retrieval call binding the contract method 0x9006a277.
+//
+// Solidity: function overcommitBps() view returns(uint256)
+func (_BrevisMarket *BrevisMarketCaller) OvercommitBps(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "overcommitBps")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// OvercommitBps is a free data retrieval call binding the contract method 0x9006a277.
+//
+// Solidity: function overcommitBps() view returns(uint256)
+func (_BrevisMarket *BrevisMarketSession) OvercommitBps() (*big.Int, error) {
+	return _BrevisMarket.Contract.OvercommitBps(&_BrevisMarket.CallOpts)
+}
+
+// OvercommitBps is a free data retrieval call binding the contract method 0x9006a277.
+//
+// Solidity: function overcommitBps() view returns(uint256)
+func (_BrevisMarket *BrevisMarketCallerSession) OvercommitBps() (*big.Int, error) {
+	return _BrevisMarket.Contract.OvercommitBps(&_BrevisMarket.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
@@ -2489,9 +3008,74 @@ func (_BrevisMarket *BrevisMarketCallerSession) ProtocolFeeBps() (*big.Int, erro
 	return _BrevisMarket.Contract.ProtocolFeeBps(&_BrevisMarket.CallOpts)
 }
 
+// ProverStats is a free data retrieval call binding the contract method 0x559fa96e.
+//
+// Solidity: function proverStats(address , uint64 ) view returns(uint64 bids, uint64 reveals, uint64 requestsFulfilled, uint64 requestsRefunded, uint64 lastActiveAt, uint256 feeReceived)
+func (_BrevisMarket *BrevisMarketCaller) ProverStats(opts *bind.CallOpts, arg0 common.Address, arg1 uint64) (struct {
+	Bids              uint64
+	Reveals           uint64
+	RequestsFulfilled uint64
+	RequestsRefunded  uint64
+	LastActiveAt      uint64
+	FeeReceived       *big.Int
+}, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "proverStats", arg0, arg1)
+
+	outstruct := new(struct {
+		Bids              uint64
+		Reveals           uint64
+		RequestsFulfilled uint64
+		RequestsRefunded  uint64
+		LastActiveAt      uint64
+		FeeReceived       *big.Int
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Bids = *abi.ConvertType(out[0], new(uint64)).(*uint64)
+	outstruct.Reveals = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.RequestsFulfilled = *abi.ConvertType(out[2], new(uint64)).(*uint64)
+	outstruct.RequestsRefunded = *abi.ConvertType(out[3], new(uint64)).(*uint64)
+	outstruct.LastActiveAt = *abi.ConvertType(out[4], new(uint64)).(*uint64)
+	outstruct.FeeReceived = *abi.ConvertType(out[5], new(*big.Int)).(**big.Int)
+
+	return *outstruct, err
+
+}
+
+// ProverStats is a free data retrieval call binding the contract method 0x559fa96e.
+//
+// Solidity: function proverStats(address , uint64 ) view returns(uint64 bids, uint64 reveals, uint64 requestsFulfilled, uint64 requestsRefunded, uint64 lastActiveAt, uint256 feeReceived)
+func (_BrevisMarket *BrevisMarketSession) ProverStats(arg0 common.Address, arg1 uint64) (struct {
+	Bids              uint64
+	Reveals           uint64
+	RequestsFulfilled uint64
+	RequestsRefunded  uint64
+	LastActiveAt      uint64
+	FeeReceived       *big.Int
+}, error) {
+	return _BrevisMarket.Contract.ProverStats(&_BrevisMarket.CallOpts, arg0, arg1)
+}
+
+// ProverStats is a free data retrieval call binding the contract method 0x559fa96e.
+//
+// Solidity: function proverStats(address , uint64 ) view returns(uint64 bids, uint64 reveals, uint64 requestsFulfilled, uint64 requestsRefunded, uint64 lastActiveAt, uint256 feeReceived)
+func (_BrevisMarket *BrevisMarketCallerSession) ProverStats(arg0 common.Address, arg1 uint64) (struct {
+	Bids              uint64
+	Reveals           uint64
+	RequestsFulfilled uint64
+	RequestsRefunded  uint64
+	LastActiveAt      uint64
+	FeeReceived       *big.Int
+}, error) {
+	return _BrevisMarket.Contract.ProverStats(&_BrevisMarket.CallOpts, arg0, arg1)
+}
+
 // Requests is a free data retrieval call binding the contract method 0x9d866985.
 //
-// Solidity: function requests(bytes32 ) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint256 bidCount, (address,uint256) winner, (address,uint256) second)
+// Solidity: function requests(bytes32 ) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
 func (_BrevisMarket *BrevisMarketCaller) Requests(opts *bind.CallOpts, arg0 [32]byte) (struct {
 	Status             uint8
 	Timestamp          uint64
@@ -2499,7 +3083,7 @@ func (_BrevisMarket *BrevisMarketCaller) Requests(opts *bind.CallOpts, arg0 [32]
 	Fee                IBrevisMarketFeeParams
 	Vk                 [32]byte
 	PublicValuesDigest [32]byte
-	BidCount           *big.Int
+	BidCount           uint64
 	Winner             IBrevisMarketBidder
 	Second             IBrevisMarketBidder
 }, error) {
@@ -2513,7 +3097,7 @@ func (_BrevisMarket *BrevisMarketCaller) Requests(opts *bind.CallOpts, arg0 [32]
 		Fee                IBrevisMarketFeeParams
 		Vk                 [32]byte
 		PublicValuesDigest [32]byte
-		BidCount           *big.Int
+		BidCount           uint64
 		Winner             IBrevisMarketBidder
 		Second             IBrevisMarketBidder
 	})
@@ -2527,7 +3111,7 @@ func (_BrevisMarket *BrevisMarketCaller) Requests(opts *bind.CallOpts, arg0 [32]
 	outstruct.Fee = *abi.ConvertType(out[3], new(IBrevisMarketFeeParams)).(*IBrevisMarketFeeParams)
 	outstruct.Vk = *abi.ConvertType(out[4], new([32]byte)).(*[32]byte)
 	outstruct.PublicValuesDigest = *abi.ConvertType(out[5], new([32]byte)).(*[32]byte)
-	outstruct.BidCount = *abi.ConvertType(out[6], new(*big.Int)).(**big.Int)
+	outstruct.BidCount = *abi.ConvertType(out[6], new(uint64)).(*uint64)
 	outstruct.Winner = *abi.ConvertType(out[7], new(IBrevisMarketBidder)).(*IBrevisMarketBidder)
 	outstruct.Second = *abi.ConvertType(out[8], new(IBrevisMarketBidder)).(*IBrevisMarketBidder)
 
@@ -2537,7 +3121,7 @@ func (_BrevisMarket *BrevisMarketCaller) Requests(opts *bind.CallOpts, arg0 [32]
 
 // Requests is a free data retrieval call binding the contract method 0x9d866985.
 //
-// Solidity: function requests(bytes32 ) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint256 bidCount, (address,uint256) winner, (address,uint256) second)
+// Solidity: function requests(bytes32 ) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
 func (_BrevisMarket *BrevisMarketSession) Requests(arg0 [32]byte) (struct {
 	Status             uint8
 	Timestamp          uint64
@@ -2545,7 +3129,7 @@ func (_BrevisMarket *BrevisMarketSession) Requests(arg0 [32]byte) (struct {
 	Fee                IBrevisMarketFeeParams
 	Vk                 [32]byte
 	PublicValuesDigest [32]byte
-	BidCount           *big.Int
+	BidCount           uint64
 	Winner             IBrevisMarketBidder
 	Second             IBrevisMarketBidder
 }, error) {
@@ -2554,7 +3138,7 @@ func (_BrevisMarket *BrevisMarketSession) Requests(arg0 [32]byte) (struct {
 
 // Requests is a free data retrieval call binding the contract method 0x9d866985.
 //
-// Solidity: function requests(bytes32 ) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint256 bidCount, (address,uint256) winner, (address,uint256) second)
+// Solidity: function requests(bytes32 ) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
 func (_BrevisMarket *BrevisMarketCallerSession) Requests(arg0 [32]byte) (struct {
 	Status             uint8
 	Timestamp          uint64
@@ -2562,7 +3146,7 @@ func (_BrevisMarket *BrevisMarketCallerSession) Requests(arg0 [32]byte) (struct 
 	Fee                IBrevisMarketFeeParams
 	Vk                 [32]byte
 	PublicValuesDigest [32]byte
-	BidCount           *big.Int
+	BidCount           uint64
 	Winner             IBrevisMarketBidder
 	Second             IBrevisMarketBidder
 }, error) {
@@ -2786,6 +3370,113 @@ func (_BrevisMarket *BrevisMarketCallerSession) StakingController() (common.Addr
 	return _BrevisMarket.Contract.StakingController(&_BrevisMarket.CallOpts)
 }
 
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64)
+func (_BrevisMarket *BrevisMarketCaller) StatsEpochId(opts *bind.CallOpts) (uint64, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "statsEpochId")
+
+	if err != nil {
+		return *new(uint64), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(uint64)).(*uint64)
+
+	return out0, err
+
+}
+
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64)
+func (_BrevisMarket *BrevisMarketSession) StatsEpochId() (uint64, error) {
+	return _BrevisMarket.Contract.StatsEpochId(&_BrevisMarket.CallOpts)
+}
+
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64)
+func (_BrevisMarket *BrevisMarketCallerSession) StatsEpochId() (uint64, error) {
+	return _BrevisMarket.Contract.StatsEpochId(&_BrevisMarket.CallOpts)
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 ) view returns(uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketCaller) StatsEpochs(opts *bind.CallOpts, arg0 *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "statsEpochs", arg0)
+
+	outstruct := new(struct {
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.StartAt = *abi.ConvertType(out[0], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 ) view returns(uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketSession) StatsEpochs(arg0 *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _BrevisMarket.Contract.StatsEpochs(&_BrevisMarket.CallOpts, arg0)
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 ) view returns(uint64 startAt, uint64 endAt)
+func (_BrevisMarket *BrevisMarketCallerSession) StatsEpochs(arg0 *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _BrevisMarket.Contract.StatsEpochs(&_BrevisMarket.CallOpts, arg0)
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_BrevisMarket *BrevisMarketCaller) StatsEpochsLength(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _BrevisMarket.contract.Call(opts, &out, "statsEpochsLength")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_BrevisMarket *BrevisMarketSession) StatsEpochsLength() (*big.Int, error) {
+	return _BrevisMarket.Contract.StatsEpochsLength(&_BrevisMarket.CallOpts)
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_BrevisMarket *BrevisMarketCallerSession) StatsEpochsLength() (*big.Int, error) {
+	return _BrevisMarket.Contract.StatsEpochsLength(&_BrevisMarket.CallOpts)
+}
+
 // SubmitterConsent is a free data retrieval call binding the contract method 0x020ebc35.
 //
 // Solidity: function submitterConsent(address submitter) view returns(address prover)
@@ -2974,6 +3665,27 @@ func (_BrevisMarket *BrevisMarketTransactorSession) Init(_picoVerifier common.Ad
 	return _BrevisMarket.Contract.Init(&_BrevisMarket.TransactOpts, _picoVerifier, _stakingController, _biddingPhaseDuration, _revealPhaseDuration, _minMaxFee)
 }
 
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_BrevisMarket *BrevisMarketTransactor) PopStatsEpoch(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _BrevisMarket.contract.Transact(opts, "popStatsEpoch")
+}
+
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_BrevisMarket *BrevisMarketSession) PopStatsEpoch() (*types.Transaction, error) {
+	return _BrevisMarket.Contract.PopStatsEpoch(&_BrevisMarket.TransactOpts)
+}
+
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_BrevisMarket *BrevisMarketTransactorSession) PopStatsEpoch() (*types.Transaction, error) {
+	return _BrevisMarket.Contract.PopStatsEpoch(&_BrevisMarket.TransactOpts)
+}
+
 // Refund is a paid mutator transaction binding the contract method 0x7249fbb6.
 //
 // Solidity: function refund(bytes32 reqid) returns()
@@ -3142,6 +3854,27 @@ func (_BrevisMarket *BrevisMarketTransactorSession) RevokeRoles(role [32]byte, a
 	return _BrevisMarket.Contract.RevokeRoles(&_BrevisMarket.TransactOpts, role, accounts)
 }
 
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_BrevisMarket *BrevisMarketTransactor) ScheduleStatsEpoch(opts *bind.TransactOpts, startAt uint64) (*types.Transaction, error) {
+	return _BrevisMarket.contract.Transact(opts, "scheduleStatsEpoch", startAt)
+}
+
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_BrevisMarket *BrevisMarketSession) ScheduleStatsEpoch(startAt uint64) (*types.Transaction, error) {
+	return _BrevisMarket.Contract.ScheduleStatsEpoch(&_BrevisMarket.TransactOpts, startAt)
+}
+
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_BrevisMarket *BrevisMarketTransactorSession) ScheduleStatsEpoch(startAt uint64) (*types.Transaction, error) {
+	return _BrevisMarket.Contract.ScheduleStatsEpoch(&_BrevisMarket.TransactOpts, startAt)
+}
+
 // SetBiddingPhaseDuration is a paid mutator transaction binding the contract method 0x7d9b7158.
 //
 // Solidity: function setBiddingPhaseDuration(uint64 newDuration) returns()
@@ -3163,6 +3896,27 @@ func (_BrevisMarket *BrevisMarketTransactorSession) SetBiddingPhaseDuration(newD
 	return _BrevisMarket.Contract.SetBiddingPhaseDuration(&_BrevisMarket.TransactOpts, newDuration)
 }
 
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_BrevisMarket *BrevisMarketTransactor) SetMaxMaxFee(opts *bind.TransactOpts, newMaxFee *big.Int) (*types.Transaction, error) {
+	return _BrevisMarket.contract.Transact(opts, "setMaxMaxFee", newMaxFee)
+}
+
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_BrevisMarket *BrevisMarketSession) SetMaxMaxFee(newMaxFee *big.Int) (*types.Transaction, error) {
+	return _BrevisMarket.Contract.SetMaxMaxFee(&_BrevisMarket.TransactOpts, newMaxFee)
+}
+
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_BrevisMarket *BrevisMarketTransactorSession) SetMaxMaxFee(newMaxFee *big.Int) (*types.Transaction, error) {
+	return _BrevisMarket.Contract.SetMaxMaxFee(&_BrevisMarket.TransactOpts, newMaxFee)
+}
+
 // SetMinMaxFee is a paid mutator transaction binding the contract method 0xe30c1fc3.
 //
 // Solidity: function setMinMaxFee(uint256 newMinFee) returns()
@@ -3182,6 +3936,27 @@ func (_BrevisMarket *BrevisMarketSession) SetMinMaxFee(newMinFee *big.Int) (*typ
 // Solidity: function setMinMaxFee(uint256 newMinFee) returns()
 func (_BrevisMarket *BrevisMarketTransactorSession) SetMinMaxFee(newMinFee *big.Int) (*types.Transaction, error) {
 	return _BrevisMarket.Contract.SetMinMaxFee(&_BrevisMarket.TransactOpts, newMinFee)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_BrevisMarket *BrevisMarketTransactor) SetOvercommitBps(opts *bind.TransactOpts, newBps *big.Int) (*types.Transaction, error) {
+	return _BrevisMarket.contract.Transact(opts, "setOvercommitBps", newBps)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_BrevisMarket *BrevisMarketSession) SetOvercommitBps(newBps *big.Int) (*types.Transaction, error) {
+	return _BrevisMarket.Contract.SetOvercommitBps(&_BrevisMarket.TransactOpts, newBps)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_BrevisMarket *BrevisMarketTransactorSession) SetOvercommitBps(newBps *big.Int) (*types.Transaction, error) {
+	return _BrevisMarket.Contract.SetOvercommitBps(&_BrevisMarket.TransactOpts, newBps)
 }
 
 // SetPicoVerifier is a paid mutator transaction binding the contract method 0x95591966.
@@ -3941,6 +4716,141 @@ func (_BrevisMarket *BrevisMarketFilterer) ParseFeeTokenUpdated(log types.Log) (
 	return event, nil
 }
 
+// BrevisMarketMaxMaxFeeUpdatedIterator is returned from FilterMaxMaxFeeUpdated and is used to iterate over the raw logs and unpacked data for MaxMaxFeeUpdated events raised by the BrevisMarket contract.
+type BrevisMarketMaxMaxFeeUpdatedIterator struct {
+	Event *BrevisMarketMaxMaxFeeUpdated // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BrevisMarketMaxMaxFeeUpdatedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BrevisMarketMaxMaxFeeUpdated)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BrevisMarketMaxMaxFeeUpdated)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BrevisMarketMaxMaxFeeUpdatedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BrevisMarketMaxMaxFeeUpdatedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BrevisMarketMaxMaxFeeUpdated represents a MaxMaxFeeUpdated event raised by the BrevisMarket contract.
+type BrevisMarketMaxMaxFeeUpdated struct {
+	OldFee *big.Int
+	NewFee *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterMaxMaxFeeUpdated is a free log retrieval operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_BrevisMarket *BrevisMarketFilterer) FilterMaxMaxFeeUpdated(opts *bind.FilterOpts) (*BrevisMarketMaxMaxFeeUpdatedIterator, error) {
+
+	logs, sub, err := _BrevisMarket.contract.FilterLogs(opts, "MaxMaxFeeUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return &BrevisMarketMaxMaxFeeUpdatedIterator{contract: _BrevisMarket.contract, event: "MaxMaxFeeUpdated", logs: logs, sub: sub}, nil
+}
+
+// WatchMaxMaxFeeUpdated is a free log subscription operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_BrevisMarket *BrevisMarketFilterer) WatchMaxMaxFeeUpdated(opts *bind.WatchOpts, sink chan<- *BrevisMarketMaxMaxFeeUpdated) (event.Subscription, error) {
+
+	logs, sub, err := _BrevisMarket.contract.WatchLogs(opts, "MaxMaxFeeUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BrevisMarketMaxMaxFeeUpdated)
+				if err := _BrevisMarket.contract.UnpackLog(event, "MaxMaxFeeUpdated", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseMaxMaxFeeUpdated is a log parse operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_BrevisMarket *BrevisMarketFilterer) ParseMaxMaxFeeUpdated(log types.Log) (*BrevisMarketMaxMaxFeeUpdated, error) {
+	event := new(BrevisMarketMaxMaxFeeUpdated)
+	if err := _BrevisMarket.contract.UnpackLog(event, "MaxMaxFeeUpdated", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
 // BrevisMarketMinMaxFeeUpdatedIterator is returned from FilterMinMaxFeeUpdated and is used to iterate over the raw logs and unpacked data for MinMaxFeeUpdated events raised by the BrevisMarket contract.
 type BrevisMarketMinMaxFeeUpdatedIterator struct {
 	Event *BrevisMarketMinMaxFeeUpdated // Event containing the contract specifics and raw log
@@ -4369,6 +5279,141 @@ func (_BrevisMarket *BrevisMarketFilterer) WatchNewRequest(opts *bind.WatchOpts,
 func (_BrevisMarket *BrevisMarketFilterer) ParseNewRequest(log types.Log) (*BrevisMarketNewRequest, error) {
 	event := new(BrevisMarketNewRequest)
 	if err := _BrevisMarket.contract.UnpackLog(event, "NewRequest", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// BrevisMarketOvercommitBpsUpdatedIterator is returned from FilterOvercommitBpsUpdated and is used to iterate over the raw logs and unpacked data for OvercommitBpsUpdated events raised by the BrevisMarket contract.
+type BrevisMarketOvercommitBpsUpdatedIterator struct {
+	Event *BrevisMarketOvercommitBpsUpdated // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BrevisMarketOvercommitBpsUpdatedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BrevisMarketOvercommitBpsUpdated)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BrevisMarketOvercommitBpsUpdated)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BrevisMarketOvercommitBpsUpdatedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BrevisMarketOvercommitBpsUpdatedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BrevisMarketOvercommitBpsUpdated represents a OvercommitBpsUpdated event raised by the BrevisMarket contract.
+type BrevisMarketOvercommitBpsUpdated struct {
+	OldBps *big.Int
+	NewBps *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterOvercommitBpsUpdated is a free log retrieval operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_BrevisMarket *BrevisMarketFilterer) FilterOvercommitBpsUpdated(opts *bind.FilterOpts) (*BrevisMarketOvercommitBpsUpdatedIterator, error) {
+
+	logs, sub, err := _BrevisMarket.contract.FilterLogs(opts, "OvercommitBpsUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return &BrevisMarketOvercommitBpsUpdatedIterator{contract: _BrevisMarket.contract, event: "OvercommitBpsUpdated", logs: logs, sub: sub}, nil
+}
+
+// WatchOvercommitBpsUpdated is a free log subscription operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_BrevisMarket *BrevisMarketFilterer) WatchOvercommitBpsUpdated(opts *bind.WatchOpts, sink chan<- *BrevisMarketOvercommitBpsUpdated) (event.Subscription, error) {
+
+	logs, sub, err := _BrevisMarket.contract.WatchLogs(opts, "OvercommitBpsUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BrevisMarketOvercommitBpsUpdated)
+				if err := _BrevisMarket.contract.UnpackLog(event, "OvercommitBpsUpdated", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseOvercommitBpsUpdated is a log parse operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_BrevisMarket *BrevisMarketFilterer) ParseOvercommitBpsUpdated(log types.Log) (*BrevisMarketOvercommitBpsUpdated, error) {
+	event := new(BrevisMarketOvercommitBpsUpdated)
+	if err := _BrevisMarket.contract.UnpackLog(event, "OvercommitBpsUpdated", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -6603,6 +7648,409 @@ func (_BrevisMarket *BrevisMarketFilterer) ParseSlashWindowUpdated(log types.Log
 	return event, nil
 }
 
+// BrevisMarketStatsEpochPoppedIterator is returned from FilterStatsEpochPopped and is used to iterate over the raw logs and unpacked data for StatsEpochPopped events raised by the BrevisMarket contract.
+type BrevisMarketStatsEpochPoppedIterator struct {
+	Event *BrevisMarketStatsEpochPopped // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BrevisMarketStatsEpochPoppedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BrevisMarketStatsEpochPopped)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BrevisMarketStatsEpochPopped)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BrevisMarketStatsEpochPoppedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BrevisMarketStatsEpochPoppedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BrevisMarketStatsEpochPopped represents a StatsEpochPopped event raised by the BrevisMarket contract.
+type BrevisMarketStatsEpochPopped struct {
+	PoppedStartAt uint64
+	Raw           types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsEpochPopped is a free log retrieval operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) FilterStatsEpochPopped(opts *bind.FilterOpts) (*BrevisMarketStatsEpochPoppedIterator, error) {
+
+	logs, sub, err := _BrevisMarket.contract.FilterLogs(opts, "StatsEpochPopped")
+	if err != nil {
+		return nil, err
+	}
+	return &BrevisMarketStatsEpochPoppedIterator{contract: _BrevisMarket.contract, event: "StatsEpochPopped", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsEpochPopped is a free log subscription operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) WatchStatsEpochPopped(opts *bind.WatchOpts, sink chan<- *BrevisMarketStatsEpochPopped) (event.Subscription, error) {
+
+	logs, sub, err := _BrevisMarket.contract.WatchLogs(opts, "StatsEpochPopped")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BrevisMarketStatsEpochPopped)
+				if err := _BrevisMarket.contract.UnpackLog(event, "StatsEpochPopped", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsEpochPopped is a log parse operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) ParseStatsEpochPopped(log types.Log) (*BrevisMarketStatsEpochPopped, error) {
+	event := new(BrevisMarketStatsEpochPopped)
+	if err := _BrevisMarket.contract.UnpackLog(event, "StatsEpochPopped", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// BrevisMarketStatsEpochScheduledIterator is returned from FilterStatsEpochScheduled and is used to iterate over the raw logs and unpacked data for StatsEpochScheduled events raised by the BrevisMarket contract.
+type BrevisMarketStatsEpochScheduledIterator struct {
+	Event *BrevisMarketStatsEpochScheduled // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BrevisMarketStatsEpochScheduledIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BrevisMarketStatsEpochScheduled)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BrevisMarketStatsEpochScheduled)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BrevisMarketStatsEpochScheduledIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BrevisMarketStatsEpochScheduledIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BrevisMarketStatsEpochScheduled represents a StatsEpochScheduled event raised by the BrevisMarket contract.
+type BrevisMarketStatsEpochScheduled struct {
+	ScheduledStartAt uint64
+	Raw              types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsEpochScheduled is a free log retrieval operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) FilterStatsEpochScheduled(opts *bind.FilterOpts) (*BrevisMarketStatsEpochScheduledIterator, error) {
+
+	logs, sub, err := _BrevisMarket.contract.FilterLogs(opts, "StatsEpochScheduled")
+	if err != nil {
+		return nil, err
+	}
+	return &BrevisMarketStatsEpochScheduledIterator{contract: _BrevisMarket.contract, event: "StatsEpochScheduled", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsEpochScheduled is a free log subscription operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) WatchStatsEpochScheduled(opts *bind.WatchOpts, sink chan<- *BrevisMarketStatsEpochScheduled) (event.Subscription, error) {
+
+	logs, sub, err := _BrevisMarket.contract.WatchLogs(opts, "StatsEpochScheduled")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BrevisMarketStatsEpochScheduled)
+				if err := _BrevisMarket.contract.UnpackLog(event, "StatsEpochScheduled", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsEpochScheduled is a log parse operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) ParseStatsEpochScheduled(log types.Log) (*BrevisMarketStatsEpochScheduled, error) {
+	event := new(BrevisMarketStatsEpochScheduled)
+	if err := _BrevisMarket.contract.UnpackLog(event, "StatsEpochScheduled", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// BrevisMarketStatsResetIterator is returned from FilterStatsReset and is used to iterate over the raw logs and unpacked data for StatsReset events raised by the BrevisMarket contract.
+type BrevisMarketStatsResetIterator struct {
+	Event *BrevisMarketStatsReset // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BrevisMarketStatsResetIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BrevisMarketStatsReset)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BrevisMarketStatsReset)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BrevisMarketStatsResetIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BrevisMarketStatsResetIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BrevisMarketStatsReset represents a StatsReset event raised by the BrevisMarket contract.
+type BrevisMarketStatsReset struct {
+	NewEpochId   uint64
+	StatsStartAt uint64
+	Raw          types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsReset is a free log retrieval operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) FilterStatsReset(opts *bind.FilterOpts) (*BrevisMarketStatsResetIterator, error) {
+
+	logs, sub, err := _BrevisMarket.contract.FilterLogs(opts, "StatsReset")
+	if err != nil {
+		return nil, err
+	}
+	return &BrevisMarketStatsResetIterator{contract: _BrevisMarket.contract, event: "StatsReset", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsReset is a free log subscription operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) WatchStatsReset(opts *bind.WatchOpts, sink chan<- *BrevisMarketStatsReset) (event.Subscription, error) {
+
+	logs, sub, err := _BrevisMarket.contract.WatchLogs(opts, "StatsReset")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BrevisMarketStatsReset)
+				if err := _BrevisMarket.contract.UnpackLog(event, "StatsReset", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsReset is a log parse operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_BrevisMarket *BrevisMarketFilterer) ParseStatsReset(log types.Log) (*BrevisMarketStatsReset, error) {
+	event := new(BrevisMarketStatsReset)
+	if err := _BrevisMarket.contract.UnpackLog(event, "StatsReset", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
 // BrevisMarketSubmitterConsentUpdatedIterator is returned from FilterSubmitterConsentUpdated and is used to iterate over the raw logs and unpacked data for SubmitterConsentUpdated events raised by the BrevisMarket contract.
 type BrevisMarketSubmitterConsentUpdatedIterator struct {
 	Event *BrevisMarketSubmitterConsentUpdated // Event containing the contract specifics and raw log
@@ -8461,7 +9909,7 @@ func (_IAccessControl *IAccessControlFilterer) ParseRoleRevoked(log types.Log) (
 
 // IBrevisMarketMetaData contains all meta data concerning the IBrevisMarket contract.
 var IBrevisMarketMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketBeforeDeadline\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"expected\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"actual\",\"type\":\"bytes32\"}],\"name\":\"MarketBidRevealMismatch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketCannotRefundYet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketCannotRegisterProverAsSubmitter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketCannotRegisterSelf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineBeforeRevealPhaseEnd\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineMustBeInFuture\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlinePassed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAllowed\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlineTooFar\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"}],\"name\":\"MarketFeeExceedsMaximum\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidProtocolFeeBps\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"MarketInvalidRequestStatus\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidSlashBps\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidStakingController\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMinStakeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketNoAssignedProverToSlash\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoProtocolFeeToWithdraw\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNotAuthorized\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"actual\",\"type\":\"address\"}],\"name\":\"MarketNotExpectedProver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requiredStake\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"actualStake\",\"type\":\"uint256\"}],\"name\":\"MarketProverNotEligible\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketProverNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestAlreadyExists\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestNotFound\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"slashWindowEnd\",\"type\":\"uint256\"}],\"name\":\"MarketSlashWindowExpired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketSubmitterAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterConsentRequired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterNotRegistered\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"BidRevealed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"BiddingPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldToken\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newToken\",\"type\":\"address\"}],\"name\":\"FeeTokenUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MinMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"NewBid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"indexed\":false,\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"NewRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldVerifier\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"PicoVerifierUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"actualFee\",\"type\":\"uint256\"}],\"name\":\"ProofSubmitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"slashAmount\",\"type\":\"uint256\"}],\"name\":\"ProverSlashed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Refunded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"RevealPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"SlashBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldWindow\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"SlashWindowUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldProver\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newProver\",\"type\":\"address\"}],\"name\":\"SubmitterConsentUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterUnregistered\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_DEADLINE_DURATION\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"bid\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"biddingPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"duration\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeToken\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getBidHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getBidders\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"winnerFee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"secondPlace\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"secondFee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getProof\",\"outputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProtocolFeeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"feeBps\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getRequest\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getSubmittersForProver\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minMaxFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"picoVerifier\",\"outputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"verifier\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"refund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"registerSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"requestProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"reveal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revealPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"duration\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setBiddingPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMinFee\",\"type\":\"uint256\"}],\"name\":\"setMinMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"setPicoVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setProtocolFeeBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setRevealPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setSlashBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"setSlashWindow\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"setSubmitterConsent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"slash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingController\",\"outputs\":[{\"internalType\":\"contractIStakingController\",\"name\":\"controller\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"name\":\"submitProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterToProver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"withdrawProtocolFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketBeforeDeadline\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"expected\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"actual\",\"type\":\"bytes32\"}],\"name\":\"MarketBidRevealMismatch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"currentTime\",\"type\":\"uint64\"}],\"name\":\"MarketCannotPopStartedEpoch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketCannotRefundYet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketCannotRegisterProverAsSubmitter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketCannotRegisterSelf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineBeforeRevealPhaseEnd\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineMustBeInFuture\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlinePassed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAllowed\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlineTooFar\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"}],\"name\":\"MarketFeeExceedsMaximum\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidBps\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"MarketInvalidRequestStatus\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidStakingController\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"lastStartAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"newStartAt\",\"type\":\"uint64\"}],\"name\":\"MarketInvalidStatsEpochStart\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maximum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooHigh\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMinStakeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketNoAssignedProverToSlash\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoFutureEpochToPop\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoProtocolFeeToWithdraw\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNotAuthorized\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"actual\",\"type\":\"address\"}],\"name\":\"MarketNotExpectedProver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requiredStake\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"actualStake\",\"type\":\"uint256\"}],\"name\":\"MarketProverNotEligible\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketProverNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestAlreadyExists\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestNotFound\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"slashWindowEnd\",\"type\":\"uint256\"}],\"name\":\"MarketSlashWindowExpired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketSubmitterAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterConsentRequired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterNotRegistered\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"BidRevealed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"BiddingPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldToken\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newToken\",\"type\":\"address\"}],\"name\":\"FeeTokenUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MaxMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MinMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"NewBid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"indexed\":false,\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"NewRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"OvercommitBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldVerifier\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"PicoVerifierUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"actualFee\",\"type\":\"uint256\"}],\"name\":\"ProofSubmitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"slashAmount\",\"type\":\"uint256\"}],\"name\":\"ProverSlashed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Refunded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"RevealPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"SlashBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldWindow\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"SlashWindowUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"poppedStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsEpochPopped\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"scheduledStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsEpochScheduled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newEpochId\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"statsStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsReset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldProver\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newProver\",\"type\":\"address\"}],\"name\":\"SubmitterConsentUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterUnregistered\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_DEADLINE_DURATION\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"bid\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"biddingPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"duration\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeToken\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getBidHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getBidders\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"winnerFee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"secondPlace\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"secondFee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getGlobalRecentStats\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"name\":\"getGlobalStatsForStatsEpoch\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getGlobalStatsTotal\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getProof\",\"outputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProtocolFeeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"feeBps\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverPendingRequests\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"reqids\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverRecentStats\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"name\":\"getProverStatsForStatsEpoch\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverStatsTotal\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRecentStatsInfo\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getRequest\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"getSenderPendingRequests\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"reqids\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getSubmittersForProver\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minMaxFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"picoVerifier\",\"outputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"verifier\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"popStatsEpoch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"refund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"registerSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"requestProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"requests\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"bidCount\",\"type\":\"uint64\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.Bidder\",\"name\":\"winner\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.Bidder\",\"name\":\"second\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"reveal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revealPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"duration\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"name\":\"scheduleStatsEpoch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setBiddingPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMaxFee\",\"type\":\"uint256\"}],\"name\":\"setMaxMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMinFee\",\"type\":\"uint256\"}],\"name\":\"setMinMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setOvercommitBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"setPicoVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setProtocolFeeBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setRevealPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setSlashBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"setSlashWindow\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"setSubmitterConsent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"slash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingController\",\"outputs\":[{\"internalType\":\"contractIStakingController\",\"name\":\"controller\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"statsEpochId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"statsEpochs\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"statsEpochsLength\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"name\":\"submitProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterToProver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"withdrawProtocolFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // IBrevisMarketABI is the input ABI used to generate the binding from.
@@ -8789,6 +10237,132 @@ func (_IBrevisMarket *IBrevisMarketCallerSession) GetBidders(reqid [32]byte) (st
 	return _IBrevisMarket.Contract.GetBidders(&_IBrevisMarket.CallOpts, reqid)
 }
 
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_IBrevisMarket *IBrevisMarketCaller) GetGlobalRecentStats(opts *bind.CallOpts) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getGlobalRecentStats")
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketGlobalStats
+		StartAt uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_IBrevisMarket *IBrevisMarketSession) GetGlobalRecentStats() (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetGlobalRecentStats(&_IBrevisMarket.CallOpts)
+}
+
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetGlobalRecentStats() (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetGlobalRecentStats(&_IBrevisMarket.CallOpts)
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketCaller) GetGlobalStatsForStatsEpoch(opts *bind.CallOpts, epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getGlobalStatsForStatsEpoch", epochId)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketGlobalStats
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[2], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketSession) GetGlobalStatsForStatsEpoch(epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetGlobalStatsForStatsEpoch(&_IBrevisMarket.CallOpts, epochId)
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetGlobalStatsForStatsEpoch(epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetGlobalStatsForStatsEpoch(&_IBrevisMarket.CallOpts, epochId)
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_IBrevisMarket *IBrevisMarketCaller) GetGlobalStatsTotal(opts *bind.CallOpts) (IBrevisMarketGlobalStats, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getGlobalStatsTotal")
+
+	if err != nil {
+		return *new(IBrevisMarketGlobalStats), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+
+	return out0, err
+
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_IBrevisMarket *IBrevisMarketSession) GetGlobalStatsTotal() (IBrevisMarketGlobalStats, error) {
+	return _IBrevisMarket.Contract.GetGlobalStatsTotal(&_IBrevisMarket.CallOpts)
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetGlobalStatsTotal() (IBrevisMarketGlobalStats, error) {
+	return _IBrevisMarket.Contract.GetGlobalStatsTotal(&_IBrevisMarket.CallOpts)
+}
+
 // GetProof is a free data retrieval call binding the contract method 0x1b80bb3a.
 //
 // Solidity: function getProof(bytes32 reqid) view returns(uint256[8] proof)
@@ -8865,6 +10439,208 @@ func (_IBrevisMarket *IBrevisMarketCallerSession) GetProtocolFeeInfo() (struct {
 	return _IBrevisMarket.Contract.GetProtocolFeeInfo(&_IBrevisMarket.CallOpts)
 }
 
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_IBrevisMarket *IBrevisMarketCaller) GetProverPendingRequests(opts *bind.CallOpts, prover common.Address) ([][32]byte, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getProverPendingRequests", prover)
+
+	if err != nil {
+		return *new([][32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([][32]byte)).(*[][32]byte)
+
+	return out0, err
+
+}
+
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_IBrevisMarket *IBrevisMarketSession) GetProverPendingRequests(prover common.Address) ([][32]byte, error) {
+	return _IBrevisMarket.Contract.GetProverPendingRequests(&_IBrevisMarket.CallOpts, prover)
+}
+
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetProverPendingRequests(prover common.Address) ([][32]byte, error) {
+	return _IBrevisMarket.Contract.GetProverPendingRequests(&_IBrevisMarket.CallOpts, prover)
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_IBrevisMarket *IBrevisMarketCaller) GetProverRecentStats(opts *bind.CallOpts, prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getProverRecentStats", prover)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketProverStats
+		StartAt uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_IBrevisMarket *IBrevisMarketSession) GetProverRecentStats(prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetProverRecentStats(&_IBrevisMarket.CallOpts, prover)
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetProverRecentStats(prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetProverRecentStats(&_IBrevisMarket.CallOpts, prover)
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketCaller) GetProverStatsForStatsEpoch(opts *bind.CallOpts, prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getProverStatsForStatsEpoch", prover, epochId)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketProverStats
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[2], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketSession) GetProverStatsForStatsEpoch(prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetProverStatsForStatsEpoch(&_IBrevisMarket.CallOpts, prover, epochId)
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetProverStatsForStatsEpoch(prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetProverStatsForStatsEpoch(&_IBrevisMarket.CallOpts, prover, epochId)
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_IBrevisMarket *IBrevisMarketCaller) GetProverStatsTotal(opts *bind.CallOpts, prover common.Address) (IBrevisMarketProverStats, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getProverStatsTotal", prover)
+
+	if err != nil {
+		return *new(IBrevisMarketProverStats), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+
+	return out0, err
+
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_IBrevisMarket *IBrevisMarketSession) GetProverStatsTotal(prover common.Address) (IBrevisMarketProverStats, error) {
+	return _IBrevisMarket.Contract.GetProverStatsTotal(&_IBrevisMarket.CallOpts, prover)
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetProverStatsTotal(prover common.Address) (IBrevisMarketProverStats, error) {
+	return _IBrevisMarket.Contract.GetProverStatsTotal(&_IBrevisMarket.CallOpts, prover)
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_IBrevisMarket *IBrevisMarketCaller) GetRecentStatsInfo(opts *bind.CallOpts) (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getRecentStatsInfo")
+
+	outstruct := new(struct {
+		StartAt uint64
+		EpochId uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.StartAt = *abi.ConvertType(out[0], new(uint64)).(*uint64)
+	outstruct.EpochId = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_IBrevisMarket *IBrevisMarketSession) GetRecentStatsInfo() (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetRecentStatsInfo(&_IBrevisMarket.CallOpts)
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetRecentStatsInfo() (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	return _IBrevisMarket.Contract.GetRecentStatsInfo(&_IBrevisMarket.CallOpts)
+}
+
 // GetRequest is a free data retrieval call binding the contract method 0xfb1e61ca.
 //
 // Solidity: function getRequest(bytes32 reqid) view returns(uint8 status, uint64 timestamp, address sender, uint256 maxFee, uint256 minStake, uint64 deadline, bytes32 vk, bytes32 publicValuesDigest)
@@ -8938,6 +10714,37 @@ func (_IBrevisMarket *IBrevisMarketCallerSession) GetRequest(reqid [32]byte) (st
 	PublicValuesDigest [32]byte
 }, error) {
 	return _IBrevisMarket.Contract.GetRequest(&_IBrevisMarket.CallOpts, reqid)
+}
+
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_IBrevisMarket *IBrevisMarketCaller) GetSenderPendingRequests(opts *bind.CallOpts, sender common.Address) ([][32]byte, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "getSenderPendingRequests", sender)
+
+	if err != nil {
+		return *new([][32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([][32]byte)).(*[][32]byte)
+
+	return out0, err
+
+}
+
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_IBrevisMarket *IBrevisMarketSession) GetSenderPendingRequests(sender common.Address) ([][32]byte, error) {
+	return _IBrevisMarket.Contract.GetSenderPendingRequests(&_IBrevisMarket.CallOpts, sender)
+}
+
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_IBrevisMarket *IBrevisMarketCallerSession) GetSenderPendingRequests(sender common.Address) ([][32]byte, error) {
+	return _IBrevisMarket.Contract.GetSenderPendingRequests(&_IBrevisMarket.CallOpts, sender)
 }
 
 // GetSubmittersForProver is a free data retrieval call binding the contract method 0x1cde352b.
@@ -9033,6 +10840,86 @@ func (_IBrevisMarket *IBrevisMarketCallerSession) PicoVerifier() (common.Address
 	return _IBrevisMarket.Contract.PicoVerifier(&_IBrevisMarket.CallOpts)
 }
 
+// Requests is a free data retrieval call binding the contract method 0x9d866985.
+//
+// Solidity: function requests(bytes32 reqid) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
+func (_IBrevisMarket *IBrevisMarketCaller) Requests(opts *bind.CallOpts, reqid [32]byte) (struct {
+	Status             uint8
+	Timestamp          uint64
+	Sender             common.Address
+	Fee                IBrevisMarketFeeParams
+	Vk                 [32]byte
+	PublicValuesDigest [32]byte
+	BidCount           uint64
+	Winner             IBrevisMarketBidder
+	Second             IBrevisMarketBidder
+}, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "requests", reqid)
+
+	outstruct := new(struct {
+		Status             uint8
+		Timestamp          uint64
+		Sender             common.Address
+		Fee                IBrevisMarketFeeParams
+		Vk                 [32]byte
+		PublicValuesDigest [32]byte
+		BidCount           uint64
+		Winner             IBrevisMarketBidder
+		Second             IBrevisMarketBidder
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Status = *abi.ConvertType(out[0], new(uint8)).(*uint8)
+	outstruct.Timestamp = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.Sender = *abi.ConvertType(out[2], new(common.Address)).(*common.Address)
+	outstruct.Fee = *abi.ConvertType(out[3], new(IBrevisMarketFeeParams)).(*IBrevisMarketFeeParams)
+	outstruct.Vk = *abi.ConvertType(out[4], new([32]byte)).(*[32]byte)
+	outstruct.PublicValuesDigest = *abi.ConvertType(out[5], new([32]byte)).(*[32]byte)
+	outstruct.BidCount = *abi.ConvertType(out[6], new(uint64)).(*uint64)
+	outstruct.Winner = *abi.ConvertType(out[7], new(IBrevisMarketBidder)).(*IBrevisMarketBidder)
+	outstruct.Second = *abi.ConvertType(out[8], new(IBrevisMarketBidder)).(*IBrevisMarketBidder)
+
+	return *outstruct, err
+
+}
+
+// Requests is a free data retrieval call binding the contract method 0x9d866985.
+//
+// Solidity: function requests(bytes32 reqid) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
+func (_IBrevisMarket *IBrevisMarketSession) Requests(reqid [32]byte) (struct {
+	Status             uint8
+	Timestamp          uint64
+	Sender             common.Address
+	Fee                IBrevisMarketFeeParams
+	Vk                 [32]byte
+	PublicValuesDigest [32]byte
+	BidCount           uint64
+	Winner             IBrevisMarketBidder
+	Second             IBrevisMarketBidder
+}, error) {
+	return _IBrevisMarket.Contract.Requests(&_IBrevisMarket.CallOpts, reqid)
+}
+
+// Requests is a free data retrieval call binding the contract method 0x9d866985.
+//
+// Solidity: function requests(bytes32 reqid) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
+func (_IBrevisMarket *IBrevisMarketCallerSession) Requests(reqid [32]byte) (struct {
+	Status             uint8
+	Timestamp          uint64
+	Sender             common.Address
+	Fee                IBrevisMarketFeeParams
+	Vk                 [32]byte
+	PublicValuesDigest [32]byte
+	BidCount           uint64
+	Winner             IBrevisMarketBidder
+	Second             IBrevisMarketBidder
+}, error) {
+	return _IBrevisMarket.Contract.Requests(&_IBrevisMarket.CallOpts, reqid)
+}
+
 // RevealPhaseDuration is a free data retrieval call binding the contract method 0xdfc75372.
 //
 // Solidity: function revealPhaseDuration() view returns(uint64 duration)
@@ -9095,6 +10982,113 @@ func (_IBrevisMarket *IBrevisMarketCallerSession) StakingController() (common.Ad
 	return _IBrevisMarket.Contract.StakingController(&_IBrevisMarket.CallOpts)
 }
 
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64 epochId)
+func (_IBrevisMarket *IBrevisMarketCaller) StatsEpochId(opts *bind.CallOpts) (uint64, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "statsEpochId")
+
+	if err != nil {
+		return *new(uint64), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(uint64)).(*uint64)
+
+	return out0, err
+
+}
+
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64 epochId)
+func (_IBrevisMarket *IBrevisMarketSession) StatsEpochId() (uint64, error) {
+	return _IBrevisMarket.Contract.StatsEpochId(&_IBrevisMarket.CallOpts)
+}
+
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64 epochId)
+func (_IBrevisMarket *IBrevisMarketCallerSession) StatsEpochId() (uint64, error) {
+	return _IBrevisMarket.Contract.StatsEpochId(&_IBrevisMarket.CallOpts)
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 index) view returns(uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketCaller) StatsEpochs(opts *bind.CallOpts, index *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "statsEpochs", index)
+
+	outstruct := new(struct {
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.StartAt = *abi.ConvertType(out[0], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 index) view returns(uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketSession) StatsEpochs(index *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _IBrevisMarket.Contract.StatsEpochs(&_IBrevisMarket.CallOpts, index)
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 index) view returns(uint64 startAt, uint64 endAt)
+func (_IBrevisMarket *IBrevisMarketCallerSession) StatsEpochs(index *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _IBrevisMarket.Contract.StatsEpochs(&_IBrevisMarket.CallOpts, index)
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_IBrevisMarket *IBrevisMarketCaller) StatsEpochsLength(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _IBrevisMarket.contract.Call(opts, &out, "statsEpochsLength")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_IBrevisMarket *IBrevisMarketSession) StatsEpochsLength() (*big.Int, error) {
+	return _IBrevisMarket.Contract.StatsEpochsLength(&_IBrevisMarket.CallOpts)
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_IBrevisMarket *IBrevisMarketCallerSession) StatsEpochsLength() (*big.Int, error) {
+	return _IBrevisMarket.Contract.StatsEpochsLength(&_IBrevisMarket.CallOpts)
+}
+
 // SubmitterToProver is a free data retrieval call binding the contract method 0x84d111f1.
 //
 // Solidity: function submitterToProver(address submitter) view returns(address prover)
@@ -9145,6 +11139,27 @@ func (_IBrevisMarket *IBrevisMarketSession) Bid(reqid [32]byte, bidHash [32]byte
 // Solidity: function bid(bytes32 reqid, bytes32 bidHash) returns()
 func (_IBrevisMarket *IBrevisMarketTransactorSession) Bid(reqid [32]byte, bidHash [32]byte) (*types.Transaction, error) {
 	return _IBrevisMarket.Contract.Bid(&_IBrevisMarket.TransactOpts, reqid, bidHash)
+}
+
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_IBrevisMarket *IBrevisMarketTransactor) PopStatsEpoch(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _IBrevisMarket.contract.Transact(opts, "popStatsEpoch")
+}
+
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_IBrevisMarket *IBrevisMarketSession) PopStatsEpoch() (*types.Transaction, error) {
+	return _IBrevisMarket.Contract.PopStatsEpoch(&_IBrevisMarket.TransactOpts)
+}
+
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_IBrevisMarket *IBrevisMarketTransactorSession) PopStatsEpoch() (*types.Transaction, error) {
+	return _IBrevisMarket.Contract.PopStatsEpoch(&_IBrevisMarket.TransactOpts)
 }
 
 // Refund is a paid mutator transaction binding the contract method 0x7249fbb6.
@@ -9231,6 +11246,27 @@ func (_IBrevisMarket *IBrevisMarketTransactorSession) Reveal(reqid [32]byte, fee
 	return _IBrevisMarket.Contract.Reveal(&_IBrevisMarket.TransactOpts, reqid, fee, nonce)
 }
 
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_IBrevisMarket *IBrevisMarketTransactor) ScheduleStatsEpoch(opts *bind.TransactOpts, startAt uint64) (*types.Transaction, error) {
+	return _IBrevisMarket.contract.Transact(opts, "scheduleStatsEpoch", startAt)
+}
+
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_IBrevisMarket *IBrevisMarketSession) ScheduleStatsEpoch(startAt uint64) (*types.Transaction, error) {
+	return _IBrevisMarket.Contract.ScheduleStatsEpoch(&_IBrevisMarket.TransactOpts, startAt)
+}
+
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_IBrevisMarket *IBrevisMarketTransactorSession) ScheduleStatsEpoch(startAt uint64) (*types.Transaction, error) {
+	return _IBrevisMarket.Contract.ScheduleStatsEpoch(&_IBrevisMarket.TransactOpts, startAt)
+}
+
 // SetBiddingPhaseDuration is a paid mutator transaction binding the contract method 0x7d9b7158.
 //
 // Solidity: function setBiddingPhaseDuration(uint64 newDuration) returns()
@@ -9252,6 +11288,27 @@ func (_IBrevisMarket *IBrevisMarketTransactorSession) SetBiddingPhaseDuration(ne
 	return _IBrevisMarket.Contract.SetBiddingPhaseDuration(&_IBrevisMarket.TransactOpts, newDuration)
 }
 
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_IBrevisMarket *IBrevisMarketTransactor) SetMaxMaxFee(opts *bind.TransactOpts, newMaxFee *big.Int) (*types.Transaction, error) {
+	return _IBrevisMarket.contract.Transact(opts, "setMaxMaxFee", newMaxFee)
+}
+
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_IBrevisMarket *IBrevisMarketSession) SetMaxMaxFee(newMaxFee *big.Int) (*types.Transaction, error) {
+	return _IBrevisMarket.Contract.SetMaxMaxFee(&_IBrevisMarket.TransactOpts, newMaxFee)
+}
+
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_IBrevisMarket *IBrevisMarketTransactorSession) SetMaxMaxFee(newMaxFee *big.Int) (*types.Transaction, error) {
+	return _IBrevisMarket.Contract.SetMaxMaxFee(&_IBrevisMarket.TransactOpts, newMaxFee)
+}
+
 // SetMinMaxFee is a paid mutator transaction binding the contract method 0xe30c1fc3.
 //
 // Solidity: function setMinMaxFee(uint256 newMinFee) returns()
@@ -9271,6 +11328,27 @@ func (_IBrevisMarket *IBrevisMarketSession) SetMinMaxFee(newMinFee *big.Int) (*t
 // Solidity: function setMinMaxFee(uint256 newMinFee) returns()
 func (_IBrevisMarket *IBrevisMarketTransactorSession) SetMinMaxFee(newMinFee *big.Int) (*types.Transaction, error) {
 	return _IBrevisMarket.Contract.SetMinMaxFee(&_IBrevisMarket.TransactOpts, newMinFee)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_IBrevisMarket *IBrevisMarketTransactor) SetOvercommitBps(opts *bind.TransactOpts, newBps *big.Int) (*types.Transaction, error) {
+	return _IBrevisMarket.contract.Transact(opts, "setOvercommitBps", newBps)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_IBrevisMarket *IBrevisMarketSession) SetOvercommitBps(newBps *big.Int) (*types.Transaction, error) {
+	return _IBrevisMarket.Contract.SetOvercommitBps(&_IBrevisMarket.TransactOpts, newBps)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_IBrevisMarket *IBrevisMarketTransactorSession) SetOvercommitBps(newBps *big.Int) (*types.Transaction, error) {
+	return _IBrevisMarket.Contract.SetOvercommitBps(&_IBrevisMarket.TransactOpts, newBps)
 }
 
 // SetPicoVerifier is a paid mutator transaction binding the contract method 0x95591966.
@@ -9925,6 +12003,141 @@ func (_IBrevisMarket *IBrevisMarketFilterer) ParseFeeTokenUpdated(log types.Log)
 	return event, nil
 }
 
+// IBrevisMarketMaxMaxFeeUpdatedIterator is returned from FilterMaxMaxFeeUpdated and is used to iterate over the raw logs and unpacked data for MaxMaxFeeUpdated events raised by the IBrevisMarket contract.
+type IBrevisMarketMaxMaxFeeUpdatedIterator struct {
+	Event *IBrevisMarketMaxMaxFeeUpdated // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *IBrevisMarketMaxMaxFeeUpdatedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(IBrevisMarketMaxMaxFeeUpdated)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(IBrevisMarketMaxMaxFeeUpdated)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *IBrevisMarketMaxMaxFeeUpdatedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *IBrevisMarketMaxMaxFeeUpdatedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// IBrevisMarketMaxMaxFeeUpdated represents a MaxMaxFeeUpdated event raised by the IBrevisMarket contract.
+type IBrevisMarketMaxMaxFeeUpdated struct {
+	OldFee *big.Int
+	NewFee *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterMaxMaxFeeUpdated is a free log retrieval operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_IBrevisMarket *IBrevisMarketFilterer) FilterMaxMaxFeeUpdated(opts *bind.FilterOpts) (*IBrevisMarketMaxMaxFeeUpdatedIterator, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.FilterLogs(opts, "MaxMaxFeeUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return &IBrevisMarketMaxMaxFeeUpdatedIterator{contract: _IBrevisMarket.contract, event: "MaxMaxFeeUpdated", logs: logs, sub: sub}, nil
+}
+
+// WatchMaxMaxFeeUpdated is a free log subscription operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_IBrevisMarket *IBrevisMarketFilterer) WatchMaxMaxFeeUpdated(opts *bind.WatchOpts, sink chan<- *IBrevisMarketMaxMaxFeeUpdated) (event.Subscription, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.WatchLogs(opts, "MaxMaxFeeUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(IBrevisMarketMaxMaxFeeUpdated)
+				if err := _IBrevisMarket.contract.UnpackLog(event, "MaxMaxFeeUpdated", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseMaxMaxFeeUpdated is a log parse operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_IBrevisMarket *IBrevisMarketFilterer) ParseMaxMaxFeeUpdated(log types.Log) (*IBrevisMarketMaxMaxFeeUpdated, error) {
+	event := new(IBrevisMarketMaxMaxFeeUpdated)
+	if err := _IBrevisMarket.contract.UnpackLog(event, "MaxMaxFeeUpdated", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
 // IBrevisMarketMinMaxFeeUpdatedIterator is returned from FilterMinMaxFeeUpdated and is used to iterate over the raw logs and unpacked data for MinMaxFeeUpdated events raised by the IBrevisMarket contract.
 type IBrevisMarketMinMaxFeeUpdatedIterator struct {
 	Event *IBrevisMarketMinMaxFeeUpdated // Event containing the contract specifics and raw log
@@ -10353,6 +12566,141 @@ func (_IBrevisMarket *IBrevisMarketFilterer) WatchNewRequest(opts *bind.WatchOpt
 func (_IBrevisMarket *IBrevisMarketFilterer) ParseNewRequest(log types.Log) (*IBrevisMarketNewRequest, error) {
 	event := new(IBrevisMarketNewRequest)
 	if err := _IBrevisMarket.contract.UnpackLog(event, "NewRequest", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// IBrevisMarketOvercommitBpsUpdatedIterator is returned from FilterOvercommitBpsUpdated and is used to iterate over the raw logs and unpacked data for OvercommitBpsUpdated events raised by the IBrevisMarket contract.
+type IBrevisMarketOvercommitBpsUpdatedIterator struct {
+	Event *IBrevisMarketOvercommitBpsUpdated // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *IBrevisMarketOvercommitBpsUpdatedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(IBrevisMarketOvercommitBpsUpdated)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(IBrevisMarketOvercommitBpsUpdated)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *IBrevisMarketOvercommitBpsUpdatedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *IBrevisMarketOvercommitBpsUpdatedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// IBrevisMarketOvercommitBpsUpdated represents a OvercommitBpsUpdated event raised by the IBrevisMarket contract.
+type IBrevisMarketOvercommitBpsUpdated struct {
+	OldBps *big.Int
+	NewBps *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterOvercommitBpsUpdated is a free log retrieval operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_IBrevisMarket *IBrevisMarketFilterer) FilterOvercommitBpsUpdated(opts *bind.FilterOpts) (*IBrevisMarketOvercommitBpsUpdatedIterator, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.FilterLogs(opts, "OvercommitBpsUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return &IBrevisMarketOvercommitBpsUpdatedIterator{contract: _IBrevisMarket.contract, event: "OvercommitBpsUpdated", logs: logs, sub: sub}, nil
+}
+
+// WatchOvercommitBpsUpdated is a free log subscription operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_IBrevisMarket *IBrevisMarketFilterer) WatchOvercommitBpsUpdated(opts *bind.WatchOpts, sink chan<- *IBrevisMarketOvercommitBpsUpdated) (event.Subscription, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.WatchLogs(opts, "OvercommitBpsUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(IBrevisMarketOvercommitBpsUpdated)
+				if err := _IBrevisMarket.contract.UnpackLog(event, "OvercommitBpsUpdated", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseOvercommitBpsUpdated is a log parse operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_IBrevisMarket *IBrevisMarketFilterer) ParseOvercommitBpsUpdated(log types.Log) (*IBrevisMarketOvercommitBpsUpdated, error) {
+	event := new(IBrevisMarketOvercommitBpsUpdated)
+	if err := _IBrevisMarket.contract.UnpackLog(event, "OvercommitBpsUpdated", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -11654,6 +14002,409 @@ func (_IBrevisMarket *IBrevisMarketFilterer) WatchSlashWindowUpdated(opts *bind.
 func (_IBrevisMarket *IBrevisMarketFilterer) ParseSlashWindowUpdated(log types.Log) (*IBrevisMarketSlashWindowUpdated, error) {
 	event := new(IBrevisMarketSlashWindowUpdated)
 	if err := _IBrevisMarket.contract.UnpackLog(event, "SlashWindowUpdated", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// IBrevisMarketStatsEpochPoppedIterator is returned from FilterStatsEpochPopped and is used to iterate over the raw logs and unpacked data for StatsEpochPopped events raised by the IBrevisMarket contract.
+type IBrevisMarketStatsEpochPoppedIterator struct {
+	Event *IBrevisMarketStatsEpochPopped // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *IBrevisMarketStatsEpochPoppedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(IBrevisMarketStatsEpochPopped)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(IBrevisMarketStatsEpochPopped)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *IBrevisMarketStatsEpochPoppedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *IBrevisMarketStatsEpochPoppedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// IBrevisMarketStatsEpochPopped represents a StatsEpochPopped event raised by the IBrevisMarket contract.
+type IBrevisMarketStatsEpochPopped struct {
+	PoppedStartAt uint64
+	Raw           types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsEpochPopped is a free log retrieval operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) FilterStatsEpochPopped(opts *bind.FilterOpts) (*IBrevisMarketStatsEpochPoppedIterator, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.FilterLogs(opts, "StatsEpochPopped")
+	if err != nil {
+		return nil, err
+	}
+	return &IBrevisMarketStatsEpochPoppedIterator{contract: _IBrevisMarket.contract, event: "StatsEpochPopped", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsEpochPopped is a free log subscription operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) WatchStatsEpochPopped(opts *bind.WatchOpts, sink chan<- *IBrevisMarketStatsEpochPopped) (event.Subscription, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.WatchLogs(opts, "StatsEpochPopped")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(IBrevisMarketStatsEpochPopped)
+				if err := _IBrevisMarket.contract.UnpackLog(event, "StatsEpochPopped", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsEpochPopped is a log parse operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) ParseStatsEpochPopped(log types.Log) (*IBrevisMarketStatsEpochPopped, error) {
+	event := new(IBrevisMarketStatsEpochPopped)
+	if err := _IBrevisMarket.contract.UnpackLog(event, "StatsEpochPopped", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// IBrevisMarketStatsEpochScheduledIterator is returned from FilterStatsEpochScheduled and is used to iterate over the raw logs and unpacked data for StatsEpochScheduled events raised by the IBrevisMarket contract.
+type IBrevisMarketStatsEpochScheduledIterator struct {
+	Event *IBrevisMarketStatsEpochScheduled // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *IBrevisMarketStatsEpochScheduledIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(IBrevisMarketStatsEpochScheduled)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(IBrevisMarketStatsEpochScheduled)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *IBrevisMarketStatsEpochScheduledIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *IBrevisMarketStatsEpochScheduledIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// IBrevisMarketStatsEpochScheduled represents a StatsEpochScheduled event raised by the IBrevisMarket contract.
+type IBrevisMarketStatsEpochScheduled struct {
+	ScheduledStartAt uint64
+	Raw              types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsEpochScheduled is a free log retrieval operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) FilterStatsEpochScheduled(opts *bind.FilterOpts) (*IBrevisMarketStatsEpochScheduledIterator, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.FilterLogs(opts, "StatsEpochScheduled")
+	if err != nil {
+		return nil, err
+	}
+	return &IBrevisMarketStatsEpochScheduledIterator{contract: _IBrevisMarket.contract, event: "StatsEpochScheduled", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsEpochScheduled is a free log subscription operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) WatchStatsEpochScheduled(opts *bind.WatchOpts, sink chan<- *IBrevisMarketStatsEpochScheduled) (event.Subscription, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.WatchLogs(opts, "StatsEpochScheduled")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(IBrevisMarketStatsEpochScheduled)
+				if err := _IBrevisMarket.contract.UnpackLog(event, "StatsEpochScheduled", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsEpochScheduled is a log parse operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) ParseStatsEpochScheduled(log types.Log) (*IBrevisMarketStatsEpochScheduled, error) {
+	event := new(IBrevisMarketStatsEpochScheduled)
+	if err := _IBrevisMarket.contract.UnpackLog(event, "StatsEpochScheduled", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// IBrevisMarketStatsResetIterator is returned from FilterStatsReset and is used to iterate over the raw logs and unpacked data for StatsReset events raised by the IBrevisMarket contract.
+type IBrevisMarketStatsResetIterator struct {
+	Event *IBrevisMarketStatsReset // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *IBrevisMarketStatsResetIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(IBrevisMarketStatsReset)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(IBrevisMarketStatsReset)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *IBrevisMarketStatsResetIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *IBrevisMarketStatsResetIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// IBrevisMarketStatsReset represents a StatsReset event raised by the IBrevisMarket contract.
+type IBrevisMarketStatsReset struct {
+	NewEpochId   uint64
+	StatsStartAt uint64
+	Raw          types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsReset is a free log retrieval operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) FilterStatsReset(opts *bind.FilterOpts) (*IBrevisMarketStatsResetIterator, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.FilterLogs(opts, "StatsReset")
+	if err != nil {
+		return nil, err
+	}
+	return &IBrevisMarketStatsResetIterator{contract: _IBrevisMarket.contract, event: "StatsReset", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsReset is a free log subscription operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) WatchStatsReset(opts *bind.WatchOpts, sink chan<- *IBrevisMarketStatsReset) (event.Subscription, error) {
+
+	logs, sub, err := _IBrevisMarket.contract.WatchLogs(opts, "StatsReset")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(IBrevisMarketStatsReset)
+				if err := _IBrevisMarket.contract.UnpackLog(event, "StatsReset", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsReset is a log parse operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_IBrevisMarket *IBrevisMarketFilterer) ParseStatsReset(log types.Log) (*IBrevisMarketStatsReset, error) {
+	event := new(IBrevisMarketStatsReset)
+	if err := _IBrevisMarket.contract.UnpackLog(event, "StatsReset", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -14664,7 +17415,7 @@ func (_IPicoVerifier *IPicoVerifierCallerSession) VerifyPicoProof0(riscvVkey [32
 
 // IStakingControllerMetaData contains all meta data concerning the IStakingController contract.
 var IStakingControllerMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"name\":\"ControllerCannotRetireProverWithAssets\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerCannotRetireProverWithPendingUnstakes\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerInsufficientShares\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerInsufficientTreasury\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerInvalidArg\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerMinSelfStakeNotMet\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerNoShares\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerNoUnstakeRequest\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerNotAuthorized\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerOnlyAdmin\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerOnlyProver\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerOnlyVault\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerProverAlreadyInitialized\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerProverNotActive\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerProverNotInitialized\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerShareAccountingMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerSlashTooHigh\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerTooManyPendingUnstakes\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerUnstakeNotReady\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerZeroAmount\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"CommissionClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldRate\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newRate\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"useDefault\",\"type\":\"bool\"}],\"name\":\"CommissionRateUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"EmergencyRecovered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldValue\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"MaxSlashBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldValue\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"MinSelfStakeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"defaultCommissionRate\",\"type\":\"uint64\"}],\"name\":\"ProverInitialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"ProverRetired\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"bps\",\"type\":\"uint256\"}],\"name\":\"ProverSlashed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enumIStakingController.ProverState\",\"name\":\"oldState\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"enumIStakingController.ProverState\",\"name\":\"newState\",\"type\":\"uint8\"}],\"name\":\"ProverStateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"required\",\"type\":\"bool\"}],\"name\":\"RequireAuthorizationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"commission\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"toStakers\",\"type\":\"uint256\"}],\"name\":\"RewardsAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Staked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TreasuryWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"UnstakeCompleted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldDelay\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newDelay\",\"type\":\"uint256\"}],\"name\":\"UnstakeDelayUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"UnstakeRequested\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"addRewards\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"commission\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toStakers\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"beforeShareTransfer\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claimCommission\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"completeUnstake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"deactivateProver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"emergencyRecover\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getActiveProverCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"count\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getActiveProvers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"provers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllProvers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"provers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"}],\"name\":\"getCommissionRate\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"rate\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getCommissionRates\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"sources\",\"type\":\"address[]\"},{\"internalType\":\"uint64[]\",\"name\":\"rates\",\"type\":\"uint64[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"getPendingUnstakes\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"requestTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"scaleSnapshot\",\"type\":\"uint256\"}],\"internalType\":\"structIStakingController.UnstakeRequest[]\",\"name\":\"requests\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProverCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"count\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverInfo\",\"outputs\":[{\"internalType\":\"enumIStakingController.ProverState\",\"name\":\"state\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"defaultCommissionRate\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"pendingCommission\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"numStakers\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverSlashingScale\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"scale\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverStakers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"stakers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverState\",\"outputs\":[{\"internalType\":\"enumIStakingController.ProverState\",\"name\":\"state\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverTotalAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAssets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverTotalUnstaking\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverVault\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"getStakeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getStakersWithPendingUnstakes\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"stakers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getStakersWithPendingUnstakesCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"count\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalActiveProverVaultAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAssets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalVaultAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAssets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"getUnstakingInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"readyAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"defaultCommissionRate\",\"type\":\"uint64\"}],\"name\":\"initializeProver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"minimumVaultAssets\",\"type\":\"uint256\"}],\"name\":\"isProverEligible\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"eligible\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"currentVaultAssets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"jailProver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"maxDeposit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"maxMint\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"maxRedeem\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxSlashBps\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"bps\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"maxWithdraw\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minSelfStake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"onShareTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"reactivateProver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"requestUnstake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"}],\"name\":\"resetCommissionRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"retireProver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"newRate\",\"type\":\"uint64\"}],\"name\":\"setCommissionRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"setMaxSlashBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"setMinSelfStake\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"required\",\"type\":\"bool\"}],\"name\":\"setRequireAuthorization\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newDelay\",\"type\":\"uint256\"}],\"name\":\"setUnstakeDelay\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"bps\",\"type\":\"uint256\"}],\"name\":\"slash\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"slashedAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"slashByAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"slashedAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"stake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"stakerHasPendingUnstakes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"hasPending\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingToken\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unstakeDelay\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"delay\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdrawTreasury\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[],\"name\":\"ControllerCannotRetireProverWithAssets\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerCannotRetireProverWithPendingUnstakes\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerInsufficientShares\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerInsufficientTreasury\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerInvalidArg\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerMinSelfStakeNotMet\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerNoShares\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerNoUnstakeRequest\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerNotAuthorized\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerOnlyAdmin\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerOnlyProver\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerOnlyVault\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerProverAlreadyInitialized\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerProverNotActive\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerProverNotInitialized\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerShareAccountingMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerSlashTooHigh\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerTooManyPendingUnstakes\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerUnstakeNotReady\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ControllerZeroAmount\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"CommissionClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldRate\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newRate\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"useDefault\",\"type\":\"bool\"}],\"name\":\"CommissionRateUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"EmergencyRecovered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldValue\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"MaxSlashBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldValue\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newValue\",\"type\":\"uint256\"}],\"name\":\"MinSelfStakeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"defaultCommissionRate\",\"type\":\"uint64\"}],\"name\":\"ProverInitialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"iconUrl\",\"type\":\"string\"}],\"name\":\"ProverProfileUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"ProverRetired\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"bps\",\"type\":\"uint256\"}],\"name\":\"ProverSlashed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enumIStakingController.ProverState\",\"name\":\"oldState\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"enumIStakingController.ProverState\",\"name\":\"newState\",\"type\":\"uint8\"}],\"name\":\"ProverStateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"required\",\"type\":\"bool\"}],\"name\":\"RequireAuthorizationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"commission\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"toStakers\",\"type\":\"uint256\"}],\"name\":\"RewardsAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Staked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TreasuryWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"UnstakeCompleted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldDelay\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newDelay\",\"type\":\"uint256\"}],\"name\":\"UnstakeDelayUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"UnstakeRequested\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"addRewards\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"commission\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toStakers\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"beforeShareTransfer\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claimCommission\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"completeUnstake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"deactivateProver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"emergencyRecover\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getActiveProverCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"count\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getActiveProvers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"provers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllProvers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"provers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"}],\"name\":\"getCommissionRate\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"rate\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getCommissionRates\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"sources\",\"type\":\"address[]\"},{\"internalType\":\"uint64[]\",\"name\":\"rates\",\"type\":\"uint64[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"getPendingUnstakes\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"requestTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"scaleSnapshot\",\"type\":\"uint256\"}],\"internalType\":\"structIStakingController.UnstakeRequest[]\",\"name\":\"requests\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProverCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"count\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverInfo\",\"outputs\":[{\"internalType\":\"enumIStakingController.ProverState\",\"name\":\"state\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"defaultCommissionRate\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"pendingCommission\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"numStakers\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"joinedAt\",\"type\":\"uint64\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverProfile\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"iconUrl\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverSlashingScale\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"scale\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverStakers\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"stakers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverState\",\"outputs\":[{\"internalType\":\"enumIStakingController.ProverState\",\"name\":\"state\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverTotalAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAssets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverTotalUnstaking\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverVault\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"getStakeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getStakersWithPendingUnstakes\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"stakers\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getStakersWithPendingUnstakesCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"count\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalActiveProverVaultAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAssets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalVaultAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAssets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"getUnstakingInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"totalAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"readyAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"defaultCommissionRate\",\"type\":\"uint64\"}],\"name\":\"initializeProver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"vault\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"minimumVaultAssets\",\"type\":\"uint256\"}],\"name\":\"isProverEligible\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"eligible\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"currentVaultAssets\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"jailProver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"maxDeposit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"maxMint\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"maxRedeem\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxSlashBps\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"bps\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"maxWithdraw\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minSelfStake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"onShareTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"reactivateProver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"name\":\"requestUnstake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"}],\"name\":\"resetCommissionRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"retireProver\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"source\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"newRate\",\"type\":\"uint64\"}],\"name\":\"setCommissionRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"setMaxSlashBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"setMinSelfStake\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"iconUrl\",\"type\":\"string\"}],\"name\":\"setProverProfile\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"iconUrl\",\"type\":\"string\"}],\"name\":\"setProverProfileByAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"required\",\"type\":\"bool\"}],\"name\":\"setRequireAuthorization\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newDelay\",\"type\":\"uint256\"}],\"name\":\"setUnstakeDelay\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"bps\",\"type\":\"uint256\"}],\"name\":\"slash\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"slashedAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"slashByAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"slashedAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"stake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"shares\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"staker\",\"type\":\"address\"}],\"name\":\"stakerHasPendingUnstakes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"hasPending\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingToken\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unstakeDelay\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"delay\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"withdrawTreasury\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // IStakingControllerABI is the input ABI used to generate the binding from.
@@ -15075,13 +17826,15 @@ func (_IStakingController *IStakingControllerCallerSession) GetProverCount() (*b
 
 // GetProverInfo is a free data retrieval call binding the contract method 0x259c17e4.
 //
-// Solidity: function getProverInfo(address prover) view returns(uint8 state, address vault, uint64 defaultCommissionRate, uint256 pendingCommission, uint256 numStakers)
+// Solidity: function getProverInfo(address prover) view returns(uint8 state, address vault, uint64 defaultCommissionRate, uint256 pendingCommission, uint256 numStakers, uint64 joinedAt, string name)
 func (_IStakingController *IStakingControllerCaller) GetProverInfo(opts *bind.CallOpts, prover common.Address) (struct {
 	State                 uint8
 	Vault                 common.Address
 	DefaultCommissionRate uint64
 	PendingCommission     *big.Int
 	NumStakers            *big.Int
+	JoinedAt              uint64
+	Name                  string
 }, error) {
 	var out []interface{}
 	err := _IStakingController.contract.Call(opts, &out, "getProverInfo", prover)
@@ -15092,6 +17845,8 @@ func (_IStakingController *IStakingControllerCaller) GetProverInfo(opts *bind.Ca
 		DefaultCommissionRate uint64
 		PendingCommission     *big.Int
 		NumStakers            *big.Int
+		JoinedAt              uint64
+		Name                  string
 	})
 	if err != nil {
 		return *outstruct, err
@@ -15102,6 +17857,8 @@ func (_IStakingController *IStakingControllerCaller) GetProverInfo(opts *bind.Ca
 	outstruct.DefaultCommissionRate = *abi.ConvertType(out[2], new(uint64)).(*uint64)
 	outstruct.PendingCommission = *abi.ConvertType(out[3], new(*big.Int)).(**big.Int)
 	outstruct.NumStakers = *abi.ConvertType(out[4], new(*big.Int)).(**big.Int)
+	outstruct.JoinedAt = *abi.ConvertType(out[5], new(uint64)).(*uint64)
+	outstruct.Name = *abi.ConvertType(out[6], new(string)).(*string)
 
 	return *outstruct, err
 
@@ -15109,28 +17866,77 @@ func (_IStakingController *IStakingControllerCaller) GetProverInfo(opts *bind.Ca
 
 // GetProverInfo is a free data retrieval call binding the contract method 0x259c17e4.
 //
-// Solidity: function getProverInfo(address prover) view returns(uint8 state, address vault, uint64 defaultCommissionRate, uint256 pendingCommission, uint256 numStakers)
+// Solidity: function getProverInfo(address prover) view returns(uint8 state, address vault, uint64 defaultCommissionRate, uint256 pendingCommission, uint256 numStakers, uint64 joinedAt, string name)
 func (_IStakingController *IStakingControllerSession) GetProverInfo(prover common.Address) (struct {
 	State                 uint8
 	Vault                 common.Address
 	DefaultCommissionRate uint64
 	PendingCommission     *big.Int
 	NumStakers            *big.Int
+	JoinedAt              uint64
+	Name                  string
 }, error) {
 	return _IStakingController.Contract.GetProverInfo(&_IStakingController.CallOpts, prover)
 }
 
 // GetProverInfo is a free data retrieval call binding the contract method 0x259c17e4.
 //
-// Solidity: function getProverInfo(address prover) view returns(uint8 state, address vault, uint64 defaultCommissionRate, uint256 pendingCommission, uint256 numStakers)
+// Solidity: function getProverInfo(address prover) view returns(uint8 state, address vault, uint64 defaultCommissionRate, uint256 pendingCommission, uint256 numStakers, uint64 joinedAt, string name)
 func (_IStakingController *IStakingControllerCallerSession) GetProverInfo(prover common.Address) (struct {
 	State                 uint8
 	Vault                 common.Address
 	DefaultCommissionRate uint64
 	PendingCommission     *big.Int
 	NumStakers            *big.Int
+	JoinedAt              uint64
+	Name                  string
 }, error) {
 	return _IStakingController.Contract.GetProverInfo(&_IStakingController.CallOpts, prover)
+}
+
+// GetProverProfile is a free data retrieval call binding the contract method 0xb3836bae.
+//
+// Solidity: function getProverProfile(address prover) view returns(string name, string iconUrl)
+func (_IStakingController *IStakingControllerCaller) GetProverProfile(opts *bind.CallOpts, prover common.Address) (struct {
+	Name    string
+	IconUrl string
+}, error) {
+	var out []interface{}
+	err := _IStakingController.contract.Call(opts, &out, "getProverProfile", prover)
+
+	outstruct := new(struct {
+		Name    string
+		IconUrl string
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Name = *abi.ConvertType(out[0], new(string)).(*string)
+	outstruct.IconUrl = *abi.ConvertType(out[1], new(string)).(*string)
+
+	return *outstruct, err
+
+}
+
+// GetProverProfile is a free data retrieval call binding the contract method 0xb3836bae.
+//
+// Solidity: function getProverProfile(address prover) view returns(string name, string iconUrl)
+func (_IStakingController *IStakingControllerSession) GetProverProfile(prover common.Address) (struct {
+	Name    string
+	IconUrl string
+}, error) {
+	return _IStakingController.Contract.GetProverProfile(&_IStakingController.CallOpts, prover)
+}
+
+// GetProverProfile is a free data retrieval call binding the contract method 0xb3836bae.
+//
+// Solidity: function getProverProfile(address prover) view returns(string name, string iconUrl)
+func (_IStakingController *IStakingControllerCallerSession) GetProverProfile(prover common.Address) (struct {
+	Name    string
+	IconUrl string
+}, error) {
+	return _IStakingController.Contract.GetProverProfile(&_IStakingController.CallOpts, prover)
 }
 
 // GetProverSlashingScale is a free data retrieval call binding the contract method 0x34c0d357.
@@ -16158,6 +18964,48 @@ func (_IStakingController *IStakingControllerTransactorSession) SetMinSelfStake(
 	return _IStakingController.Contract.SetMinSelfStake(&_IStakingController.TransactOpts, value)
 }
 
+// SetProverProfile is a paid mutator transaction binding the contract method 0x0c4f8171.
+//
+// Solidity: function setProverProfile(string name, string iconUrl) returns()
+func (_IStakingController *IStakingControllerTransactor) SetProverProfile(opts *bind.TransactOpts, name string, iconUrl string) (*types.Transaction, error) {
+	return _IStakingController.contract.Transact(opts, "setProverProfile", name, iconUrl)
+}
+
+// SetProverProfile is a paid mutator transaction binding the contract method 0x0c4f8171.
+//
+// Solidity: function setProverProfile(string name, string iconUrl) returns()
+func (_IStakingController *IStakingControllerSession) SetProverProfile(name string, iconUrl string) (*types.Transaction, error) {
+	return _IStakingController.Contract.SetProverProfile(&_IStakingController.TransactOpts, name, iconUrl)
+}
+
+// SetProverProfile is a paid mutator transaction binding the contract method 0x0c4f8171.
+//
+// Solidity: function setProverProfile(string name, string iconUrl) returns()
+func (_IStakingController *IStakingControllerTransactorSession) SetProverProfile(name string, iconUrl string) (*types.Transaction, error) {
+	return _IStakingController.Contract.SetProverProfile(&_IStakingController.TransactOpts, name, iconUrl)
+}
+
+// SetProverProfileByAdmin is a paid mutator transaction binding the contract method 0xd4e3169e.
+//
+// Solidity: function setProverProfileByAdmin(address prover, string name, string iconUrl) returns()
+func (_IStakingController *IStakingControllerTransactor) SetProverProfileByAdmin(opts *bind.TransactOpts, prover common.Address, name string, iconUrl string) (*types.Transaction, error) {
+	return _IStakingController.contract.Transact(opts, "setProverProfileByAdmin", prover, name, iconUrl)
+}
+
+// SetProverProfileByAdmin is a paid mutator transaction binding the contract method 0xd4e3169e.
+//
+// Solidity: function setProverProfileByAdmin(address prover, string name, string iconUrl) returns()
+func (_IStakingController *IStakingControllerSession) SetProverProfileByAdmin(prover common.Address, name string, iconUrl string) (*types.Transaction, error) {
+	return _IStakingController.Contract.SetProverProfileByAdmin(&_IStakingController.TransactOpts, prover, name, iconUrl)
+}
+
+// SetProverProfileByAdmin is a paid mutator transaction binding the contract method 0xd4e3169e.
+//
+// Solidity: function setProverProfileByAdmin(address prover, string name, string iconUrl) returns()
+func (_IStakingController *IStakingControllerTransactorSession) SetProverProfileByAdmin(prover common.Address, name string, iconUrl string) (*types.Transaction, error) {
+	return _IStakingController.Contract.SetProverProfileByAdmin(&_IStakingController.TransactOpts, prover, name, iconUrl)
+}
+
 // SetRequireAuthorization is a paid mutator transaction binding the contract method 0xa9aadaad.
 //
 // Solidity: function setRequireAuthorization(bool required) returns()
@@ -17138,6 +19986,152 @@ func (_IStakingController *IStakingControllerFilterer) WatchProverInitialized(op
 func (_IStakingController *IStakingControllerFilterer) ParseProverInitialized(log types.Log) (*IStakingControllerProverInitialized, error) {
 	event := new(IStakingControllerProverInitialized)
 	if err := _IStakingController.contract.UnpackLog(event, "ProverInitialized", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// IStakingControllerProverProfileUpdatedIterator is returned from FilterProverProfileUpdated and is used to iterate over the raw logs and unpacked data for ProverProfileUpdated events raised by the IStakingController contract.
+type IStakingControllerProverProfileUpdatedIterator struct {
+	Event *IStakingControllerProverProfileUpdated // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *IStakingControllerProverProfileUpdatedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(IStakingControllerProverProfileUpdated)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(IStakingControllerProverProfileUpdated)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *IStakingControllerProverProfileUpdatedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *IStakingControllerProverProfileUpdatedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// IStakingControllerProverProfileUpdated represents a ProverProfileUpdated event raised by the IStakingController contract.
+type IStakingControllerProverProfileUpdated struct {
+	Prover  common.Address
+	Name    string
+	IconUrl string
+	Raw     types.Log // Blockchain specific contextual infos
+}
+
+// FilterProverProfileUpdated is a free log retrieval operation binding the contract event 0x24496e9f27c65afaabee65b7c5f57d0ffd2bc15a3041c1c1c6781ebb158f79b4.
+//
+// Solidity: event ProverProfileUpdated(address indexed prover, string name, string iconUrl)
+func (_IStakingController *IStakingControllerFilterer) FilterProverProfileUpdated(opts *bind.FilterOpts, prover []common.Address) (*IStakingControllerProverProfileUpdatedIterator, error) {
+
+	var proverRule []interface{}
+	for _, proverItem := range prover {
+		proverRule = append(proverRule, proverItem)
+	}
+
+	logs, sub, err := _IStakingController.contract.FilterLogs(opts, "ProverProfileUpdated", proverRule)
+	if err != nil {
+		return nil, err
+	}
+	return &IStakingControllerProverProfileUpdatedIterator{contract: _IStakingController.contract, event: "ProverProfileUpdated", logs: logs, sub: sub}, nil
+}
+
+// WatchProverProfileUpdated is a free log subscription operation binding the contract event 0x24496e9f27c65afaabee65b7c5f57d0ffd2bc15a3041c1c1c6781ebb158f79b4.
+//
+// Solidity: event ProverProfileUpdated(address indexed prover, string name, string iconUrl)
+func (_IStakingController *IStakingControllerFilterer) WatchProverProfileUpdated(opts *bind.WatchOpts, sink chan<- *IStakingControllerProverProfileUpdated, prover []common.Address) (event.Subscription, error) {
+
+	var proverRule []interface{}
+	for _, proverItem := range prover {
+		proverRule = append(proverRule, proverItem)
+	}
+
+	logs, sub, err := _IStakingController.contract.WatchLogs(opts, "ProverProfileUpdated", proverRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(IStakingControllerProverProfileUpdated)
+				if err := _IStakingController.contract.UnpackLog(event, "ProverProfileUpdated", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseProverProfileUpdated is a log parse operation binding the contract event 0x24496e9f27c65afaabee65b7c5f57d0ffd2bc15a3041c1c1c6781ebb158f79b4.
+//
+// Solidity: event ProverProfileUpdated(address indexed prover, string name, string iconUrl)
+func (_IStakingController *IStakingControllerFilterer) ParseProverProfileUpdated(log types.Log) (*IStakingControllerProverProfileUpdated, error) {
+	event := new(IStakingControllerProverProfileUpdated)
+	if err := _IStakingController.contract.UnpackLog(event, "ProverProfileUpdated", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -19718,7 +22712,7 @@ func (_Panic *PanicTransactorRaw) Transact(opts *bind.TransactOpts, method strin
 
 // ProverSubmittersMetaData contains all meta data concerning the ProverSubmitters contract.
 var ProverSubmittersMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketBeforeDeadline\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"expected\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"actual\",\"type\":\"bytes32\"}],\"name\":\"MarketBidRevealMismatch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketCannotRefundYet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketCannotRegisterProverAsSubmitter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketCannotRegisterSelf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineBeforeRevealPhaseEnd\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineMustBeInFuture\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlinePassed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAllowed\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlineTooFar\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"}],\"name\":\"MarketFeeExceedsMaximum\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidProtocolFeeBps\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"MarketInvalidRequestStatus\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidSlashBps\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidStakingController\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMinStakeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketNoAssignedProverToSlash\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoProtocolFeeToWithdraw\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNotAuthorized\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"actual\",\"type\":\"address\"}],\"name\":\"MarketNotExpectedProver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requiredStake\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"actualStake\",\"type\":\"uint256\"}],\"name\":\"MarketProverNotEligible\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketProverNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestAlreadyExists\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestNotFound\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"slashWindowEnd\",\"type\":\"uint256\"}],\"name\":\"MarketSlashWindowExpired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketSubmitterAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterConsentRequired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterNotRegistered\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"BidRevealed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"BiddingPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldToken\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newToken\",\"type\":\"address\"}],\"name\":\"FeeTokenUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MinMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"NewBid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"indexed\":false,\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"NewRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldVerifier\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"PicoVerifierUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"actualFee\",\"type\":\"uint256\"}],\"name\":\"ProofSubmitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"slashAmount\",\"type\":\"uint256\"}],\"name\":\"ProverSlashed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Refunded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"RevealPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"SlashBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldWindow\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"SlashWindowUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldProver\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newProver\",\"type\":\"address\"}],\"name\":\"SubmitterConsentUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterUnregistered\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_DEADLINE_DURATION\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"bid\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"biddingPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"duration\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeToken\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getBidHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getBidders\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"winnerFee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"secondPlace\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"secondFee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getProof\",\"outputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProtocolFeeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"feeBps\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getRequest\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getSubmittersForProver\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minMaxFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"picoVerifier\",\"outputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"verifier\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"refund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"registerSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"name\":\"registerSubmitters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"requestProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"reveal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revealPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"duration\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setBiddingPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMinFee\",\"type\":\"uint256\"}],\"name\":\"setMinMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"setPicoVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setProtocolFeeBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setRevealPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setSlashBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"setSlashWindow\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"setSubmitterConsent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"slash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingController\",\"outputs\":[{\"internalType\":\"contractIStakingController\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"name\":\"submitProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterConsent\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterToProver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"name\":\"unregisterSubmitters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"withdrawProtocolFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketBeforeDeadline\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"expected\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"actual\",\"type\":\"bytes32\"}],\"name\":\"MarketBidRevealMismatch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketBiddingPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"currentTime\",\"type\":\"uint64\"}],\"name\":\"MarketCannotPopStartedEpoch\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"biddingEndTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketCannotRefundYet\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketCannotRegisterProverAsSubmitter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketCannotRegisterSelf\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineBeforeRevealPhaseEnd\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketDeadlineMustBeInFuture\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlinePassed\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxAllowed\",\"type\":\"uint256\"}],\"name\":\"MarketDeadlineTooFar\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"}],\"name\":\"MarketFeeExceedsMaximum\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidBps\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"MarketInvalidRequestStatus\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketInvalidStakingController\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"lastStartAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"newStartAt\",\"type\":\"uint64\"}],\"name\":\"MarketInvalidStatsEpochStart\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maximum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooHigh\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMaxFeeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"provided\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimum\",\"type\":\"uint256\"}],\"name\":\"MarketMinStakeTooLow\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketNoAssignedProverToSlash\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoFutureEpochToPop\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNoProtocolFeeToWithdraw\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketNotAuthorized\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"expected\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"actual\",\"type\":\"address\"}],\"name\":\"MarketNotExpectedProver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"requiredStake\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"actualStake\",\"type\":\"uint256\"}],\"name\":\"MarketProverNotEligible\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketProverNotRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestAlreadyExists\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"MarketRequestNotFound\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"revealEndTime\",\"type\":\"uint256\"}],\"name\":\"MarketRevealPhaseNotEnded\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"slashWindowEnd\",\"type\":\"uint256\"}],\"name\":\"MarketSlashWindowExpired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"MarketSubmitterAlreadyRegistered\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterConsentRequired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"MarketSubmitterNotRegistered\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"MarketZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"BidRevealed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"BiddingPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldToken\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newToken\",\"type\":\"address\"}],\"name\":\"FeeTokenUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MaxMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldFee\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"MinMaxFeeUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"NewBid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"indexed\":false,\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"NewRequest\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"OvercommitBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldVerifier\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"PicoVerifierUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"actualFee\",\"type\":\"uint256\"}],\"name\":\"ProofSubmitted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"ProtocolFeeWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"slashAmount\",\"type\":\"uint256\"}],\"name\":\"ProverSlashed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"requester\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Refunded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"oldDuration\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"RevealPhaseDurationUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldBps\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"SlashBpsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"oldWindow\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"SlashWindowUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"poppedStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsEpochPopped\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"scheduledStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsEpochScheduled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"newEpochId\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"statsStartAt\",\"type\":\"uint64\"}],\"name\":\"StatsReset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldProver\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newProver\",\"type\":\"address\"}],\"name\":\"SubmitterConsentUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"SubmitterUnregistered\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_DEADLINE_DURATION\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"name\":\"bid\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"biddingPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"duration\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"feeToken\",\"outputs\":[{\"internalType\":\"contractIERC20\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getBidHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"bidHash\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getBidders\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"winnerFee\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"secondPlace\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"secondFee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getGlobalRecentStats\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"name\":\"getGlobalStatsForStatsEpoch\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getGlobalStatsTotal\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"totalRequests\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"totalFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"totalFees\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.GlobalStats\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getProof\",\"outputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProtocolFeeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"feeBps\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverPendingRequests\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"reqids\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverRecentStats\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"name\":\"getProverStatsForStatsEpoch\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"stats\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getProverStatsTotal\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"bids\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"reveals\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsFulfilled\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"requestsRefunded\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lastActiveAt\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"feeReceived\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.ProverStats\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRecentStatsInfo\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"getRequest\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"getSenderPendingRequests\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"reqids\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"getSubmittersForProver\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minMaxFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"picoVerifier\",\"outputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"verifier\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"popStatsEpoch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"refund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"registerSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"name\":\"registerSubmitters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"imgURL\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"inputData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"inputURL\",\"type\":\"string\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"}],\"internalType\":\"structIBrevisMarket.ProofRequest\",\"name\":\"req\",\"type\":\"tuple\"}],\"name\":\"requestProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"requests\",\"outputs\":[{\"internalType\":\"enumIBrevisMarket.ReqStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"internalType\":\"uint64\",\"name\":\"timestamp\",\"type\":\"uint64\"},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"maxFee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minStake\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"deadline\",\"type\":\"uint64\"}],\"internalType\":\"structIBrevisMarket.FeeParams\",\"name\":\"fee\",\"type\":\"tuple\"},{\"internalType\":\"bytes32\",\"name\":\"vk\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"publicValuesDigest\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"bidCount\",\"type\":\"uint64\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.Bidder\",\"name\":\"winner\",\"type\":\"tuple\"},{\"components\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"internalType\":\"structIBrevisMarket.Bidder\",\"name\":\"second\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"reveal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"revealPhaseDuration\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"duration\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"}],\"name\":\"scheduleStatsEpoch\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setBiddingPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMaxFee\",\"type\":\"uint256\"}],\"name\":\"setMaxMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newMinFee\",\"type\":\"uint256\"}],\"name\":\"setMinMaxFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setOvercommitBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIPicoVerifier\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"setPicoVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setProtocolFeeBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"newDuration\",\"type\":\"uint64\"}],\"name\":\"setRevealPhaseDuration\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newBps\",\"type\":\"uint256\"}],\"name\":\"setSlashBps\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newWindow\",\"type\":\"uint256\"}],\"name\":\"setSlashWindow\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"name\":\"setSubmitterConsent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"}],\"name\":\"slash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakingController\",\"outputs\":[{\"internalType\":\"contractIStakingController\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"statsEpochId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"epochId\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"statsEpochs\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"startAt\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"endAt\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"statsEpochsLength\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"reqid\",\"type\":\"bytes32\"},{\"internalType\":\"uint256[8]\",\"name\":\"proof\",\"type\":\"uint256[8]\"}],\"name\":\"submitProof\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterConsent\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"submitterToProver\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"prover\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"submitter\",\"type\":\"address\"}],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unregisterSubmitter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"submitters\",\"type\":\"address[]\"}],\"name\":\"unregisterSubmitters\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"withdrawProtocolFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // ProverSubmittersABI is the input ABI used to generate the binding from.
@@ -20046,6 +23040,132 @@ func (_ProverSubmitters *ProverSubmittersCallerSession) GetBidders(reqid [32]byt
 	return _ProverSubmitters.Contract.GetBidders(&_ProverSubmitters.CallOpts, reqid)
 }
 
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_ProverSubmitters *ProverSubmittersCaller) GetGlobalRecentStats(opts *bind.CallOpts) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getGlobalRecentStats")
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketGlobalStats
+		StartAt uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_ProverSubmitters *ProverSubmittersSession) GetGlobalRecentStats() (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetGlobalRecentStats(&_ProverSubmitters.CallOpts)
+}
+
+// GetGlobalRecentStats is a free data retrieval call binding the contract method 0x0bf46c2c.
+//
+// Solidity: function getGlobalRecentStats() view returns((uint64,uint64,uint256) stats, uint64 startAt)
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetGlobalRecentStats() (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetGlobalRecentStats(&_ProverSubmitters.CallOpts)
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersCaller) GetGlobalStatsForStatsEpoch(opts *bind.CallOpts, epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getGlobalStatsForStatsEpoch", epochId)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketGlobalStats
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[2], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersSession) GetGlobalStatsForStatsEpoch(epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetGlobalStatsForStatsEpoch(&_ProverSubmitters.CallOpts, epochId)
+}
+
+// GetGlobalStatsForStatsEpoch is a free data retrieval call binding the contract method 0xecbd09ae.
+//
+// Solidity: function getGlobalStatsForStatsEpoch(uint64 epochId) view returns((uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetGlobalStatsForStatsEpoch(epochId uint64) (struct {
+	Stats   IBrevisMarketGlobalStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetGlobalStatsForStatsEpoch(&_ProverSubmitters.CallOpts, epochId)
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_ProverSubmitters *ProverSubmittersCaller) GetGlobalStatsTotal(opts *bind.CallOpts) (IBrevisMarketGlobalStats, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getGlobalStatsTotal")
+
+	if err != nil {
+		return *new(IBrevisMarketGlobalStats), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(IBrevisMarketGlobalStats)).(*IBrevisMarketGlobalStats)
+
+	return out0, err
+
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_ProverSubmitters *ProverSubmittersSession) GetGlobalStatsTotal() (IBrevisMarketGlobalStats, error) {
+	return _ProverSubmitters.Contract.GetGlobalStatsTotal(&_ProverSubmitters.CallOpts)
+}
+
+// GetGlobalStatsTotal is a free data retrieval call binding the contract method 0xe8497cea.
+//
+// Solidity: function getGlobalStatsTotal() view returns((uint64,uint64,uint256))
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetGlobalStatsTotal() (IBrevisMarketGlobalStats, error) {
+	return _ProverSubmitters.Contract.GetGlobalStatsTotal(&_ProverSubmitters.CallOpts)
+}
+
 // GetProof is a free data retrieval call binding the contract method 0x1b80bb3a.
 //
 // Solidity: function getProof(bytes32 reqid) view returns(uint256[8] proof)
@@ -20122,6 +23242,208 @@ func (_ProverSubmitters *ProverSubmittersCallerSession) GetProtocolFeeInfo() (st
 	return _ProverSubmitters.Contract.GetProtocolFeeInfo(&_ProverSubmitters.CallOpts)
 }
 
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_ProverSubmitters *ProverSubmittersCaller) GetProverPendingRequests(opts *bind.CallOpts, prover common.Address) ([][32]byte, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getProverPendingRequests", prover)
+
+	if err != nil {
+		return *new([][32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([][32]byte)).(*[][32]byte)
+
+	return out0, err
+
+}
+
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_ProverSubmitters *ProverSubmittersSession) GetProverPendingRequests(prover common.Address) ([][32]byte, error) {
+	return _ProverSubmitters.Contract.GetProverPendingRequests(&_ProverSubmitters.CallOpts, prover)
+}
+
+// GetProverPendingRequests is a free data retrieval call binding the contract method 0x40f518c7.
+//
+// Solidity: function getProverPendingRequests(address prover) view returns(bytes32[] reqids)
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetProverPendingRequests(prover common.Address) ([][32]byte, error) {
+	return _ProverSubmitters.Contract.GetProverPendingRequests(&_ProverSubmitters.CallOpts, prover)
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_ProverSubmitters *ProverSubmittersCaller) GetProverRecentStats(opts *bind.CallOpts, prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getProverRecentStats", prover)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketProverStats
+		StartAt uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_ProverSubmitters *ProverSubmittersSession) GetProverRecentStats(prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetProverRecentStats(&_ProverSubmitters.CallOpts, prover)
+}
+
+// GetProverRecentStats is a free data retrieval call binding the contract method 0x83d15092.
+//
+// Solidity: function getProverRecentStats(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt)
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetProverRecentStats(prover common.Address) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetProverRecentStats(&_ProverSubmitters.CallOpts, prover)
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersCaller) GetProverStatsForStatsEpoch(opts *bind.CallOpts, prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getProverStatsForStatsEpoch", prover, epochId)
+
+	outstruct := new(struct {
+		Stats   IBrevisMarketProverStats
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Stats = *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+	outstruct.StartAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[2], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersSession) GetProverStatsForStatsEpoch(prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetProverStatsForStatsEpoch(&_ProverSubmitters.CallOpts, prover, epochId)
+}
+
+// GetProverStatsForStatsEpoch is a free data retrieval call binding the contract method 0x672de289.
+//
+// Solidity: function getProverStatsForStatsEpoch(address prover, uint64 epochId) view returns((uint64,uint64,uint64,uint64,uint64,uint256) stats, uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetProverStatsForStatsEpoch(prover common.Address, epochId uint64) (struct {
+	Stats   IBrevisMarketProverStats
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetProverStatsForStatsEpoch(&_ProverSubmitters.CallOpts, prover, epochId)
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_ProverSubmitters *ProverSubmittersCaller) GetProverStatsTotal(opts *bind.CallOpts, prover common.Address) (IBrevisMarketProverStats, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getProverStatsTotal", prover)
+
+	if err != nil {
+		return *new(IBrevisMarketProverStats), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(IBrevisMarketProverStats)).(*IBrevisMarketProverStats)
+
+	return out0, err
+
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_ProverSubmitters *ProverSubmittersSession) GetProverStatsTotal(prover common.Address) (IBrevisMarketProverStats, error) {
+	return _ProverSubmitters.Contract.GetProverStatsTotal(&_ProverSubmitters.CallOpts, prover)
+}
+
+// GetProverStatsTotal is a free data retrieval call binding the contract method 0x107736fe.
+//
+// Solidity: function getProverStatsTotal(address prover) view returns((uint64,uint64,uint64,uint64,uint64,uint256))
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetProverStatsTotal(prover common.Address) (IBrevisMarketProverStats, error) {
+	return _ProverSubmitters.Contract.GetProverStatsTotal(&_ProverSubmitters.CallOpts, prover)
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_ProverSubmitters *ProverSubmittersCaller) GetRecentStatsInfo(opts *bind.CallOpts) (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getRecentStatsInfo")
+
+	outstruct := new(struct {
+		StartAt uint64
+		EpochId uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.StartAt = *abi.ConvertType(out[0], new(uint64)).(*uint64)
+	outstruct.EpochId = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_ProverSubmitters *ProverSubmittersSession) GetRecentStatsInfo() (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetRecentStatsInfo(&_ProverSubmitters.CallOpts)
+}
+
+// GetRecentStatsInfo is a free data retrieval call binding the contract method 0x5750df08.
+//
+// Solidity: function getRecentStatsInfo() view returns(uint64 startAt, uint64 epochId)
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetRecentStatsInfo() (struct {
+	StartAt uint64
+	EpochId uint64
+}, error) {
+	return _ProverSubmitters.Contract.GetRecentStatsInfo(&_ProverSubmitters.CallOpts)
+}
+
 // GetRequest is a free data retrieval call binding the contract method 0xfb1e61ca.
 //
 // Solidity: function getRequest(bytes32 reqid) view returns(uint8 status, uint64 timestamp, address sender, uint256 maxFee, uint256 minStake, uint64 deadline, bytes32 vk, bytes32 publicValuesDigest)
@@ -20195,6 +23517,37 @@ func (_ProverSubmitters *ProverSubmittersCallerSession) GetRequest(reqid [32]byt
 	PublicValuesDigest [32]byte
 }, error) {
 	return _ProverSubmitters.Contract.GetRequest(&_ProverSubmitters.CallOpts, reqid)
+}
+
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_ProverSubmitters *ProverSubmittersCaller) GetSenderPendingRequests(opts *bind.CallOpts, sender common.Address) ([][32]byte, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "getSenderPendingRequests", sender)
+
+	if err != nil {
+		return *new([][32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([][32]byte)).(*[][32]byte)
+
+	return out0, err
+
+}
+
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_ProverSubmitters *ProverSubmittersSession) GetSenderPendingRequests(sender common.Address) ([][32]byte, error) {
+	return _ProverSubmitters.Contract.GetSenderPendingRequests(&_ProverSubmitters.CallOpts, sender)
+}
+
+// GetSenderPendingRequests is a free data retrieval call binding the contract method 0xe20a0e7c.
+//
+// Solidity: function getSenderPendingRequests(address sender) view returns(bytes32[] reqids)
+func (_ProverSubmitters *ProverSubmittersCallerSession) GetSenderPendingRequests(sender common.Address) ([][32]byte, error) {
+	return _ProverSubmitters.Contract.GetSenderPendingRequests(&_ProverSubmitters.CallOpts, sender)
 }
 
 // GetSubmittersForProver is a free data retrieval call binding the contract method 0x1cde352b.
@@ -20290,6 +23643,86 @@ func (_ProverSubmitters *ProverSubmittersCallerSession) PicoVerifier() (common.A
 	return _ProverSubmitters.Contract.PicoVerifier(&_ProverSubmitters.CallOpts)
 }
 
+// Requests is a free data retrieval call binding the contract method 0x9d866985.
+//
+// Solidity: function requests(bytes32 reqid) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
+func (_ProverSubmitters *ProverSubmittersCaller) Requests(opts *bind.CallOpts, reqid [32]byte) (struct {
+	Status             uint8
+	Timestamp          uint64
+	Sender             common.Address
+	Fee                IBrevisMarketFeeParams
+	Vk                 [32]byte
+	PublicValuesDigest [32]byte
+	BidCount           uint64
+	Winner             IBrevisMarketBidder
+	Second             IBrevisMarketBidder
+}, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "requests", reqid)
+
+	outstruct := new(struct {
+		Status             uint8
+		Timestamp          uint64
+		Sender             common.Address
+		Fee                IBrevisMarketFeeParams
+		Vk                 [32]byte
+		PublicValuesDigest [32]byte
+		BidCount           uint64
+		Winner             IBrevisMarketBidder
+		Second             IBrevisMarketBidder
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Status = *abi.ConvertType(out[0], new(uint8)).(*uint8)
+	outstruct.Timestamp = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+	outstruct.Sender = *abi.ConvertType(out[2], new(common.Address)).(*common.Address)
+	outstruct.Fee = *abi.ConvertType(out[3], new(IBrevisMarketFeeParams)).(*IBrevisMarketFeeParams)
+	outstruct.Vk = *abi.ConvertType(out[4], new([32]byte)).(*[32]byte)
+	outstruct.PublicValuesDigest = *abi.ConvertType(out[5], new([32]byte)).(*[32]byte)
+	outstruct.BidCount = *abi.ConvertType(out[6], new(uint64)).(*uint64)
+	outstruct.Winner = *abi.ConvertType(out[7], new(IBrevisMarketBidder)).(*IBrevisMarketBidder)
+	outstruct.Second = *abi.ConvertType(out[8], new(IBrevisMarketBidder)).(*IBrevisMarketBidder)
+
+	return *outstruct, err
+
+}
+
+// Requests is a free data retrieval call binding the contract method 0x9d866985.
+//
+// Solidity: function requests(bytes32 reqid) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
+func (_ProverSubmitters *ProverSubmittersSession) Requests(reqid [32]byte) (struct {
+	Status             uint8
+	Timestamp          uint64
+	Sender             common.Address
+	Fee                IBrevisMarketFeeParams
+	Vk                 [32]byte
+	PublicValuesDigest [32]byte
+	BidCount           uint64
+	Winner             IBrevisMarketBidder
+	Second             IBrevisMarketBidder
+}, error) {
+	return _ProverSubmitters.Contract.Requests(&_ProverSubmitters.CallOpts, reqid)
+}
+
+// Requests is a free data retrieval call binding the contract method 0x9d866985.
+//
+// Solidity: function requests(bytes32 reqid) view returns(uint8 status, uint64 timestamp, address sender, (uint256,uint256,uint64) fee, bytes32 vk, bytes32 publicValuesDigest, uint64 bidCount, (address,uint256) winner, (address,uint256) second)
+func (_ProverSubmitters *ProverSubmittersCallerSession) Requests(reqid [32]byte) (struct {
+	Status             uint8
+	Timestamp          uint64
+	Sender             common.Address
+	Fee                IBrevisMarketFeeParams
+	Vk                 [32]byte
+	PublicValuesDigest [32]byte
+	BidCount           uint64
+	Winner             IBrevisMarketBidder
+	Second             IBrevisMarketBidder
+}, error) {
+	return _ProverSubmitters.Contract.Requests(&_ProverSubmitters.CallOpts, reqid)
+}
+
 // RevealPhaseDuration is a free data retrieval call binding the contract method 0xdfc75372.
 //
 // Solidity: function revealPhaseDuration() view returns(uint64 duration)
@@ -20350,6 +23783,113 @@ func (_ProverSubmitters *ProverSubmittersSession) StakingController() (common.Ad
 // Solidity: function stakingController() view returns(address)
 func (_ProverSubmitters *ProverSubmittersCallerSession) StakingController() (common.Address, error) {
 	return _ProverSubmitters.Contract.StakingController(&_ProverSubmitters.CallOpts)
+}
+
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64 epochId)
+func (_ProverSubmitters *ProverSubmittersCaller) StatsEpochId(opts *bind.CallOpts) (uint64, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "statsEpochId")
+
+	if err != nil {
+		return *new(uint64), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(uint64)).(*uint64)
+
+	return out0, err
+
+}
+
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64 epochId)
+func (_ProverSubmitters *ProverSubmittersSession) StatsEpochId() (uint64, error) {
+	return _ProverSubmitters.Contract.StatsEpochId(&_ProverSubmitters.CallOpts)
+}
+
+// StatsEpochId is a free data retrieval call binding the contract method 0x390389ea.
+//
+// Solidity: function statsEpochId() view returns(uint64 epochId)
+func (_ProverSubmitters *ProverSubmittersCallerSession) StatsEpochId() (uint64, error) {
+	return _ProverSubmitters.Contract.StatsEpochId(&_ProverSubmitters.CallOpts)
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 index) view returns(uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersCaller) StatsEpochs(opts *bind.CallOpts, index *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "statsEpochs", index)
+
+	outstruct := new(struct {
+		StartAt uint64
+		EndAt   uint64
+	})
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.StartAt = *abi.ConvertType(out[0], new(uint64)).(*uint64)
+	outstruct.EndAt = *abi.ConvertType(out[1], new(uint64)).(*uint64)
+
+	return *outstruct, err
+
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 index) view returns(uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersSession) StatsEpochs(index *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _ProverSubmitters.Contract.StatsEpochs(&_ProverSubmitters.CallOpts, index)
+}
+
+// StatsEpochs is a free data retrieval call binding the contract method 0x3e8fcff6.
+//
+// Solidity: function statsEpochs(uint256 index) view returns(uint64 startAt, uint64 endAt)
+func (_ProverSubmitters *ProverSubmittersCallerSession) StatsEpochs(index *big.Int) (struct {
+	StartAt uint64
+	EndAt   uint64
+}, error) {
+	return _ProverSubmitters.Contract.StatsEpochs(&_ProverSubmitters.CallOpts, index)
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_ProverSubmitters *ProverSubmittersCaller) StatsEpochsLength(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _ProverSubmitters.contract.Call(opts, &out, "statsEpochsLength")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_ProverSubmitters *ProverSubmittersSession) StatsEpochsLength() (*big.Int, error) {
+	return _ProverSubmitters.Contract.StatsEpochsLength(&_ProverSubmitters.CallOpts)
+}
+
+// StatsEpochsLength is a free data retrieval call binding the contract method 0xf09b6c80.
+//
+// Solidity: function statsEpochsLength() view returns(uint256)
+func (_ProverSubmitters *ProverSubmittersCallerSession) StatsEpochsLength() (*big.Int, error) {
+	return _ProverSubmitters.Contract.StatsEpochsLength(&_ProverSubmitters.CallOpts)
 }
 
 // SubmitterConsent is a free data retrieval call binding the contract method 0x020ebc35.
@@ -20433,6 +23973,27 @@ func (_ProverSubmitters *ProverSubmittersSession) Bid(reqid [32]byte, bidHash [3
 // Solidity: function bid(bytes32 reqid, bytes32 bidHash) returns()
 func (_ProverSubmitters *ProverSubmittersTransactorSession) Bid(reqid [32]byte, bidHash [32]byte) (*types.Transaction, error) {
 	return _ProverSubmitters.Contract.Bid(&_ProverSubmitters.TransactOpts, reqid, bidHash)
+}
+
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_ProverSubmitters *ProverSubmittersTransactor) PopStatsEpoch(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ProverSubmitters.contract.Transact(opts, "popStatsEpoch")
+}
+
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_ProverSubmitters *ProverSubmittersSession) PopStatsEpoch() (*types.Transaction, error) {
+	return _ProverSubmitters.Contract.PopStatsEpoch(&_ProverSubmitters.TransactOpts)
+}
+
+// PopStatsEpoch is a paid mutator transaction binding the contract method 0xde3c65fc.
+//
+// Solidity: function popStatsEpoch() returns()
+func (_ProverSubmitters *ProverSubmittersTransactorSession) PopStatsEpoch() (*types.Transaction, error) {
+	return _ProverSubmitters.Contract.PopStatsEpoch(&_ProverSubmitters.TransactOpts)
 }
 
 // Refund is a paid mutator transaction binding the contract method 0x7249fbb6.
@@ -20540,6 +24101,27 @@ func (_ProverSubmitters *ProverSubmittersTransactorSession) Reveal(reqid [32]byt
 	return _ProverSubmitters.Contract.Reveal(&_ProverSubmitters.TransactOpts, reqid, fee, nonce)
 }
 
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_ProverSubmitters *ProverSubmittersTransactor) ScheduleStatsEpoch(opts *bind.TransactOpts, startAt uint64) (*types.Transaction, error) {
+	return _ProverSubmitters.contract.Transact(opts, "scheduleStatsEpoch", startAt)
+}
+
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_ProverSubmitters *ProverSubmittersSession) ScheduleStatsEpoch(startAt uint64) (*types.Transaction, error) {
+	return _ProverSubmitters.Contract.ScheduleStatsEpoch(&_ProverSubmitters.TransactOpts, startAt)
+}
+
+// ScheduleStatsEpoch is a paid mutator transaction binding the contract method 0x08ea7ea2.
+//
+// Solidity: function scheduleStatsEpoch(uint64 startAt) returns()
+func (_ProverSubmitters *ProverSubmittersTransactorSession) ScheduleStatsEpoch(startAt uint64) (*types.Transaction, error) {
+	return _ProverSubmitters.Contract.ScheduleStatsEpoch(&_ProverSubmitters.TransactOpts, startAt)
+}
+
 // SetBiddingPhaseDuration is a paid mutator transaction binding the contract method 0x7d9b7158.
 //
 // Solidity: function setBiddingPhaseDuration(uint64 newDuration) returns()
@@ -20561,6 +24143,27 @@ func (_ProverSubmitters *ProverSubmittersTransactorSession) SetBiddingPhaseDurat
 	return _ProverSubmitters.Contract.SetBiddingPhaseDuration(&_ProverSubmitters.TransactOpts, newDuration)
 }
 
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_ProverSubmitters *ProverSubmittersTransactor) SetMaxMaxFee(opts *bind.TransactOpts, newMaxFee *big.Int) (*types.Transaction, error) {
+	return _ProverSubmitters.contract.Transact(opts, "setMaxMaxFee", newMaxFee)
+}
+
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_ProverSubmitters *ProverSubmittersSession) SetMaxMaxFee(newMaxFee *big.Int) (*types.Transaction, error) {
+	return _ProverSubmitters.Contract.SetMaxMaxFee(&_ProverSubmitters.TransactOpts, newMaxFee)
+}
+
+// SetMaxMaxFee is a paid mutator transaction binding the contract method 0x377ae959.
+//
+// Solidity: function setMaxMaxFee(uint256 newMaxFee) returns()
+func (_ProverSubmitters *ProverSubmittersTransactorSession) SetMaxMaxFee(newMaxFee *big.Int) (*types.Transaction, error) {
+	return _ProverSubmitters.Contract.SetMaxMaxFee(&_ProverSubmitters.TransactOpts, newMaxFee)
+}
+
 // SetMinMaxFee is a paid mutator transaction binding the contract method 0xe30c1fc3.
 //
 // Solidity: function setMinMaxFee(uint256 newMinFee) returns()
@@ -20580,6 +24183,27 @@ func (_ProverSubmitters *ProverSubmittersSession) SetMinMaxFee(newMinFee *big.In
 // Solidity: function setMinMaxFee(uint256 newMinFee) returns()
 func (_ProverSubmitters *ProverSubmittersTransactorSession) SetMinMaxFee(newMinFee *big.Int) (*types.Transaction, error) {
 	return _ProverSubmitters.Contract.SetMinMaxFee(&_ProverSubmitters.TransactOpts, newMinFee)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_ProverSubmitters *ProverSubmittersTransactor) SetOvercommitBps(opts *bind.TransactOpts, newBps *big.Int) (*types.Transaction, error) {
+	return _ProverSubmitters.contract.Transact(opts, "setOvercommitBps", newBps)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_ProverSubmitters *ProverSubmittersSession) SetOvercommitBps(newBps *big.Int) (*types.Transaction, error) {
+	return _ProverSubmitters.Contract.SetOvercommitBps(&_ProverSubmitters.TransactOpts, newBps)
+}
+
+// SetOvercommitBps is a paid mutator transaction binding the contract method 0x6dbb179b.
+//
+// Solidity: function setOvercommitBps(uint256 newBps) returns()
+func (_ProverSubmitters *ProverSubmittersTransactorSession) SetOvercommitBps(newBps *big.Int) (*types.Transaction, error) {
+	return _ProverSubmitters.Contract.SetOvercommitBps(&_ProverSubmitters.TransactOpts, newBps)
 }
 
 // SetPicoVerifier is a paid mutator transaction binding the contract method 0x95591966.
@@ -21276,6 +24900,141 @@ func (_ProverSubmitters *ProverSubmittersFilterer) ParseFeeTokenUpdated(log type
 	return event, nil
 }
 
+// ProverSubmittersMaxMaxFeeUpdatedIterator is returned from FilterMaxMaxFeeUpdated and is used to iterate over the raw logs and unpacked data for MaxMaxFeeUpdated events raised by the ProverSubmitters contract.
+type ProverSubmittersMaxMaxFeeUpdatedIterator struct {
+	Event *ProverSubmittersMaxMaxFeeUpdated // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ProverSubmittersMaxMaxFeeUpdatedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ProverSubmittersMaxMaxFeeUpdated)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ProverSubmittersMaxMaxFeeUpdated)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ProverSubmittersMaxMaxFeeUpdatedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ProverSubmittersMaxMaxFeeUpdatedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ProverSubmittersMaxMaxFeeUpdated represents a MaxMaxFeeUpdated event raised by the ProverSubmitters contract.
+type ProverSubmittersMaxMaxFeeUpdated struct {
+	OldFee *big.Int
+	NewFee *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterMaxMaxFeeUpdated is a free log retrieval operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_ProverSubmitters *ProverSubmittersFilterer) FilterMaxMaxFeeUpdated(opts *bind.FilterOpts) (*ProverSubmittersMaxMaxFeeUpdatedIterator, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.FilterLogs(opts, "MaxMaxFeeUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return &ProverSubmittersMaxMaxFeeUpdatedIterator{contract: _ProverSubmitters.contract, event: "MaxMaxFeeUpdated", logs: logs, sub: sub}, nil
+}
+
+// WatchMaxMaxFeeUpdated is a free log subscription operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_ProverSubmitters *ProverSubmittersFilterer) WatchMaxMaxFeeUpdated(opts *bind.WatchOpts, sink chan<- *ProverSubmittersMaxMaxFeeUpdated) (event.Subscription, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.WatchLogs(opts, "MaxMaxFeeUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ProverSubmittersMaxMaxFeeUpdated)
+				if err := _ProverSubmitters.contract.UnpackLog(event, "MaxMaxFeeUpdated", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseMaxMaxFeeUpdated is a log parse operation binding the contract event 0x0683d7037faf65df908ec5ab64d6ab0b64826fc2144ba56b84fa6ad3c515df37.
+//
+// Solidity: event MaxMaxFeeUpdated(uint256 oldFee, uint256 newFee)
+func (_ProverSubmitters *ProverSubmittersFilterer) ParseMaxMaxFeeUpdated(log types.Log) (*ProverSubmittersMaxMaxFeeUpdated, error) {
+	event := new(ProverSubmittersMaxMaxFeeUpdated)
+	if err := _ProverSubmitters.contract.UnpackLog(event, "MaxMaxFeeUpdated", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
 // ProverSubmittersMinMaxFeeUpdatedIterator is returned from FilterMinMaxFeeUpdated and is used to iterate over the raw logs and unpacked data for MinMaxFeeUpdated events raised by the ProverSubmitters contract.
 type ProverSubmittersMinMaxFeeUpdatedIterator struct {
 	Event *ProverSubmittersMinMaxFeeUpdated // Event containing the contract specifics and raw log
@@ -21704,6 +25463,141 @@ func (_ProverSubmitters *ProverSubmittersFilterer) WatchNewRequest(opts *bind.Wa
 func (_ProverSubmitters *ProverSubmittersFilterer) ParseNewRequest(log types.Log) (*ProverSubmittersNewRequest, error) {
 	event := new(ProverSubmittersNewRequest)
 	if err := _ProverSubmitters.contract.UnpackLog(event, "NewRequest", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// ProverSubmittersOvercommitBpsUpdatedIterator is returned from FilterOvercommitBpsUpdated and is used to iterate over the raw logs and unpacked data for OvercommitBpsUpdated events raised by the ProverSubmitters contract.
+type ProverSubmittersOvercommitBpsUpdatedIterator struct {
+	Event *ProverSubmittersOvercommitBpsUpdated // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ProverSubmittersOvercommitBpsUpdatedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ProverSubmittersOvercommitBpsUpdated)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ProverSubmittersOvercommitBpsUpdated)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ProverSubmittersOvercommitBpsUpdatedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ProverSubmittersOvercommitBpsUpdatedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ProverSubmittersOvercommitBpsUpdated represents a OvercommitBpsUpdated event raised by the ProverSubmitters contract.
+type ProverSubmittersOvercommitBpsUpdated struct {
+	OldBps *big.Int
+	NewBps *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterOvercommitBpsUpdated is a free log retrieval operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_ProverSubmitters *ProverSubmittersFilterer) FilterOvercommitBpsUpdated(opts *bind.FilterOpts) (*ProverSubmittersOvercommitBpsUpdatedIterator, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.FilterLogs(opts, "OvercommitBpsUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return &ProverSubmittersOvercommitBpsUpdatedIterator{contract: _ProverSubmitters.contract, event: "OvercommitBpsUpdated", logs: logs, sub: sub}, nil
+}
+
+// WatchOvercommitBpsUpdated is a free log subscription operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_ProverSubmitters *ProverSubmittersFilterer) WatchOvercommitBpsUpdated(opts *bind.WatchOpts, sink chan<- *ProverSubmittersOvercommitBpsUpdated) (event.Subscription, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.WatchLogs(opts, "OvercommitBpsUpdated")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ProverSubmittersOvercommitBpsUpdated)
+				if err := _ProverSubmitters.contract.UnpackLog(event, "OvercommitBpsUpdated", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseOvercommitBpsUpdated is a log parse operation binding the contract event 0x722a27720771459c658aaf7935e587aa461068e42636f431909c873e7810fe24.
+//
+// Solidity: event OvercommitBpsUpdated(uint256 oldBps, uint256 newBps)
+func (_ProverSubmitters *ProverSubmittersFilterer) ParseOvercommitBpsUpdated(log types.Log) (*ProverSubmittersOvercommitBpsUpdated, error) {
+	event := new(ProverSubmittersOvercommitBpsUpdated)
+	if err := _ProverSubmitters.contract.UnpackLog(event, "OvercommitBpsUpdated", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -23005,6 +26899,409 @@ func (_ProverSubmitters *ProverSubmittersFilterer) WatchSlashWindowUpdated(opts 
 func (_ProverSubmitters *ProverSubmittersFilterer) ParseSlashWindowUpdated(log types.Log) (*ProverSubmittersSlashWindowUpdated, error) {
 	event := new(ProverSubmittersSlashWindowUpdated)
 	if err := _ProverSubmitters.contract.UnpackLog(event, "SlashWindowUpdated", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// ProverSubmittersStatsEpochPoppedIterator is returned from FilterStatsEpochPopped and is used to iterate over the raw logs and unpacked data for StatsEpochPopped events raised by the ProverSubmitters contract.
+type ProverSubmittersStatsEpochPoppedIterator struct {
+	Event *ProverSubmittersStatsEpochPopped // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ProverSubmittersStatsEpochPoppedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ProverSubmittersStatsEpochPopped)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ProverSubmittersStatsEpochPopped)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ProverSubmittersStatsEpochPoppedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ProverSubmittersStatsEpochPoppedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ProverSubmittersStatsEpochPopped represents a StatsEpochPopped event raised by the ProverSubmitters contract.
+type ProverSubmittersStatsEpochPopped struct {
+	PoppedStartAt uint64
+	Raw           types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsEpochPopped is a free log retrieval operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) FilterStatsEpochPopped(opts *bind.FilterOpts) (*ProverSubmittersStatsEpochPoppedIterator, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.FilterLogs(opts, "StatsEpochPopped")
+	if err != nil {
+		return nil, err
+	}
+	return &ProverSubmittersStatsEpochPoppedIterator{contract: _ProverSubmitters.contract, event: "StatsEpochPopped", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsEpochPopped is a free log subscription operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) WatchStatsEpochPopped(opts *bind.WatchOpts, sink chan<- *ProverSubmittersStatsEpochPopped) (event.Subscription, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.WatchLogs(opts, "StatsEpochPopped")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ProverSubmittersStatsEpochPopped)
+				if err := _ProverSubmitters.contract.UnpackLog(event, "StatsEpochPopped", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsEpochPopped is a log parse operation binding the contract event 0xf6f02cf527c4bd7e5782ec0998b1419ef26ee52793fb5cb200f588851548b7a3.
+//
+// Solidity: event StatsEpochPopped(uint64 poppedStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) ParseStatsEpochPopped(log types.Log) (*ProverSubmittersStatsEpochPopped, error) {
+	event := new(ProverSubmittersStatsEpochPopped)
+	if err := _ProverSubmitters.contract.UnpackLog(event, "StatsEpochPopped", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// ProverSubmittersStatsEpochScheduledIterator is returned from FilterStatsEpochScheduled and is used to iterate over the raw logs and unpacked data for StatsEpochScheduled events raised by the ProverSubmitters contract.
+type ProverSubmittersStatsEpochScheduledIterator struct {
+	Event *ProverSubmittersStatsEpochScheduled // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ProverSubmittersStatsEpochScheduledIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ProverSubmittersStatsEpochScheduled)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ProverSubmittersStatsEpochScheduled)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ProverSubmittersStatsEpochScheduledIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ProverSubmittersStatsEpochScheduledIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ProverSubmittersStatsEpochScheduled represents a StatsEpochScheduled event raised by the ProverSubmitters contract.
+type ProverSubmittersStatsEpochScheduled struct {
+	ScheduledStartAt uint64
+	Raw              types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsEpochScheduled is a free log retrieval operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) FilterStatsEpochScheduled(opts *bind.FilterOpts) (*ProverSubmittersStatsEpochScheduledIterator, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.FilterLogs(opts, "StatsEpochScheduled")
+	if err != nil {
+		return nil, err
+	}
+	return &ProverSubmittersStatsEpochScheduledIterator{contract: _ProverSubmitters.contract, event: "StatsEpochScheduled", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsEpochScheduled is a free log subscription operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) WatchStatsEpochScheduled(opts *bind.WatchOpts, sink chan<- *ProverSubmittersStatsEpochScheduled) (event.Subscription, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.WatchLogs(opts, "StatsEpochScheduled")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ProverSubmittersStatsEpochScheduled)
+				if err := _ProverSubmitters.contract.UnpackLog(event, "StatsEpochScheduled", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsEpochScheduled is a log parse operation binding the contract event 0xfc10eebf860786644c388c6fe2e6396b5cd02c3fedfd1b9e6436715a750b7c55.
+//
+// Solidity: event StatsEpochScheduled(uint64 scheduledStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) ParseStatsEpochScheduled(log types.Log) (*ProverSubmittersStatsEpochScheduled, error) {
+	event := new(ProverSubmittersStatsEpochScheduled)
+	if err := _ProverSubmitters.contract.UnpackLog(event, "StatsEpochScheduled", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// ProverSubmittersStatsResetIterator is returned from FilterStatsReset and is used to iterate over the raw logs and unpacked data for StatsReset events raised by the ProverSubmitters contract.
+type ProverSubmittersStatsResetIterator struct {
+	Event *ProverSubmittersStatsReset // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *ProverSubmittersStatsResetIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(ProverSubmittersStatsReset)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(ProverSubmittersStatsReset)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *ProverSubmittersStatsResetIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *ProverSubmittersStatsResetIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// ProverSubmittersStatsReset represents a StatsReset event raised by the ProverSubmitters contract.
+type ProverSubmittersStatsReset struct {
+	NewEpochId   uint64
+	StatsStartAt uint64
+	Raw          types.Log // Blockchain specific contextual infos
+}
+
+// FilterStatsReset is a free log retrieval operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) FilterStatsReset(opts *bind.FilterOpts) (*ProverSubmittersStatsResetIterator, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.FilterLogs(opts, "StatsReset")
+	if err != nil {
+		return nil, err
+	}
+	return &ProverSubmittersStatsResetIterator{contract: _ProverSubmitters.contract, event: "StatsReset", logs: logs, sub: sub}, nil
+}
+
+// WatchStatsReset is a free log subscription operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) WatchStatsReset(opts *bind.WatchOpts, sink chan<- *ProverSubmittersStatsReset) (event.Subscription, error) {
+
+	logs, sub, err := _ProverSubmitters.contract.WatchLogs(opts, "StatsReset")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(ProverSubmittersStatsReset)
+				if err := _ProverSubmitters.contract.UnpackLog(event, "StatsReset", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStatsReset is a log parse operation binding the contract event 0xa88235786747391b7923867065139a03eac6c1f385c0d475749d3e900d510818.
+//
+// Solidity: event StatsReset(uint64 newEpochId, uint64 statsStartAt)
+func (_ProverSubmitters *ProverSubmittersFilterer) ParseStatsReset(log types.Log) (*ProverSubmittersStatsReset, error) {
+	event := new(ProverSubmittersStatsReset)
+	if err := _ProverSubmitters.contract.UnpackLog(event, "StatsReset", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log

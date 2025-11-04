@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 	"math/big"
+	"strings"
 	"tools/bindings"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -29,6 +30,8 @@ type StakingConfig struct {
 	ProverPassphrase    string `mapstructure:"prover_passphrase"`
 	SubmitterKeystore   string `mapstructure:"submitter_keystore"`
 	SubmitterPassphrase string `mapstructure:"submitter_passphrase"`
+	ProverName          string `mapstructure:"prover_name"`
+	ProverIcon          string `mapstructure:"prover_icon"`
 
 	StakingAmt        string `mapstructure:"staking_amt"`
 	CommissionRateBps uint64 `mapstructure:"commission_rate_bps"`
@@ -94,7 +97,13 @@ func stake() error {
 	var submitterAuth *bind.TransactOpts
 	var submitter common.Address
 	var brevisMarket *bindings.BrevisMarket
+	proverName := strings.TrimSpace(c.ProverName)
+	proverIcon := strings.TrimSpace(c.ProverIcon)
 	if initialize {
+		if proverName == "" || proverIcon == "" {
+			log.Fatalln("please fill in both prover_name and prover_icon")
+		}
+
 		if c.SubmitterKeystore != "" {
 			submitterAuth, submitter, err = CreateTransactOpts(c.SubmitterKeystore, c.SubmitterPassphrase, chid)
 			chkErr(err, "submitter CreateTransactOpts")
@@ -128,6 +137,15 @@ func stake() error {
 			chkErr(err, "WaitMined")
 			if receipt.Status != types.ReceiptStatusSuccessful {
 				log.Fatalln("InitializeProver tx status is not success")
+			}
+
+			tx, err = stakingController.SetProverProfile(proverAuth, proverName, proverIcon)
+			chkErr(err, "SetProverProfile")
+			log.Printf("SetProverProfile tx: %s", tx.Hash())
+			receipt, err = bind.WaitMined(context.Background(), ec, tx)
+			chkErr(err, "WaitMined")
+			if receipt.Status != types.ReceiptStatusSuccessful {
+				log.Fatalln("SetProverProfile tx status is not success")
 			}
 		}
 
