@@ -40,6 +40,14 @@ If you need to run the pico proving service as a system service, shut down the s
     Environment=DATABASE_URL=sqlite:///home/ubuntu/.pico/pico_proving_service.db?mode=rwc
     Environment=RUST_LOG=debug
     Environment=NUM_THREADS=8
+    Environment=RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f,+avx512ifma,+avx512vl"
+    Environment=JEMALLOC_SYS_WITH_MALLOC_CONF="retain:true,background_thread:true,metadata_thp:always,dirty_decay_ms:-1,muzzy_decay_ms:-1,abort_conf:true"
+    Environment=CHUNK_SIZE=2097152
+    Environment=CHUNK_BATCH_SIZE=32
+    Environment=SPLIT_THRESHOLD=1048576
+    Environment=PROVER_COUNT=32
+    Environment=RUST_MIN_STACK=16777216
+    Environment=VK_VERIFICATION=false    
     ExecStart=/home/ubuntu/.pico/server
     StandardOutput=append:/var/log/pico/app.log
     StandardError=append:/var/log/pico/app.log
@@ -68,6 +76,7 @@ If you need to run the pico proving service as a system service, shut down the s
 4. Enable and start the service:
 
     ```sh
+    ulimit -s unlimited
     sudo systemctl enable pico
     sudo systemctl start pico
     ```
