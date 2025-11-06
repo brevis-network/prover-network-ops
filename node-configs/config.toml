@@ -18,3 +18,4 @@ submitter_passphrase=""
 max_fee="1000000000000000000000000000000000"
 max_input_size=0
 prover_gas_price="1"
+prove_min_duration=3600

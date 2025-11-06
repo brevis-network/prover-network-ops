@@ -187,6 +187,16 @@ If you need to run the pico proving service as a system service, shut down the s
     | submitter_keystore | The path to your prepared submitter ethereum keystore json (or use AWS KMS) |
     | submitter_passphrase | The passphrase to the submitter keystore (or apikey:apisec if using AWS KMS) |
 
+    Update the below fields on demand in accordance with your requirement:
+    | Field | Description |
+    | ----- | ----------- |
+    | prover_gas_price | the price of a prove cycle. the bid fee to a request comes from `prove cycles * prover gas price`. the prove cycles of a request is auto calculated by pico service, while the prover gas price can be set in consideration of your business |
+    | prove_min_duration | skip the requests that the duration from proving start time (right after reveal phase) to deadline is less than the `prove_min_duration` |
+    | max_input_size | default 0 means no limit. if this value is non-zero, and request input is larger, skip request |
+    | max_fee | skip the requests that the calculated bid fee exceeds the `max_fee` |
+
+	Note, the fee is denominated in staking token.
+
 ### Staking as a bidder
 
 To join the proving network as a bidder, you must stake staking token in [StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract). 
