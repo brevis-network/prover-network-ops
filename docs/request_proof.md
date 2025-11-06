@@ -30,6 +30,14 @@ Reference the [Pico document](https://pico-docs.brevis.network/writing-apps/prog
 Reference [Pico Fibonacci](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/fibonacci) as an example. 
 The generated ELF file is uploaded to this URL.
 
+### Sample Apps for Testing
+
+You can use the following sample app codes to create ELF files for testing:
+
+- **[Fibonacci](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/fibonacci)**: A simple example verifying Fibonacci number computation
+- **[Reth](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/reth-pico)**: An example demonstrating Ethereum block verification
+- **[Tendermint](https://github.com/brevis-network/pico/tree/main/examples/tendermint/app)**: An example for Tendermint verification
+
 5. `inputData`
 
 The input data is build by the pico-sdk emulator builder. Reference [pico-proving-service gen-inputs](https://github.com/brevis-network/pico-proving-service/blob/main/bin/gen_inputs.rs):
