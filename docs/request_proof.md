@@ -30,14 +30,6 @@ Reference the [Pico document](https://pico-docs.brevis.network/writing-apps/prog
 Reference [Pico Fibonacci](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/fibonacci) as an example. 
 The generated ELF file is uploaded to this URL.
 
-### Sample Apps for Testing
-
-You can use the following sample app codes to create ELF files for testing:
-
-- **[Fibonacci](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/fibonacci)**: A simple example verifying Fibonacci number computation
-- **[Reth](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/reth-pico)**: An example demonstrating Ethereum block verification
-- **[Tendermint](https://github.com/brevis-network/pico/tree/main/examples/tendermint/app)**: An example for Tendermint verification
-
 5. `inputData`
 
 The input data is build by the pico-sdk emulator builder. Reference [pico-proving-service gen-inputs](https://github.com/brevis-network/pico-proving-service/blob/main/bin/gen_inputs.rs):
@@ -88,3 +80,12 @@ Update the param values in `[[request]]` section accordingly. Provide multile `[
     ./tools request-proof --config ./req_config.toml
     ```
 
+## Sample Apps for Testing
+
+The following sample applications are available for testing and benchmarking:
+
+- **[Fibonacci](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/fibonacci)**: Computes the n-th Fibonacci number from a `u32` input using modular arithmetic to prevent overflow. Represents a **light** proving workload suitable for quick validation.
+- **[Tendermint](https://github.com/brevis-network/pico/tree/main/examples/tendermint/app)**: Implements a Tendermint light-client verifier that validates consensus updates between two light blocks. Represents a **medium** proving workload for consensus verification.
+- **[Reth](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/reth-pico)**: Executes Ethereum block verification using the Reth client executor and commits the resulting block header. Represents a **heavy** proving workload for production block verification.
+
+To build ELF files from these sample apps, use `cargo pico build` as described in Section 4. For input data generation, refer to Section 5.
