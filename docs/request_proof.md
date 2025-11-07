@@ -80,3 +80,12 @@ Update the param values in `[[request]]` section accordingly. Provide multile `[
     ./tools request-proof --config ./req_config.toml
     ```
 
+## Sample Apps for Testing
+
+The following sample applications are available for testing and benchmarking:
+
+- **[Fibonacci](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/fibonacci)**: Computes the n-th Fibonacci number from a `u32` input using modular arithmetic to prevent overflow. Represents a **light** proving workload suitable for quick validation.
+- **[Tendermint](https://github.com/brevis-network/pico/tree/main/examples/tendermint/app)**: Implements a Tendermint light-client verifier that validates consensus updates between two light blocks. Represents a **medium** proving workload for consensus verification.
+- **[Reth](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/reth-pico)**: Executes Ethereum block verification using the Reth client executor and commits the resulting block header. Represents a **heavy** proving workload for production block verification.
+
+To build ELF files from these sample apps, use `cargo pico build` as described in Section 4. For input data generation, refer to Section 5.
