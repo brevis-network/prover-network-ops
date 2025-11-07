@@ -26,49 +26,49 @@ If you need to run the pico proving service as a system service, shut down the s
 
 2. Select an appropriate `MAX_EMULATION_CYCLES` value for the input tasks supported by the prover. If unset, all proving tasks are supported.
 
-  For CPU machine, reference the benchmark result on `r7i.16xlarge`:
-  ```
-  - Fibonacci n = 1_000_000
-  Cycles: 12001916
-  Proving time: 64.313s
+    For CPU machine, reference the benchmark result on `r7i.16xlarge`:
+    ```
+    - Fibonacci n = 1_000_000
+    Cycles: 12001916
+    Proving time: 64.313s
 
 
-  - Fibonacci n = 10_000_000
-  Cycles: 120001916
-  Proving time: 394.217s
+    - Fibonacci n = 10_000_000
+    Cycles: 120001916
+    Proving time: 394.217s
 
-  - Reth block_number = 18884864
-  Cycles: 90169715
-  Proving time: 385.187s
-  ETH gas: 4,266,500
+    - Reth block_number = 18884864
+    Cycles: 90169715
+    Proving time: 385.187s
+    ETH gas: 4,266,500
 
-  - Reth block_number = 17106222
-  Cycles: 176733255
-  Proving time: 733.075s
-  ETH gas: 10,781,405
-  ```
+    - Reth block_number = 17106222
+    Cycles: 176733255
+    Proving time: 733.075s
+    ETH gas: 10,781,405
+    ```
 
-  For GPU machine, reference the benchmark result on `8 X NVIDIA RTX 5090`:
-  ```
-  - Fibonacci n = 1_000_000
-  Cycles: 12001916
-  Proving time: 8.345s
+    For GPU machine, reference the benchmark result on `8 X NVIDIA RTX 5090`:
+    ```
+    - Fibonacci n = 1_000_000
+    Cycles: 12001916
+    Proving time: 8.345s
 
 
-  - Fibonacci n = 10_000_000
-  Cycles: 120001916
-  Proving time: 15.025s
+    - Fibonacci n = 10_000_000
+    Cycles: 120001916
+    Proving time: 15.025s
 
-  - Reth block_number = 18884864
-  Cycles: 90169715
-  Proving time: 22.03s
-  ETH gas: 4,266,500
+    - Reth block_number = 18884864
+    Cycles: 90169715
+    Proving time: 22.03s
+    ETH gas: 4,266,500
 
-  - Reth block_number = 17106222
-  Cycles: 176733255
-  Proving time: 32.024s
-  ETH gas: 10,781,405
-  ```
+    - Reth block_number = 17106222
+    Cycles: 176733255
+    Proving time: 32.024s
+    ETH gas: 10,781,405
+    ```
 
 3. Execute below to configure pico as a system service (assume `$Home=/home/ubuntu`, if not, please replace `/home/ubuntu` to your real one)
 
