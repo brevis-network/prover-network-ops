@@ -24,7 +24,53 @@ If you need to run the pico proving service as a system service, shut down the s
     cp ./pico_proving_service.db $HOME/.pico/pico_proving_service.db
     ```
 
-2. Execute below to configure pico as a system service (assume `$Home=/home/ubuntu`, if not, please replace `/home/ubuntu` to your real one)
+2. Select an appropriate `MAX_EMULATION_CYCLES` value for the input tasks supported by the prover. If unset, all proving tasks are supported.
+
+  For CPU machine, reference the benchmark result on `r7i.16xlarge`:
+  ```
+  - Fibonacci n = 1_000_000
+  Cycles: 12001916
+  Proving time: 64.313s
+
+
+  - Fibonacci n = 10_000_000
+  Cycles: 120001916
+  Proving time: 394.217s
+
+  - Reth block_number = 18884864
+  Cycles: 90169715
+  Proving time: 385.187s
+  ETH gas: 4,266,500
+
+  - Reth block_number = 17106222
+  Cycles: 176733255
+  Proving time: 733.075s
+  ETH gas: 10,781,405
+  ```
+
+  For GPU machine, reference the benchmark result on `8 X NVIDIA RTX 5090`:
+  ```
+  - Fibonacci n = 1_000_000
+  Cycles: 12001916
+  Proving time: 8.345s
+
+
+  - Fibonacci n = 10_000_000
+  Cycles: 120001916
+  Proving time: 15.025s
+
+  - Reth block_number = 18884864
+  Cycles: 90169715
+  Proving time: 22.03s
+  ETH gas: 4,266,500
+
+  - Reth block_number = 17106222
+  Cycles: 176733255
+  Proving time: 32.024s
+  ETH gas: 10,781,405
+  ```
+
+3. Execute below to configure pico as a system service (assume `$Home=/home/ubuntu`, if not, please replace `/home/ubuntu` to your real one)
 
     ```sh
     sudo mkdir -p /var/log/pico
@@ -47,7 +93,8 @@ If you need to run the pico proving service as a system service, shut down the s
     Environment=SPLIT_THRESHOLD=1048576
     Environment=PROVER_COUNT=32
     Environment=RUST_MIN_STACK=16777216
-    Environment=VK_VERIFICATION=false    
+    Environment=VK_VERIFICATION=false
+    # Environment=MAX_EMULATION_CYCLES=200000000 # optional
     ExecStart=/home/ubuntu/.pico/server
     StandardOutput=append:/var/log/pico/app.log
     StandardError=append:/var/log/pico/app.log
@@ -61,7 +108,7 @@ If you need to run the pico proving service as a system service, shut down the s
     EOF
     ```
 
-3. Create `/etc/logrotate.d/pico` and add the following:
+4. Create `/etc/logrotate.d/pico` and add the following:
 
     ```
     /var/log/pico/*.log {
@@ -73,7 +120,7 @@ If you need to run the pico proving service as a system service, shut down the s
     }
     ```
 
-4. Enable and start the service:
+5. Enable and start the service:
 
     ```sh
     ulimit -s unlimited
