@@ -237,7 +237,7 @@ If you need to run the pico proving service as a system service, shut down the s
     Update the below fields on demand in accordance with your requirement:
     | Field | Description |
     | ----- | ----------- |
-    | prover_gas_price | the price of a prove cycle. the bid fee to a request comes from `prove cycles * prover gas price`. the prove cycles of a request is auto calculated by pico service, while the prover gas price can be set in consideration of your business |
+    | prover_gas_price | the price of a prove cycle, with a default 1e9 denominator. the bid fee to a request comes from `prove cycles * prover gas price / 1e9`. the prove cycles of a request is auto calculated by pico service, while the prover gas price can be set in consideration of your business |
     | prove_min_duration | skip the requests that the duration from proving start time (right after reveal phase) to deadline is less than the `prove_min_duration` |
     | max_input_size | default 0 means no limit. if this value is non-zero, and request input is larger, skip request |
     | max_fee | skip the requests that the calculated bid fee exceeds the `max_fee` |
