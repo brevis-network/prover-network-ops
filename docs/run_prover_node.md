@@ -1,138 +1,141 @@
-# Bidder operation manual
+# Prover operation manual
 
-This manual describes the process of spinning up a bidder node of Brevis Proving Network. A bidder node needs to run a pico proving service to prove a request, and a bidder service to interact with the proving network.
+This manual describes the process of spinning up a prover node of Brevis Proving Network. A prover node needs to run a pico proving service to prove a request, and a bidder service to interact with the proving network.
 
 ## Up the pico proving service
 
-1. Select [Machine and OS](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#machine-and-os)
+Recommend running the pico proving service on GPU machine. However, for small proving tasks or play around, CPU machine is also an option. Below describes the steps of how to setup pico service on GPU machine and CPU machine respectively.
 
-2. Install required [Prerequisites](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#prerequisites)
+### GPU Machine
 
-3. Initialize [Local DB](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#local-db-initialization)
+1. Firstly please follow doc [multi-machine-setup.md](https://github.com/brevis-network/pico-ethproofs/blob/main/docs/multi-machine-setup.md) to prepare a GPU machine.
 
-4. Start [service](https://github.com/brevis-network/pico-proving-service?tab=readme-ov-file#service-start)
+2. Install [docker](https://docs.docker.com/engine/install) and then execute below to add current user to docker group 
+    ```
+    sudo groupadd docker 2>/dev/null || true && sudo usermod -aG docker $USER
+    ```
 
-### Run pico proving service as a system service
+    Ensure your system supports GPU passthrough with Docker. If you encounter this error:
 
-If you need to run the pico proving service as a system service, shut down the service in above step 3 and continue the follow steps:
+    ```bash
+    could not select device driver "" with capabilities: [[gpu]]
+    ```
 
-1. Under pico-proving-service folder (the repo you cloned), copy release binary and DB to a persistent folder
+    You need to install the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html), then restart Docker:
+
+    ```bash
+    sudo systemctl restart docker
+    ```
+
+3. From the `/home/ubuntu` directory, download the GPU version pico proving service docker image.
+    ```
+    curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/pico-proving-service-gpu.tar
+    ```
+
+4. Load the image into docker
+    ```
+    docker load -i pico-proving-service-gpu.tar
+    ```
+
+5. From the `/home/ubuntu` directory, clone the `pico-proving-service` repository, and checkout the `gpu-proving-dockerization` branch
 
     ```sh
-    mkdir $HOME/.pico
-    cp ./target/release/server $HOME/.pico/server
-    cp ./pico_proving_service.db $HOME/.pico/pico_proving_service.db
+    git clone https://github.com/brevis-network/pico-proving-service
+    cd pico-proving-service
+    git checkout gpu-proving-dockerization
     ```
 
-2. Select an appropriate `MAX_EMULATION_CYCLES` value for the input tasks supported by the prover. If unset, all proving tasks are supported.
+6. Enter the docker folder, copy `.env.example` to `.env`. Keep default value in the file unless you konw what you are doing.
 
-    For CPU machine, reference the benchmark result on `r7i.16xlarge`:
     ```
-    - Fibonacci n = 1_000_000
-    Cycles: 12001916
-    Proving time: 64.313s
-
-
-    - Fibonacci n = 10_000_000
-    Cycles: 120001916
-    Proving time: 394.217s
-
-    - Reth block_number = 18884864
-    Cycles: 90169715
-    Proving time: 385.187s
-    ETH gas: 4,266,500
-
-    - Reth block_number = 17106222
-    Cycles: 176733255
-    Proving time: 733.075s
-    ETH gas: 10,781,405
+    cd docker
+    cp .env.example .env
     ```
 
-    For GPU machine, reference the benchmark result on `8 X NVIDIA RTX 5090`:
+7. Execute below to prepare dependencies and up the containers
+
     ```
-    - Fibonacci n = 1_000_000
-    Cycles: 12001916
-    Proving time: 8.345s
-
-
-    - Fibonacci n = 10_000_000
-    Cycles: 120001916
-    Proving time: 15.025s
-
-    - Reth block_number = 18884864
-    Cycles: 90169715
-    Proving time: 22.03s
-    ETH gas: 4,266,500
-
-    - Reth block_number = 17106222
-    Cycles: 176733255
-    Proving time: 32.024s
-    ETH gas: 10,781,405
+    make download-gnark
+    make up
     ```
 
-3. Execute below to configure pico as a system service (assume `$Home=/home/ubuntu`, if not, please replace `/home/ubuntu` to your real one)
+    You now will be able to see two containers (```pico-proving-service``` and ```pico_gnark_server```) running by checking 
+    ```
+    docker ps
+    ```
+
+    Gnark server is to generate the final onchain verifiable proof. 
+
+8. Check `Makefile` to see other targets, such as down/restart/clean the containers. And also below two targets are for you to view the logs in the containers.
+
+    ```
+    make logs-server
+    make logs-gnark
+    ```
+
+### CPU Machine
+
+1. Recommend Machine and OS:
+
+    - AWS: `r7i.16xlarge` (64 CPUs)
+    - OS: `ubuntu-24.04-amd64-server`
+
+2. Install [docker](https://docs.docker.com/engine/install) and then execute below to add current user to docker group 
+    ```
+    sudo groupadd docker 2>/dev/null || true && sudo usermod -aG docker $USER
+    ```
+
+3. From the `/home/ubuntu` directory, download the GPU version pico proving service docker image.
+    ```
+    curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/pico-proving-service-cpu.tar
+    ```
+
+4. Load the image into docker
+    ```
+    docker load -i pico-proving-service-cpu.tar
+    ```
+
+5. From the `/home/ubuntu` directory, clone the `pico-proving-service` repository, and checkout the `cpu-proving-dockerization` branch
 
     ```sh
-    sudo mkdir -p /var/log/pico
-    sudo touch /var/log/pico/app.log
-
-    sudo tee /etc/systemd/system/pico.service << EOF
-    [Unit]
-    Description=Pico Proving Service
-    After=network-online.target
-
-    [Service]
-    WorkingDirectory=/home/ubuntu/.pico
-    Environment=DATABASE_URL=sqlite:///home/ubuntu/.pico/pico_proving_service.db?mode=rwc
-    Environment=RUST_LOG=debug
-    Environment=NUM_THREADS=8
-    Environment=RUSTFLAGS="-C target-cpu=native -C target-feature=+avx512f,+avx512ifma,+avx512vl"
-    Environment=JEMALLOC_SYS_WITH_MALLOC_CONF="retain:true,background_thread:true,metadata_thp:always,dirty_decay_ms:-1,muzzy_decay_ms:-1,abort_conf:true"
-    Environment=CHUNK_SIZE=2097152
-    Environment=CHUNK_BATCH_SIZE=32
-    Environment=SPLIT_THRESHOLD=1048576
-    Environment=PROVER_COUNT=32
-    Environment=RUST_MIN_STACK=16777216
-    Environment=VK_VERIFICATION=false
-    # Environment=MAX_EMULATION_CYCLES=200000000 # optional
-    ExecStart=/home/ubuntu/.pico/server
-    StandardOutput=append:/var/log/pico/app.log
-    StandardError=append:/var/log/pico/app.log
-    Restart=always
-    User=ubuntu
-    Group=ubuntu
-    RestartSec=3
-
-    [Install]
-    WantedBy=multi-user.target
-    EOF
+    git clone https://github.com/brevis-network/pico-proving-service
+    cd pico-proving-service
+    git checkout cpu-proving-dockerization
     ```
 
-4. Create `/etc/logrotate.d/pico` and add the following:
+6. Enter the docker folder, copy `.env.example` to `.env`. Keep default value in the file unless you konw what you are doing.
 
     ```
-    /var/log/pico/*.log {
-        compress
-        copytruncate
-        daily
-        maxsize 30M
-        rotate 30
-    }
+    cd docker
+    cp .env.example .env
     ```
 
-5. Enable and start the service:
+7. Execute below to prepare dependencies and up the containers
 
-    ```sh
-    ulimit -s unlimited
-    sudo systemctl enable pico
-    sudo systemctl start pico
+    ```
+    make download-gnark
+    make up
     ```
 
+    You now will be able to see two containers (```pico-proving-service``` and ```pico_gnark_server```) running by checking 
+    ```
+    docker ps
+    ```
+
+    Gnark server is to generate the final onchain verifiable proof. 
+
+8. Check `Makefile` to see other targets, such as down/restart/clean the containers. And also below two targets are for you to view the logs in the containers.
+
+    ```
+    make logs-server
+    make logs-gnark
+    ```
+    
 ## Up the bidder service
 
 ### Prepare EC2 machine and install dependencies 
 
-1. Start an EC2 machine with the Ubuntu 20.04 LTS image. Use the appropriate security groups and a keypair that you have access to.
+1. Start an EC2 machine with the Ubuntu image. Use the appropriate security groups and a keypair that you have access to.
 
 2. Install go (at least 1.16):
 
@@ -144,7 +147,7 @@ If you need to run the pico proving service as a system service, shut down the s
 3. Install CockroachDB:
 
     ```sh
-    curl -sL https://binaries.cockroachdb.com/cockroach-v21.1.3.linux-amd64.tgz | sudo tar -xz --strip 1 -C /usr/local/bin cockroach-v21.1.3.linux-amd64/cockroach
+    curl -sL https://binaries.cockroachdb.com/cockroach-v24.2.3.linux-amd64.tgz | sudo tar -xz --strip 1 -C /usr/local/bin cockroach-v24.2.3.linux-amd64/cockroach
     sudo chmod +x /usr/local/bin/cockroach
     ```
 
