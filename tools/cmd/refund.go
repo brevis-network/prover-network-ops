@@ -18,13 +18,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-const (
-	FlagReqId = "req-id"
-)
-
-var (
-	reqId string
-)
+type RefundConfig struct {
+	ReqIds []string `mapstructure:"req_ids"`
+}
 
 func RefundCmd() *cobra.Command {
 	cmd := &cobra.Command{
@@ -35,9 +31,7 @@ func RefundCmd() *cobra.Command {
 		},
 	}
 	cmd.Flags().StringVar(&config, FlagConfig, "", "config file path")
-	cmd.Flags().StringVar(&reqId, FlagReqId, "", "the req id")
 	cmd.MarkFlagRequired(FlagConfig)
-	cmd.MarkFlagRequired(FlagReqId)
 	return cmd
 }
 
@@ -67,26 +61,32 @@ func refund() error {
 	brevisMarket, err := bindings.NewBrevisMarket(common.HexToAddress(c.BrevisMarketAddr), ec)
 	chkErr(err, "NewBrevisMarket")
 
-	reqIdBytes := common.HexToHash(reqId)
-	tx, err := brevisMarket.Refund(auth, reqIdBytes)
-	if err != nil {
-		var jsonErr JsonError
-		errJson, _ := json.Marshal(err)
-		json.Unmarshal(errJson, &jsonErr)
-		if jsonErr.Data != "" {
-			errName, pErr := ParseSolCustomErrorName(bindings.BrevisMarketABI, common.FromHex(jsonErr.Data))
-			chkErr(pErr, "ParseSolCustomErrorName")
+	var refund RefundConfig
+	err = viper.UnmarshalKey("refund", &c)
+	chkErr(err, "UnmarshalKey")
 
-			log.Fatalf("Refund, err %s - %s", err.Error(), errName)
-		} else {
-			chkErr(err, "Refund")
+	for i, reqId := range refund.ReqIds {
+		reqIdBytes := common.HexToHash(reqId)
+		tx, err := brevisMarket.Refund(auth, reqIdBytes)
+		if err != nil {
+			var jsonErr JsonError
+			errJson, _ := json.Marshal(err)
+			json.Unmarshal(errJson, &jsonErr)
+			if jsonErr.Data != "" {
+				errName, pErr := ParseSolCustomErrorName(bindings.BrevisMarketABI, common.FromHex(jsonErr.Data))
+				chkErr(pErr, fmt.Sprintf("req %d: ParseSolCustomErrorName", i+1))
+
+				log.Fatalf("req %d: Refund, err %s - %s", i+1, err.Error(), errName)
+			} else {
+				chkErr(err, fmt.Sprintf("req %d: Refund", i+1))
+			}
 		}
-	}
-	log.Printf("Refund tx: %s", tx.Hash())
-	receipt, err := bind.WaitMined(context.Background(), ec, tx)
-	chkErr(err, "waitmined")
-	if receipt.Status != types.ReceiptStatusSuccessful {
-		log.Fatalln("Refund tx status is not success")
+		log.Printf("req %d: Refund tx: %s", i+1, tx.Hash())
+		receipt, err := bind.WaitMined(context.Background(), ec, tx)
+		chkErr(err, fmt.Sprintf("req %d: waitmined", i+1))
+		if receipt.Status != types.ReceiptStatusSuccessful {
+			log.Fatalf("req %d: Refund tx status is not success", i+1)
+		}
 	}
 
 	return nil

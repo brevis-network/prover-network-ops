@@ -280,23 +280,23 @@ You can also use below tool to do the job.
     go build
     ```
 
-2. Then update the `stake_config.toml` to fill in:
+2. Then update the `config.toml` to fill in:
 
-    | Field | Description |
-    | ----- | ----------- |
-    | prover_keystore | The path to your prover ethereum account keystore json |
-    | prover_passphrase | The passphrase to the prover keystore |
-    | submitter_keystore | Fill in if you need a differnt account as the submitter |
-    | submitter_passphrase | Fill in if you need a differnt account as the submitter |
-    | prover_name | a name to identify you or your organization |
-    | prover_icon | the url of the icon that represents you or your organization |
-    | staking_amt | A non-zero value if you want to stake more in addition to `minSelfStake` |
-    | commission_rate_bps | commission rate for delegators who add staking on you |
+    | Section | Field | Description |
+    | ------- | ----- | ----------- |
+    | chain | keystore | The path to your prover ethereum account keystore json |
+    | chain | passphrase | The passphrase to the prover keystore |
+    | stake | submitter_keystore | Fill in if you need a differnt account as the submitter |
+    | stake | submitter_passphrase | Fill in if you need a differnt account as the submitter |
+    | stake | prover_name | a name to identify you or your organization |
+    | stake | prover_icon | the url of the icon that represents you or your organization |
+    | stake | staking_amt | A non-zero value if you want to stake more in addition to `minSelfStake` |
+    | stake | commission_rate_bps | commission rate for delegators who add staking on you |
 
 3. Execute below command to send the requsets:
 
     ```
-    ./tools stake --config ./stake_config.toml --init true
+    ./tools stake --config ./config.toml --init true
     ```
 
 ### Run the bidder node

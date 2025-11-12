@@ -20,14 +20,6 @@ import (
 )
 
 type StakingConfig struct {
-	ChainID               uint64 `mapstructure:"chain_id"`
-	ChainRpc              string `mapstructure:"chain_rpc"`
-	BrevisMarketAddr      string `mapstructure:"brevis_market_addr"`
-	StakingTokenAddr      string `mapstructure:"staking_token_addr"`
-	StakingControllerAddr string `mapstructure:"staking_controller_addr"`
-
-	ProverKeystore      string `mapstructure:"prover_keystore"`
-	ProverPassphrase    string `mapstructure:"prover_passphrase"`
 	SubmitterKeystore   string `mapstructure:"submitter_keystore"`
 	SubmitterPassphrase string `mapstructure:"submitter_passphrase"`
 	ProverName          string `mapstructure:"prover_name"`
@@ -68,8 +60,8 @@ func stake() error {
 	err := viper.ReadInConfig()
 	chkErr(err, "ReadInConfig")
 
-	var c StakingConfig
-	err = viper.UnmarshalKey("stake", &c)
+	var c ChainConfig
+	err = viper.UnmarshalKey("chain", &c)
 	chkErr(err, "UnmarshalKey")
 
 	ec, err := ethclient.Dial(c.ChainRpc)
@@ -80,7 +72,7 @@ func stake() error {
 		return fmt.Errorf("chainid mismatch! cfg has %d but onchain has %d", c.ChainID, chid.Uint64())
 	}
 
-	proverAuth, prover, err := CreateTransactOpts(c.ProverKeystore, c.ProverPassphrase, chid)
+	proverAuth, prover, err := CreateTransactOpts(c.Keystore, c.Passphrase, chid)
 	chkErr(err, "prover CreateTransactOpts")
 
 	stakingToken, err := bindings.NewIERC20(common.HexToAddress(c.StakingTokenAddr), ec)
@@ -88,7 +80,11 @@ func stake() error {
 	stakingController, err := bindings.NewIStakingController(common.HexToAddress(c.StakingControllerAddr), ec)
 	chkErr(err, "NewIStakingController")
 
-	stakingAmt, success := big.NewInt(0).SetString(c.StakingAmt, 0)
+	var s StakingConfig
+	err = viper.UnmarshalKey("stake", &s)
+	chkErr(err, "UnmarshalKey")
+
+	stakingAmt, success := big.NewInt(0).SetString(s.StakingAmt, 0)
 	if !success {
 		return fmt.Errorf("staking_amt is not a valid number")
 	}
@@ -97,15 +93,15 @@ func stake() error {
 	var submitterAuth *bind.TransactOpts
 	var submitter common.Address
 	var brevisMarket *bindings.BrevisMarket
-	proverName := strings.TrimSpace(c.ProverName)
-	proverIcon := strings.TrimSpace(c.ProverIcon)
+	proverName := strings.TrimSpace(s.ProverName)
+	proverIcon := strings.TrimSpace(s.ProverIcon)
 	if initialize {
 		if proverName == "" || proverIcon == "" {
 			log.Fatalln("please fill in both prover_name and prover_icon")
 		}
 
-		if c.SubmitterKeystore != "" {
-			submitterAuth, submitter, err = CreateTransactOpts(c.SubmitterKeystore, c.SubmitterPassphrase, chid)
+		if s.SubmitterKeystore != "" {
+			submitterAuth, submitter, err = CreateTransactOpts(s.SubmitterKeystore, s.SubmitterPassphrase, chid)
 			chkErr(err, "submitter CreateTransactOpts")
 		}
 		brevisMarket, err = bindings.NewBrevisMarket(common.HexToAddress(c.BrevisMarketAddr), ec)
@@ -126,11 +122,11 @@ func stake() error {
 		}
 
 		if initialize {
-			if c.CommissionRateBps > 10000 {
+			if s.CommissionRateBps > 10000 {
 				return fmt.Errorf("commission_rate_bps should not exceed 10000")
 			}
 
-			tx, err := stakingController.InitializeProver(proverAuth, c.CommissionRateBps)
+			tx, err := stakingController.InitializeProver(proverAuth, s.CommissionRateBps)
 			chkErr(err, "InitializeProver")
 			log.Printf("InitializeProver tx: %s", tx.Hash())
 			receipt, err := bind.WaitMined(context.Background(), ec, tx)

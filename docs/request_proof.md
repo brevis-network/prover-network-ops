@@ -84,7 +84,7 @@ Note, Before initiate a proof request, you need to use [explorer StakingToken](h
     go build
     ```
 
-2. Then update the `req_config.toml` to fill in:
+2. Then update the `config.toml` to fill in below fields in `[chain]` section:
 
     | Field | Description |
     | ----- | ----------- |
@@ -96,7 +96,7 @@ Update the param values in `[[request]]` section accordingly. Provide multile `[
 3. Execute below command to send the requsets:
 
     ```
-    ./tools request-proof --config ./req_config.toml
+    ./tools request-proof --config ./config.toml
     ```
 
 ## Sample Apps for Testing

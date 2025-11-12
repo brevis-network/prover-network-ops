@@ -1,13 +1,18 @@
+# common settings for all commands
 [chain]
 chain_id=421614
 chain_rpc="https://arbitrum-sepolia-rpc.publicnode.com"
 brevis_market_addr="0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa"
 staking_token_addr="0x46b07178907650afc855763a8f83e65afec24074"
+staking_controller_addr="0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069"
+
+## user or prover keystore
 keystore=""
 passphrase=""
 
+# for request-proof command, sample data as below
 [[request]]
-nonce=10
+nonce=4
 vk="0x00f3b7c002bb8248c7e64b00d2e2c09b4f94e3c7a8097bc2c72076076960d62c"
 public_value_digest="0x03b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 img_url="https://github.com/hezhihua81/test/raw/refs/heads/main/fib-elf"
@@ -16,3 +21,17 @@ input_data="0x"
 max_fee=10000000000
 min_stake=1
 deadline=1763784173
+
+# for refund command
+[refund]
+req_ids = []
+
+# for stake command
+[stake]
+submitter_keystore=""
+submitter_passphrase=""
+prover_name=""
+prover_icon=""
+
+staking_amt = "0"
+commission_rate_bps = "600"

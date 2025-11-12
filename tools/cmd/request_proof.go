@@ -20,16 +20,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-type ChainConfig struct {
-	ChainID          uint64 `mapstructure:"chain_id"`
-	ChainRpc         string `mapstructure:"chain_rpc"`
-	BrevisMarketAddr string `mapstructure:"brevis_market_addr"`
-	StakingTokenAddr string `mapstructure:"staking_token_addr"`
-
-	Keystore   string `mapstructure:"keystore"`
-	Passphrase string `mapstructure:"passphrase"`
-}
-
 type Request struct {
 	Nonce              uint64 `mapstructure:"nonce"`
 	Vk                 string `mapstructure:"vk"`
