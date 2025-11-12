@@ -2,6 +2,40 @@
 
 ## Write application and generate inputs
 
+### Install Pico CLI
+
+Install Pico CLI `v1.1.8`.
+
+#### Option 1: Cargo install
+
+Install pico-cli from the GitHub repository:
+```
+cargo +nightly-2025-08-04 install --git https://github.com/brevis-network/pico --tag v1.1.8 pico-cli
+```
+
+Check the version:
+```
+cargo pico --version
+```
+
+#### Option 2: Local install
+
+Git clone Pico-VM repository:
+```
+git clone https://github.com/brevis-network/pico
+```
+Switch to tag `v1.1.8`:
+```
+cd pico
+git checkout v1.1.8
+```
+
+Install from the local path:
+```
+cd sdk/cli
+cargo install --locked --force --path .
+```
+
 ### Build application to generate ELF
 
 Reference the [Pico document](https://pico-docs.brevis.network/writing-apps/programs) to write a application program. Then use `cargo pico build` to compile and generate the ELF. 
