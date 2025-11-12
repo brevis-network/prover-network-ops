@@ -73,10 +73,14 @@ Recommend running the pico proving service on GPU machine. However, for small pr
 
 ### CPU Machine
 
-1. Recommend Machine and OS:
+1. Prepare the CPU machine:
 
     - AWS: `r7i.16xlarge` (64 CPUs)
     - OS: `ubuntu-24.04-amd64-server`
+    - Install basic tools:
+        - Install [Rust](https://www.rust-lang.org/tools/install): should reopen the console terminal to enable rust commands after first installation
+        - Install Development Tools: `sudo apt-get install -y build-essential cmake git pkg-config libssl-dev`
+        - Install [sqlx-cli](https://github.com/launchbadge/sqlx/tree/main/sqlx-cli) (`cargo install sqlx-cli`)  
 
 2. Install [docker](https://docs.docker.com/engine/install) and then execute below to add current user to docker group 
     ```
@@ -126,7 +130,7 @@ Recommend running the pico proving service on GPU machine. However, for small pr
     make logs-server
     make logs-gnark
     ```
-    
+
 ## Up the bidder service
 
 ### Prepare EC2 machine and install dependencies 
