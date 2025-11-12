@@ -87,7 +87,7 @@ Recommend running the pico proving service on GPU machine. However, for small pr
     sudo groupadd docker 2>/dev/null || true && sudo usermod -aG docker $USER
     ```
 
-3. From the `/home/ubuntu` directory, download the GPU version pico proving service docker image.
+3. From the `/home/ubuntu` directory, download the CPU version pico proving service docker image.
     ```
     curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/pico-proving-service-cpu.tar
     ```
@@ -104,7 +104,7 @@ Recommend running the pico proving service on GPU machine. However, for small pr
     cd pico-proving-service/docker/cpu
     ```
 
-6. Copy `.env.example` to `.env`. Keep default value in the file unless you konw what you are doing.
+6. Copy `.env.example` to `.env`. Keep default value in the file unless you know what you are doing.
 
     ```
     cp .env.example .env
@@ -219,11 +219,11 @@ Recommend running the pico proving service on GPU machine. However, for small pr
     cd ~
     ```
 
-4. From the `/home/ubuntu` directory, clone the `prover-network-bidder-ops` repository, then copy the config files
+4. From the `/home/ubuntu` directory, clone the `prover-network-ops` repository, then copy the config files
 
     ```sh
-    git clone https://github.com/brevis-network/prover-network-bidder-ops
-    cp -a prover-network-bidder-ops/node-configs ~/.bidder
+    git clone https://github.com/brevis-network/prover-network-ops
+    cp -a prover-network-ops/node-configs ~/.bidder
     ```
 
 5. Make sure the fields in `~/.bidder/config.toml` have the correct values:
