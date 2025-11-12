@@ -37,18 +37,16 @@ Recommend running the pico proving service on GPU machine. However, for small pr
     docker load -i pico-proving-service-gpu.tar
     ```
 
-5. From the `/home/ubuntu` directory, clone the `pico-proving-service` repository, and checkout the `gpu-proving-dockerization` branch
+5. From the `/home/ubuntu` directory, clone the `pico-proving-service` repository, and enter GPU Docker directory:
 
     ```sh
     git clone https://github.com/brevis-network/pico-proving-service
-    cd pico-proving-service
-    git checkout gpu-proving-dockerization
+    cd pico-proving-service/docker/gpu
     ```
 
-6. Enter the docker folder, copy `.env.example` to `.env`. Keep default value in the file unless you konw what you are doing.
+6. Copy `.env.example` to `.env`. Keep default value in the file unless you konw what you are doing.
 
     ```
-    cd docker
     cp .env.example .env
     ```
 
@@ -95,18 +93,16 @@ Recommend running the pico proving service on GPU machine. However, for small pr
     docker load -i pico-proving-service-cpu.tar
     ```
 
-5. From the `/home/ubuntu` directory, clone the `pico-proving-service` repository, and checkout the `cpu-proving-dockerization` branch
+5. From the `/home/ubuntu` directory, clone the `pico-proving-service` repository, and enter CPU Docker directory:
 
     ```sh
     git clone https://github.com/brevis-network/pico-proving-service
-    cd pico-proving-service
-    git checkout cpu-proving-dockerization
+    cd pico-proving-service/docker/cpu
     ```
 
-6. Enter the docker folder, copy `.env.example` to `.env`. Keep default value in the file unless you konw what you are doing.
+6. Copy `.env.example` to `.env`. Keep default value in the file unless you konw what you are doing.
 
     ```
-    cd docker
     cp .env.example .env
     ```
 
