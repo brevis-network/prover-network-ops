@@ -122,6 +122,7 @@ func stake() error {
 
 		if initialize {
 			tx, err := stakingController.InitializeProver(proverAuth, 10000) /*defaults to 100% commission for now*/
+			checkBrevisCustomError(err, "InitializeProver", bindings.IStakingControllerABI)
 			chkErr(err, "InitializeProver")
 			log.Printf("InitializeProver tx: %s", tx.Hash())
 			receipt, err := bind.WaitMined(context.Background(), ec, tx)
@@ -131,7 +132,7 @@ func stake() error {
 			}
 
 			tx, err = stakingController.SetProverProfile(proverAuth, proverName, proverIcon)
-			chkErr(err, "SetProverProfile")
+			checkBrevisCustomError(err, "SetProverProfile", bindings.IStakingControllerABI)
 			log.Printf("SetProverProfile tx: %s", tx.Hash())
 			receipt, err = bind.WaitMined(context.Background(), ec, tx)
 			chkErr(err, "WaitMined")
@@ -142,7 +143,7 @@ func stake() error {
 
 		if stakingAmt.Sign() == 1 {
 			tx, err := stakingController.Stake(proverAuth, prover, stakingAmt)
-			chkErr(err, "Stake")
+			checkBrevisCustomError(err, "Stake", bindings.IStakingControllerABI)
 			log.Printf("Stake tx: %s", tx.Hash())
 			receipt, err := bind.WaitMined(context.Background(), ec, tx)
 			chkErr(err, "WaitMined")
@@ -153,7 +154,7 @@ func stake() error {
 
 		if initialize && prover != submitter && submitter != ZeroAddr {
 			tx, err := brevisMarket.SetSubmitterConsent(submitterAuth, prover)
-			chkErr(err, "SetSubmitterConsent")
+			checkBrevisCustomError(err, "SetSubmitterConsent", bindings.IBrevisMarketABI)
 			log.Printf("SetSubmitterConsent tx: %s", tx.Hash())
 			receipt, err := bind.WaitMined(context.Background(), ec, tx)
 			chkErr(err, "WaitMined")
@@ -162,7 +163,7 @@ func stake() error {
 			}
 
 			tx, err = brevisMarket.RegisterSubmitter(proverAuth, submitter)
-			chkErr(err, "RegisterSubmitter")
+			checkBrevisCustomError(err, "RegisterSubmitter", bindings.IBrevisMarketABI)
 			log.Printf("RegisterSubmitter tx: %s", tx.Hash())
 			receipt, err = bind.WaitMined(context.Background(), ec, tx)
 			chkErr(err, "WaitMined")

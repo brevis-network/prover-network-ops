@@ -5,7 +5,6 @@ package cmd
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"math/big"
@@ -125,20 +124,7 @@ func requestProof() error {
 				Deadline: r.Deadline,
 			},
 		})
-
-		if err != nil {
-			var jsonErr JsonError
-			errJson, _ := json.Marshal(err)
-			json.Unmarshal(errJson, &jsonErr)
-			if jsonErr.Data != "" && jsonErr.Data != "0x" {
-				errName, pErr := ParseSolCustomErrorName(bindings.BrevisMarketABI, common.FromHex(jsonErr.Data))
-				chkErr(pErr, fmt.Sprintf("req %d: ParseSolCustomErrorName", i+1))
-
-				log.Fatalf("req %d: RequestProof, err %s - %s", i+1, err.Error(), errName)
-			} else {
-				chkErr(err, fmt.Sprintf("req %d: RequestProof", i+1))
-			}
-		}
+		checkBrevisCustomError(err, fmt.Sprintf("req %d: RequestProof", i+1), bindings.IBrevisMarketABI)
 		log.Printf("req %d: RequestProof tx: %s", i+1, tx.Hash())
 		receipt, err = bind.WaitMined(context.Background(), ec, tx)
 		chkErr(err, fmt.Sprintf("req %d: waitmined", i+1))

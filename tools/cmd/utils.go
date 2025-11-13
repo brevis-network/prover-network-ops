@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"math/big"
@@ -83,4 +84,20 @@ func ParseSolCustomErrorName(contractABI string, errData []byte) (string, error)
 	}
 
 	return "", nil
+}
+
+func checkBrevisCustomError(err error, logmsg string, contractABI string) {
+	if err != nil {
+		var jsonErr JsonError
+		errJson, _ := json.Marshal(err)
+		json.Unmarshal(errJson, &jsonErr)
+		if jsonErr.Data != "" && jsonErr.Data != "0x" {
+			errName, pErr := ParseSolCustomErrorName(contractABI, common.FromHex(jsonErr.Data))
+			chkErr(pErr, "ParseSolCustomErrorName")
+
+			log.Fatalf("%s, err %s - %s", logmsg, err.Error(), errName)
+		} else {
+			chkErr(err, logmsg)
+		}
+	}
 }

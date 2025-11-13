@@ -5,7 +5,6 @@ package cmd
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"tools/bindings"
@@ -90,19 +89,7 @@ func refund() error {
 	}
 
 	tx, err := brevisMarket.BatchRefund(auth, toRefundReqIds)
-	if err != nil {
-		var jsonErr JsonError
-		errJson, _ := json.Marshal(err)
-		json.Unmarshal(errJson, &jsonErr)
-		if jsonErr.Data != "" && jsonErr.Data != "0x" {
-			errName, pErr := ParseSolCustomErrorName(bindings.BrevisMarketABI, common.FromHex(jsonErr.Data))
-			chkErr(pErr, "ParseSolCustomErrorName")
-
-			log.Fatalf("BatchRefund, err %s - %s", err.Error(), errName)
-		} else {
-			chkErr(err, "BatchRefund")
-		}
-	}
+	checkBrevisCustomError(err, "BatchRefund", bindings.IBrevisMarketABI)
 	log.Printf("BatchRefund tx: %s", tx.Hash())
 	receipt, err := bind.WaitMined(context.Background(), ec, tx)
 	chkErr(err, "Waitmined")
