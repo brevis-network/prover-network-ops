@@ -27,11 +27,18 @@ deadline=1763784173
 [refund]
 req_ids = []
 
-# for stake command
-[stake]
+# for init-prover command
+[init_prover]
 submitter_keystore=""
 submitter_passphrase=""
 prover_name=""
 prover_icon=""
 
-staking_amt = "0"
+# for stake command
+[stake]
+stake_to_prover=""
+stake_amt="1000000"
+
+# for unstake command
+[unstake]
+unstake_from_prover=""
