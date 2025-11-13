@@ -79,7 +79,7 @@ func refund() error {
 			toRefundReqIds = append(toRefundReqIds, common.HexToHash(reqId))
 		}
 	} else {
-		marketViewer, err := bindings.NewMarketViewer(common.HexToAddress(c.BrevisMarketAddr), ec)
+		marketViewer, err := bindings.NewMarketViewer(common.HexToAddress(c.MarketViewerAddr), ec)
 		chkErr(err, "NewMarketViewer")
 		toRefundReqIds, err = marketViewer.GetSenderRefundableRequests(nil, sender)
 		chkErr(err, "GetSenderRefundableRequests")
