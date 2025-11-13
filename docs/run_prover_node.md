@@ -44,7 +44,7 @@ Recommend running the pico proving service on GPU machine. However, for small pr
     cd pico-proving-service/docker/gpu
     ```
 
-6. Copy `.env.example` to `.env`. Keep default value in the file unless you konw what you are doing.
+6. Copy `.env.example` to `.env`. Keep default value in the file unless you know what you are doing.
 
     ```
     cp .env.example .env
