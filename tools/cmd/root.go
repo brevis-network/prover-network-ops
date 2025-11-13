@@ -15,10 +15,19 @@ type ChainConfig struct {
 	BrevisMarketAddr      string `mapstructure:"brevis_market_addr"`
 	StakingTokenAddr      string `mapstructure:"staking_token_addr"`
 	StakingControllerAddr string `mapstructure:"staking_controller_addr"`
+	MarketViewerAddr      string `mapstructure:"market_viewer_addr"`
 
 	Keystore   string `mapstructure:"keystore"`
 	Passphrase string `mapstructure:"passphrase"`
 }
+
+const (
+	FlagConfig = "config"
+)
+
+var (
+	config string
+)
 
 var rootCmd = &cobra.Command{
 	Use:   "tools",

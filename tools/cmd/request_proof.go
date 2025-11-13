@@ -34,14 +34,6 @@ type Request struct {
 
 type Requests []*Request
 
-const (
-	FlagConfig = "config"
-)
-
-var (
-	config string
-)
-
 func RequestProofCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "request-proof",

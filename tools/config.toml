@@ -5,6 +5,7 @@ chain_rpc="https://arbitrum-sepolia-rpc.publicnode.com"
 brevis_market_addr="0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa"
 staking_token_addr="0x46b07178907650afc855763a8f83e65afec24074"
 staking_controller_addr="0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069"
+market_viewer_addr="0x00d24460e8803065BcbBb872dBb53aa6C12E6B94"
 
 ## user or prover keystore
 keystore=""
