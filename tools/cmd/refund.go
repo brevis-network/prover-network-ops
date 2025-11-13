@@ -94,7 +94,7 @@ func refund() error {
 		var jsonErr JsonError
 		errJson, _ := json.Marshal(err)
 		json.Unmarshal(errJson, &jsonErr)
-		if jsonErr.Data != "" {
+		if jsonErr.Data != "" && jsonErr.Data != "0x" {
 			errName, pErr := ParseSolCustomErrorName(bindings.BrevisMarketABI, common.FromHex(jsonErr.Data))
 			chkErr(pErr, "ParseSolCustomErrorName")
 
