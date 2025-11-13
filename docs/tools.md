@@ -1,16 +1,16 @@
 # Tools instruction
 
 Brevis provides tool utilities to facilitate the onchain operations. In Details, for a prover to 
-    - [Init prover](#init-prover)
-    - [Claim commission](#claim-commission)
-    - [Stake more](#stake)
-    - [Unstake](#unstake)
+- [Init prover](#init-prover)
+- [Claim commission](#claim-commission)
+- [Stake more](#stake)
+- [Unstake](#unstake)
 
 and for a user to
-    - [Request proofs](#request-proofs)
-    - [Refund not fulfilled requests](#refund-not-fulfilled-requests)
-    - [Stake to a prover](#stake)
-    - [Unstake from a prover](#unstake)
+- [Request proofs](#request-proofs)
+- [Refund not fulfilled requests](#refund-not-fulfilled-requests)
+- [Stake to a prover](#stake)
+- [Unstake from a prover](#unstake)
 
 ## Init prover
 
