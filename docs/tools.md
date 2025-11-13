@@ -27,8 +27,8 @@ and for a user to
     | ------- | ----- | ----------- |
     | chain | keystore | The path to your prover ethereum account keystore json |
     | chain | passphrase | The passphrase to the prover keystore |
-    | init_prover | submitter_keystore | Fill in if you need a differnt account as the submitter |
-    | init_prover | submitter_passphrase | Fill in if you need a differnt account as the submitter |
+    | init_prover | submitter_keystore | Fill in if you need a different account as the submitter |
+    | init_prover | submitter_passphrase | Fill in if you need a different account as the submitter |
     | init_prover | prover_name | a name to identify you or your organization |
     | init_prover | prover_icon | the url of the icon that represents you or your organization |
 

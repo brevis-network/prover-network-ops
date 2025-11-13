@@ -73,7 +73,11 @@ RUST_LOG=debug VK_VERIFICATION=true cargo run -r --bin gen-common-pv-digest -- -
 
 ## Send a proof request
 
-Use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to request proof. Follow below instructions to obtain each param of a request.
+Recommend using [the tool utility](./tools.md#request-proofs) to send one or multiple proof requests. For testnet, please use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074) firstly. 
+
+Below is also a way to send proof request using chain explorer interactively.
+
+Before initiating a proof request using chain explorer, you need to use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve `BrevisMarket` 0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa to spend your staking token. Then Use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to request a proof. Follow below instructions to obtain each param of a request.
 
 1. `nonce`
 
@@ -106,10 +110,6 @@ In tuple [`maxFee`, `minStake`, `deadline`].
 `maxFee`, the max fee in staking token (for testnet, it's [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074)) you wish to pay for the request.
 `minStake`, only the provers that stake more than the value can bid for the request.
 `deadline`, the proof should be submitted no later than (in unix seconds), note that the maximum deadline duration from request time can not exceed 30 days.
-
-Note, Before initiate a proof request, you need to use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to approve `BrevisMarket` 0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa to spend your staking token. Please use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074).
-
-You can also use [the tool](./tools.md#request-proofs) to do the job.
 
 ## Sample Apps for Testing
 
