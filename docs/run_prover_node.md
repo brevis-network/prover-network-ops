@@ -259,7 +259,7 @@ Please operate below steps using your `Prover` account.
 
 2. Use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to `approve` StakingController 0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069 to spend your staking token
 
-3. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `initializeProver` with a default commission rate. It will transfer a configured minimum staking amount from your wallet to `StakingController`
+3. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `initializeProver` with a default commission rate (suggest using 10000 bps for now). The transaction will also transfer a configured minimum staking amount from your wallet to `StakingController`
 
 4. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `setProverProfile`
 
@@ -291,7 +291,6 @@ You can also use below tool to do the job.
     | stake | prover_name | a name to identify you or your organization |
     | stake | prover_icon | the url of the icon that represents you or your organization |
     | stake | staking_amt | A non-zero value if you want to stake more in addition to `minSelfStake` |
-    | stake | commission_rate_bps | commission rate for delegators who add staking on you |
 
 3. Execute below command to send the requsets:
 

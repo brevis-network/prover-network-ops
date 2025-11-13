@@ -25,8 +25,7 @@ type StakingConfig struct {
 	ProverName          string `mapstructure:"prover_name"`
 	ProverIcon          string `mapstructure:"prover_icon"`
 
-	StakingAmt        string `mapstructure:"staking_amt"`
-	CommissionRateBps uint64 `mapstructure:"commission_rate_bps"`
+	StakingAmt string `mapstructure:"staking_amt"`
 }
 
 const (
@@ -122,11 +121,7 @@ func stake() error {
 		}
 
 		if initialize {
-			if s.CommissionRateBps > 10000 {
-				return fmt.Errorf("commission_rate_bps should not exceed 10000")
-			}
-
-			tx, err := stakingController.InitializeProver(proverAuth, s.CommissionRateBps)
+			tx, err := stakingController.InitializeProver(proverAuth, 10000) /*defaults to 100% commission for now*/
 			chkErr(err, "InitializeProver")
 			log.Printf("InitializeProver tx: %s", tx.Hash())
 			receipt, err := bind.WaitMined(context.Background(), ec, tx)
