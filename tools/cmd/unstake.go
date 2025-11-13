@@ -87,10 +87,24 @@ func unstake() error {
 			log.Fatalf("no shares staked: prover %s, staker %s", s.Prover, sender.Hex())
 		}
 
-		tx, err := stakingController.RequestUnstake(auth, common.HexToAddress(s.Prover), shares)
+		vaultAddr, err := stakingController.GetProverVault(nil, common.HexToAddress(s.Prover))
+		chkErr(err, "GetProverVault")
+		vault, err := bindings.NewIERC20(vaultAddr, ec)
+		chkErr(err, "NewIERC20")
+
+		tx, err := vault.Approve(auth, common.HexToAddress(c.StakingControllerAddr), shares)
+		chkErr(err, "Approve")
+		log.Printf("approve tx: %s", tx.Hash())
+		receipt, err := bind.WaitMined(context.Background(), ec, tx)
+		chkErr(err, "WaitMined")
+		if receipt.Status != types.ReceiptStatusSuccessful {
+			log.Fatalln("Approve tx status is not success")
+		}
+
+		tx, err = stakingController.RequestUnstake(auth, common.HexToAddress(s.Prover), shares)
 		checkBrevisCustomError(err, "RequestUnstake", bindings.IStakingControllerABI)
 		log.Printf("RequestUnstake tx: %s", tx.Hash())
-		receipt, err := bind.WaitMined(context.Background(), ec, tx)
+		receipt, err = bind.WaitMined(context.Background(), ec, tx)
 		chkErr(err, "WaitMined")
 		if receipt.Status != types.ReceiptStatusSuccessful {
 			log.Fatalln("RequestUnstake tx status is not success")
