@@ -251,21 +251,21 @@ Recommend running the pico proving service on GPU machine. However, for small pr
 
 ### Staking as a bidder
 
-To join the proving network as a bidder, you must init yourself as a prover in [StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract). 
+To join the proving network as a bidder, you must init yourself as a prover in [StakingController](https://basescan.org/address/0x435f3Ee9673d6a1c73AddD8F5B6bF643E882E0B3#writeProxyContract). USDC is used as staking token.
 
-Recommend using [the tool utility](./tools.md#init-prover) to do the job. For testnet, please use [explorer Faucet](https://sepolia.arbiscan.io/address/0x9C4e124141A599482b08492a03c49e26CCA21bAA#writeContract) to get `drip` some [testnet staking token](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074) firstly. 
+Recommend using [the tool utility](./tools.md#init-prover) to do the job. 
 
 Below is also a way using chain explorer interactively. Please operate below steps using your `Prover` account.
 
-1. Use [explorer StakingToken](https://sepolia.arbiscan.io/address/0x46b07178907650afc855763a8f83e65afec24074#writeContract) to `approve` StakingController 0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069 to spend your staking token
+1. Use [explorer StakingToken](https://basescan.org/token/0x833589fcd6edb6e08f4c7c32d4f71b54bda02913#writeProxyContract) to `approve` StakingController 0x435f3Ee9673d6a1c73AddD8F5B6bF643E882E0B3 to spend your staking token
 
-2. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `initializeProver` with a default commission rate (suggest using 10000 bps for now). The transaction will also transfer a configured minimum staking amount from your wallet to `StakingController`
+2. Use [explorer StakingController](https://basescan.org/address/0x435f3Ee9673d6a1c73AddD8F5B6bF643E882E0B3#writeProxyContract) to `initializeProver` with a default commission rate (suggest using 10000 bps for now). The transaction will also transfer a configured minimum staking amount from your wallet to `StakingController`
 
-3. Use [explorer StakingController](https://sepolia.arbiscan.io/address/0x4eE8ec243dceC0a6A5676470d4dBfA71CE96F069#writeProxyContract) to `setProverProfile`
+3. Use [explorer StakingController](https://basescan.org/address/0x435f3Ee9673d6a1c73AddD8F5B6bF643E882E0B3#writeProxyContract) to `setProverProfile`
 
 4. If you use different account for submitter, please:
- * Firstly as a submitter, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to `setSubmitterConsent` (submitter grants consent).
- * And then as a prover, use [explorer BrevisMarket](https://sepolia.arbiscan.io/address/0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa#writeProxyContract) to `registerSubmitter` (prover registers the submitter).
+ * Firstly as a submitter, use [explorer BrevisMarket](https://basescan.org/token/0x64A364888eeafc0F72e7788DD2fBEc9a456b305e#writeProxyContract) to `setSubmitterConsent` (submitter grants consent).
+ * And then as a prover, use [explorer BrevisMarket](https://basescan.org/token/0x64A364888eeafc0F72e7788DD2fBEc9a456b305e#writeProxyContract) to `registerSubmitter` (prover registers the submitter).
 
 ### Run the bidder node
 

@@ -3,19 +3,19 @@ db_url="localhost:26257/bidder"
 prover_url=""
 
 [chain]
-chain_id=421614
-chain_rpc="https://arbitrum-sepolia-rpc.publicnode.com"
-blk_interval=1
+chain_id=8453
+chain_rpc="https://developer-access-mainnet.base.org"
+blk_interval=2
 blk_delay=1
 max_blk_delta=5000
 forward_blk_delay=500
-brevis_market_addr="0x9c19d2De433217FB4b41a5D8d35aB8eE4A7b0DFa"
+brevis_market_addr="0x64A364888eeafc0F72e7788DD2fBEc9a456b305e"
 prover_eth_addr=""
 submitter_keystore=""
 submitter_passphrase=""
 
 [rule]
-max_fee="1000000000000000000000000000000000"
+max_fee="10000000000"
 max_input_size=0
 prover_gas_price="1"
 prove_min_duration=3600
