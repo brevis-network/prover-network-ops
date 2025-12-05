@@ -39,7 +39,8 @@ cargo install --locked --force --path .
 ### Build application to generate ELF
 
 Reference the [Pico document](https://pico-docs.brevis.network/writing-apps/programs) to write a application program. Then use `cargo pico build` to compile and generate the ELF. 
-Reference [Pico Fibonacci](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/fibonacci) as an example.
+
+Reference [Pico Fibonacci](https://github.com/brevis-network/pico/tree/main/perf/bench_apps/fibonacci) or the [example EVM Pico Apps repo](https://github.com/brevis-network/evm-pico-apps) for examples.
 
 ### Generate VK digest
 
