@@ -45,7 +45,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    docker ps
    ```
    You should see `pico-proving-service` and `pico_gnark_server`. The Gnark server produces the final on-chain verifiable proof.
-9. Review the `Makefile` for other targets (stop/restart/clean). For logs, run:
+9. Review the `Makefile` for other targets (down/restart/clean). For logs, run:
    ```bash
    make logs-server
    make logs-gnark
