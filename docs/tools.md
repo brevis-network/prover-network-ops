@@ -1,12 +1,12 @@
 # Tools instruction
 
-Brevis provides tool utilities to facilitate the onchain operations. In Details, for a prover to 
+Brevis provides CLI utilities that streamline on-chain operations for the mainnet beta launch. Provers can:
 - [Init prover](#init-prover)
 - [Claim commission](#claim-commission)
 - [Stake more](#stake)
 - [Unstake](#unstake)
 
-and for a user to
+Users can:
 - [Request proofs](#request-proofs)
 - [Refund not fulfilled requests](#refund-not-fulfilled-requests)
 - [Stake to a prover](#stake)
@@ -14,25 +14,25 @@ and for a user to
 
 ## Init prover
 
-1. Under `tools` folder in this repo, run `go build` to build the tool.
+1. From the `tools` directory in this repo, build the binary:
 
     ```
     cd tools
     go build
     ```
 
-2. Then update the `config.toml` to fill in:
+2. Update `config.toml` with the following fields:
 
     | Section | Field | Description |
     | ------- | ----- | ----------- |
-    | chain | keystore | The path to your prover ethereum account keystore json |
-    | chain | passphrase | The passphrase to the prover keystore |
-    | init_prover | submitter_keystore | Fill in if you need a different account as the submitter |
-    | init_prover | submitter_passphrase | Fill in if you need a different account as the submitter |
-    | init_prover | prover_name | a name to identify you or your organization |
-    | init_prover | prover_icon | the url of the icon that represents you or your organization |
+    | chain | keystore | Path to your prover Ethereum account keystore JSON |
+    | chain | passphrase | Passphrase for the prover keystore |
+    | init_prover | submitter_keystore | (Optional) Submitter keystore if using a different account |
+    | init_prover | submitter_passphrase | (Optional) Passphrase for the submitter account |
+    | init_prover | prover_name | Name that identifies you or your organization |
+    | init_prover | prover_icon | URL of the icon that represents you or your organization |
 
-3. Execute below command:
+3. Run:
 
     ```
     ./tools init-prover --config ./config.toml
@@ -40,21 +40,21 @@ and for a user to
 
 ## Claim commission
 
-1. Under `tools` folder in this repo, run `go build` to build the tool.
+1. From the `tools` directory, build the binary:
 
     ```
     cd tools
     go build
     ```
 
-2. Then update the `config.toml` to fill in:
+2. Update `config.toml` with:
 
     | Section | Field | Description |
     | ------- | ----- | ----------- |
-    | chain | keystore | The path to your prover ethereum account keystore json |
-    | chain | passphrase | The passphrase to the prover keystore |
+    | chain | keystore | Path to your prover Ethereum account keystore JSON |
+    | chain | passphrase | Passphrase for the prover keystore |
 
-3. Execute below command:
+3. Run:
 
     ```
     ./tools claim-commission --config ./config.toml
@@ -62,23 +62,23 @@ and for a user to
 
 ## Stake
 
-1. Under `tools` folder in this repo, run `go build` to build the tool.
+1. From the `tools` directory, build the binary:
 
     ```
     cd tools
     go build
     ```
 
-2. Then update the `config.toml` to fill in:
+2. Update `config.toml` with:
 
     | Section | Field | Description |
     | ------- | ----- | ----------- |
-    | chain | keystore | The path to your ethereum account keystore json |
-    | chain | passphrase | The passphrase to the keystore |
-    | stake | stake_to_prover | The prover address that you want to stake your token to (a prover can also use this command stake more to yourself) |
-    | stake | stake_amt | The stake amount in Wei unit |
+    | chain | keystore | Path to your Ethereum account keystore JSON |
+    | chain | passphrase | Passphrase for the keystore |
+    | stake | stake_to_prover | Prover address you want to stake to (provers can also stake more to themselves) |
+    | stake | stake_amt | Stake amount in Wei |
 
-3. Execute below command:
+3. Run:
 
     ```
     ./tools stake --config ./config.toml
@@ -86,32 +86,32 @@ and for a user to
 
 ## Unstake
 
-For unstake, it takes two stages to complete. You should firstly send an unstake request, and then after a delay period, send another request to compeltely unstake.
+Unstaking happens in two stages: submit the request, wait for the delay period, then complete the withdrawal.
 
-1. Under `tools` folder in this repo, run `go build` to build the tool.
+1. From the `tools` directory, build the binary:
 
     ```
     cd tools
     go build
     ```
 
-2. Then update the `config.toml` to fill in:
+2. Update `config.toml` with:
 
     | Section | Field | Description |
     | ------- | ----- | ----------- |
-    | chain | keystore | The path to your ethereum account keystore json |
-    | chain | passphrase | The passphrase to the keystore |
-    | unstake | unstake_from_prover | The prover address that you want to unstake from (a prover can also use this command to unstake from the system and deactivate the prover role) |
+    | chain | keystore | Path to your Ethereum account keystore JSON |
+    | chain | passphrase | Passphrase for the keystore |
+    | unstake | unstake_from_prover | Prover address you want to unstake from (provers can also use this to deactivate themselves) |
 
-3. Execute below command:
+3. Run the commands for each stage:
 
-    - for request stage
+    - Request stage
 
     ```
     ./tools unstake --config ./config.toml --stage request
     ```
 
-    - for complate stage
+    - Complete stage
 
     ```
     ./tools unstake --config ./config.toml --stage complete
@@ -119,23 +119,23 @@ For unstake, it takes two stages to complete. You should firstly send an unstake
 
 ## Request proofs
 
-1. Under `tools` folder in this repo, run `go build` to build the tool.
+1. From the `tools` directory, build the binary:
 
     ```
     cd tools
     go build
     ```
 
-2. Then update the `config.toml` to fill in below fields in `[chain]` section:
+2. Update the `[chain]` section in `config.toml`:
 
     | Field | Description |
     | ----- | ----------- |
-    | keystore | The path to your ethereum account keystore json |
-    | passphrase | The passphrase to the keystore |
+    | keystore | Path to your Ethereum account keystore JSON |
+    | passphrase | Passphrase for the keystore |
 
-Update the param values in `[[request]]` section accordingly. Provide multile `[[request]]` sections to send multiple requests.
+   Adjust the parameters inside each `[[request]]` section as needed. Add multiple `[[request]]` sections to submit more than one proof request.
 
-3. Execute below command:
+3. Run:
 
     ```
     ./tools request-proof --config ./config.toml
@@ -143,30 +143,30 @@ Update the param values in `[[request]]` section accordingly. Provide multile `[
 
 ## Refund not fulfilled requests
 
-1. Under `tools` folder in this repo, run `go build` to build the tool.
+1. From the `tools` directory, build the binary:
 
     ```
     cd tools
     go build
     ```
 
-2. Then update the `config.toml` to fill in:
+2. Update `config.toml` with:
 
     | Section | Field | Description |
     | ------- | ----- | ----------- |
-    | chain | keystore | The path to your ethereum account keystore json |
-    | chain | passphrase | The passphrase to the keystore |
-    | refund | req_ids | You can either fill in the request ids in array or leave this filed as empty array, and pass in `all` flag in the command |
+    | chain | keystore | Path to your Ethereum account keystore JSON |
+    | chain | passphrase | Passphrase for the keystore |
+    | refund | req_ids | Provide specific request IDs, or leave the array empty and use the `--all` flag |
 
-3. Execute below command:
+3. Run the appropriate command:
 
-    - provide req_ids manually in `config.toml`
+    - If `req_ids` are specified in `config.toml`:
 
     ```
     ./tools request-proof --config ./config.toml
     ```
 
-    - refund all refundable requests
+    - To refund every eligible request:
 
     ```
     ./tools request-proof --config ./config.toml --all
