@@ -1,5 +1,7 @@
 # How to Request a Proof
 
+This guide covers proof submissions for the mainnet beta launch.
+
 ## Write the Application and Prepare Inputs
 
 ### Install Pico CLI

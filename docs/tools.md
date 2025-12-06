@@ -1,6 +1,6 @@
 # Tools instruction
 
-Brevis provides CLI utilities that streamline on-chain operations. Provers can:
+Brevis provides CLI utilities that streamline on-chain operations for the mainnet beta launch. Provers can:
 - [Init prover](#init-prover)
 - [Claim commission](#claim-commission)
 - [Stake more](#stake)

@@ -1,6 +1,6 @@
 # Prover operation manual
 
-This manual explains how to spin up a prover node for the Brevis Proving Network. A prover node must run both the Pico proving service (to generate proofs) and the bidder service (to interact with the proving network).
+This manual explains how to spin up a prover node for the Brevis Proving Network during the mainnet beta launch. A prover node must run both the Pico proving service (to generate proofs) and the bidder service (to interact with the proving network).
 
 ## Up the pico proving service
 
