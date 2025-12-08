@@ -72,7 +72,7 @@ func refund() error {
 	var toRefundReqIds [][32]byte
 	if !all {
 		var refund RefundConfig
-		err = viper.UnmarshalKey("refund", &c)
+		err = viper.UnmarshalKey("refund", &refund)
 		chkErr(err, "UnmarshalKey")
 		for _, reqId := range refund.ReqIds {
 			toRefundReqIds = append(toRefundReqIds, common.HexToHash(reqId))
