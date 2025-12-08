@@ -132,7 +132,7 @@ func requestProof() error {
 			log.Fatalf("req %d: RequestProof tx status is not success", i+1)
 		}
 
-		req, err := brevisMarket.ParseNewRequest(*receipt.Logs[2])
+		req, err := brevisMarket.ParseNewRequest(*receipt.Logs[1])
 		chkErr(err, fmt.Sprintf("req %d: ParseNewRequest", i+1))
 		log.Printf("req %d: reqId is %s", i+1, common.Bytes2Hex(req.Reqid[:]))
 	}
