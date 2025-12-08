@@ -17,7 +17,7 @@ submitter_passphrase=""
 [rule]
 max_fee="10000000000"
 max_input_size=0
-prover_gas_price="1"
+prover_gas_price="20"
 prove_min_duration=3600
 vk_whitelist=[]
 vk_blacklist=["0x0000000000000000000000000000000000000000000000000000000000000000"]

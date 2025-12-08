@@ -192,7 +192,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
    | Field | Description |
    | ----- | ----------- |
-   | `prover_gas_price` | Price per prove cycle (bid fee = `prove_cycles * prover_gas_price / 1e9`). Cycles are auto-computed; set the price per your economics. |
+   | `prover_gas_price` | Price per prove cycle (bid fee = `prove_cycles * prover_gas_price / 1e12`). Cycles are auto-computed; set the price per your economics. |
    | `prove_min_duration` | Skip requests whose remaining time (reveal → deadline) is less than this many seconds. |
    | `max_input_size` | `0` means no limit; otherwise skip requests with larger inputs. |
    | `max_fee` | Skip requests whose bid fee would exceed this ceiling. |
