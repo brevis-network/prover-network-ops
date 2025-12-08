@@ -110,6 +110,7 @@ func requestProof() error {
 		if receipt.Status != types.ReceiptStatusSuccessful {
 			log.Fatalf("req %d: approve tx status is not success", i+1)
 		}
+		time.Sleep(1 * time.Second)
 
 		tx, err = brevisMarket.RequestProof(auth, bindings.IBrevisMarketProofRequest{
 			Nonce:              r.Nonce,
