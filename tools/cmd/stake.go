@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 	"math/big"
+	"time"
 	"tools/bindings"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -86,6 +87,7 @@ func stake() error {
 	if receipt.Status != types.ReceiptStatusSuccessful {
 		log.Fatalln("Approve tx status is not success")
 	}
+	time.Sleep(1 * time.Second)
 
 	tx, err = stakingController.Stake(auth, common.HexToAddress(s.Prover), stakeAmt)
 	checkBrevisCustomError(err, "Stake", bindings.IStakingControllerABI)

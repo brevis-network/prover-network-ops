@@ -9,6 +9,7 @@ import (
 	"log"
 	"math/big"
 	"strings"
+	"time"
 	"tools/bindings"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -100,6 +101,7 @@ func initProver() error {
 	if receipt.Status != types.ReceiptStatusSuccessful {
 		log.Fatalln("Approve tx status is not success")
 	}
+	time.Sleep(1 * time.Second)
 
 	tx, err = stakingController.InitializeProver(proverAuth, 10000) /*defaults to 100% commission for now*/
 	checkBrevisCustomError(err, "InitializeProver", bindings.IStakingControllerABI)
@@ -110,6 +112,7 @@ func initProver() error {
 	if receipt.Status != types.ReceiptStatusSuccessful {
 		log.Fatalln("InitializeProver tx status is not success")
 	}
+	time.Sleep(1 * time.Second)
 
 	tx, err = stakingController.SetProverProfile(proverAuth, proverName, proverIcon)
 	checkBrevisCustomError(err, "SetProverProfile", bindings.IStakingControllerABI)
@@ -121,6 +124,7 @@ func initProver() error {
 	}
 
 	if prover != submitter && submitter != ZeroAddr {
+		time.Sleep(1 * time.Second)
 		tx, err := brevisMarket.SetSubmitterConsent(submitterAuth, prover)
 		checkBrevisCustomError(err, "SetSubmitterConsent", bindings.IBrevisMarketABI)
 		log.Printf("SetSubmitterConsent tx: %s", tx.Hash())
@@ -130,6 +134,7 @@ func initProver() error {
 			log.Fatalln("SetSubmitterConsent tx status is not success")
 		}
 
+		time.Sleep(1 * time.Second)
 		tx, err = brevisMarket.RegisterSubmitter(proverAuth, submitter)
 		checkBrevisCustomError(err, "RegisterSubmitter", bindings.IBrevisMarketABI)
 		log.Printf("RegisterSubmitter tx: %s", tx.Hash())
