@@ -34,7 +34,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```bash
    cp .env.example .env
    ```
-   Fix `PROVER_COUNT` to the number of GPU cores on your machine.
+   Fix `PROVER_COUNT` to the number of GPUs on your machine.
    Leave the others unless you are sure they need to change.
    If you encounter a GPU memory allocation issue, you could enable `MAX_EMULATION_CYCLES` to give a try, its value is machine specific.
 7. Download dependencies and bring up the containers:
