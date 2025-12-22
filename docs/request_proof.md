@@ -100,6 +100,7 @@ Use the checklist below to fill each field correctly:
 	- `maxFee`: Maximum amount (USDC on Base) you are willing to pay for the proof.
 	- `minStake`: Minimum prover stake required to bid on this request.
 	- `deadline`: Unix timestamp by which the proof must be submitted. The deadline must be within 30 days of the request time.
+8. **`version`** - Version of the Pico verfifier to use, default to 0.
 
 ## Sample Apps for Testing
 
