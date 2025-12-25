@@ -19,7 +19,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```
 3. Download the GPU Pico proving service image from `/home/ubuntu`:
    ```bash
-   curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/pico-proving-service-gpu.tar
+   curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/mainnet/pico-proving-service-gpu.tar
    ```
 4. Load the image into Docker:
    ```bash
@@ -34,9 +34,11 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```bash
    cp .env.example .env
    ```
-   Fix `PROVER_COUNT` to the number of GPUs on your machine.
+   - Fix `PROVER_COUNT` to the number of GPUs on your machine.
+   - The `SPLIT_THRESHOLD`, `CHUNK_SIZE`, `MEM_POOL_RESERVE_SIZE` and `PICO_GPU_MEM` are set to default for RTX 5090. For RTX 4090, uncomment the setting below.
    Leave the others unless you are sure they need to change.
    If you encounter a GPU memory allocation issue, you could enable `MAX_EMULATION_CYCLES` to give a try, its value is machine specific.
+
 7. Download dependencies and bring up the containers:
    ```bash
    make download-gnark
@@ -68,7 +70,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```
 3. Download the CPU image from `/home/ubuntu`:
    ```bash
-   curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/pico-proving-service-cpu.tar
+   curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/mainnet/pico-proving-service-cpu.tar
    ```
 4. Load the image:
    ```bash
