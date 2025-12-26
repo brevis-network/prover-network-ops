@@ -35,7 +35,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    cp .env.example .env
    ```
    - Fix `PROVER_COUNT` to the number of GPUs on your machine.
-   - The `SPLIT_THRESHOLD`, `CHUNK_SIZE`, `MEM_POOL_RESERVE_SIZE` and `PICO_GPU_MEM` are set to default for RTX 5090. For RTX 4090, uncomment the setting below.
+   - The `SPLIT_THRESHOLD`, `CHUNK_SIZE`, `MEM_POOL_RESERVE_SIZE` and `PICO_GPU_MEM` are set to default for RTX 5090. For RTX 4090, comment the settings for 5090 and enable the settings for 4090.
    Leave the others unless you are sure they need to change.
    If you encounter a GPU memory allocation issue, you could enable `MAX_EMULATION_CYCLES` to give a try, its value is machine specific.
 
