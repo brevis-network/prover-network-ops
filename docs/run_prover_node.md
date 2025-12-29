@@ -35,7 +35,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 5. Clone the repository and enter the GPU docker folder:
    ```bash
    # mainnet
-   git clone --branch v1.2.1 https://github.com/brevis-network/pico-proving-service
+   git clone --branch v1.2.2 https://github.com/brevis-network/pico-proving-service
 
    # testnet
    git clone --branch v1.1.8 https://github.com/brevis-network/pico-proving-service
