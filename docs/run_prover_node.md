@@ -53,6 +53,9 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
 7. Download dependencies and bring up the containers:
    ```bash
+   # delete the old gnark files for upgrade
+   rm -rf ../gnark_downloads
+
    make download-gnark
    make up
    ```
@@ -112,6 +115,9 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    Keep the default values unless you have a specific reason to override them.
 7. Download dependencies and start the containers:
    ```bash
+   # delete the old gnark files for upgrade
+   rm -rf ../gnark_downloads
+
    make download-gnark
    make up
    ```
