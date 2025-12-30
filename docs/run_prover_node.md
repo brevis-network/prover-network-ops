@@ -29,7 +29,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```
 4. Delete the old image from Docker and load the new image:
    ```bash
-   docker rmi pico-proving-service-gpu:latest
+   docker rmi -f pico-proving-service-gpu:latest
    docker load -i pico-proving-service-gpu.tar
    ```
 5. Clone the repository and enter the GPU docker folder:
@@ -92,7 +92,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```
 4. Delete the old image from Docker and load the new image:
    ```bash
-   docker rmi pico-proving-service-cpu:latest
+   docker rmi -f pico-proving-service-cpu:latest
    docker load -i pico-proving-service-cpu.tar
    ```
 5. Clone the repository and enter the CPU docker folder:
