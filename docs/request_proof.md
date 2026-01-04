@@ -6,12 +6,12 @@ This guide covers proof submissions for the mainnet beta launch.
 
 ### Install Pico CLI
 
-Use Pico CLI `v1.1.8` for the steps below.
+Use Pico CLI `v1.2.2` for the steps below.
 
 #### Option 1: Install via Cargo
 
 ```
-cargo +nightly-2025-08-04 install --git https://github.com/brevis-network/pico --tag v1.1.8 pico-cli
+cargo +nightly-2025-08-04 install --git https://github.com/brevis-network/pico --tag v1.2.2 pico-cli
 ```
 
 Verify the installation:
@@ -25,7 +25,7 @@ cargo pico --version
 ```
 git clone https://github.com/brevis-network/pico
 cd pico
-git checkout v1.1.8
+git checkout v1.2.2
 cd sdk/cli
 cargo install --locked --force --path .
 ```
