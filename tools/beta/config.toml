@@ -1,0 +1,45 @@
+# common settings for all commands
+[chain]
+chain_id=8453
+chain_rpc="https://developer-access-mainnet.base.org"
+brevis_market_addr="0x64A364888eeafc0F72e7788DD2fBEc9a456b305e"
+staking_token_addr="0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"
+staking_controller_addr="0x435f3Ee9673d6a1c73AddD8F5B6bF643E882E0B3"
+market_viewer_addr="0xd022DA37cCDAFBC140E32578E8891baE7B2E1AB0"
+
+## user or prover keystore
+keystore=""
+passphrase=""
+
+# for request-proof command, sample data as below
+[[request]]
+nonce=4
+vk="0x00f3b7c002bb8248c7e64b00d2e2c09b4f94e3c7a8097bc2c72076076960d62c"
+public_value_digest="0x03b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+img_url="https://github.com/hezhihua81/test/raw/refs/heads/main/fib-elf"
+input_url="https://github.com/hezhihua81/test/raw/refs/heads/main/fib-100.bin"
+input_data="0x"
+max_fee="1000000"
+min_stake="20000000"
+deadline=1767110400 # note, should be a future time in less than 30 days
+version=0 # pico verifier version, default to 0
+
+# for refund command
+[refund]
+req_ids = []
+
+# for init-prover command
+[init_prover]
+submitter_keystore=""
+submitter_passphrase=""
+prover_name=""
+prover_icon=""
+
+# for stake command
+[stake]
+stake_to_prover=""
+stake_amt="1000000"
+
+# for unstake command
+[unstake]
+unstake_from_prover=""
