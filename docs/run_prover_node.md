@@ -8,7 +8,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
 ### GPU Machine
 
-***Re-deploy from step 3 for upgrade from testnet to mainnet.***
+***Re-deploy from step 3 for upgrade from mainnet beta to mainnet.***
 
 1. Follow [multi-machine-setup.md](https://github.com/brevis-network/pico-ethproofs/blob/main/docs/multi-machine-setup.md) to prepare the GPU box.
 2. Install [Docker](https://docs.docker.com/engine/install) and add your user to the `docker` group:
@@ -24,7 +24,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    # mainnet
    curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/mainnet/pico-proving-service-gpu.tar
 
-   # testnet
+   # mainnet beta
    curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/testnet/pico-proving-service-gpu.tar
    ```
 4. Delete the old image from Docker and load the new image:
@@ -37,7 +37,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    # mainnet
    git clone --branch v1.2.2 https://github.com/brevis-network/pico-proving-service
 
-   # testnet
+   # mainnet beta
    git clone --branch v1.1.8 https://github.com/brevis-network/pico-proving-service
 
    cd pico-proving-service/docker/gpu
@@ -72,7 +72,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
 ### CPU Machine
 
-***Re-deploy from step 3 for upgrade from testnet to mainnet.***
+***Re-deploy from step 3 for upgrade from mainnet beta to mainnet.***
 
 1. Prepare the host:
    - Instance: AWS `r7i.16xlarge` (64 vCPUs) or equivalent.
@@ -90,7 +90,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    # mainnet
    curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/mainnet/pico-proving-service-cpu.tar
 
-   # testnet
+   # mainnet beta
    curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/testnet/pico-proving-service-cpu.tar
    ```
 4. Delete the old image from Docker and load the new image:
@@ -103,7 +103,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    # mainnet
    git clone --branch v1.2.2 https://github.com/brevis-network/pico-proving-service
 
-   # testnet
+   # mainnet beta
    git clone --branch v1.1.8 https://github.com/brevis-network/pico-proving-service
 
    cd pico-proving-service/docker/cpu
@@ -207,9 +207,17 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    cd ~
    ```
 4. Copy bidder configs:
+
+   - for mainnet deployment
    ```bash
    git clone https://github.com/brevis-network/prover-network-ops
    cp -a prover-network-ops/node-configs ~/.bidder
+   ```
+
+   - for mainnet beta deployment
+   ```bash
+   git clone https://github.com/brevis-network/prover-network-ops
+   cp -a prover-network-ops/node-configs/beta ~/.bidder
    ```
 5. Edit `~/.bidder/config.toml`:
 
