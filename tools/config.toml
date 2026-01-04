@@ -19,9 +19,10 @@ public_value_digest="0x03b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7
 img_url="https://github.com/hezhihua81/test/raw/refs/heads/main/fib-elf"
 input_url="https://github.com/hezhihua81/test/raw/refs/heads/main/fib-100.bin"
 input_data="0x"
-max_fee=1000000
-min_stake=20000000
+max_fee="1000000"
+min_stake="20000000"
 deadline=1767110400 # note, should be a future time in less than 30 days
+version=0 # pico verifier version, default to 0
 
 # for refund command
 [refund]

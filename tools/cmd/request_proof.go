@@ -29,6 +29,7 @@ type Request struct {
 	MaxFee             string `mapstructure:"max_fee"`
 	MinStake           string `mapstructure:"min_stake"`
 	Deadline           uint64 `mapstructure:"deadline"`
+	Version            uint32 `mapstructure:"version"`
 }
 
 type Requests []*Request
@@ -124,6 +125,7 @@ func requestProof() error {
 				MinStake: minStakeInt,
 				Deadline: r.Deadline,
 			},
+			Version: r.Version,
 		})
 		checkBrevisCustomError(err, fmt.Sprintf("req %d: RequestProof", i+1), bindings.IBrevisMarketABI)
 		log.Printf("req %d: RequestProof tx: %s", i+1, tx.Hash())
@@ -133,7 +135,7 @@ func requestProof() error {
 			log.Fatalf("req %d: RequestProof tx status is not success", i+1)
 		}
 
-		req, err := brevisMarket.ParseNewRequest(*receipt.Logs[1])
+		req, err := brevisMarket.ParseNewRequest(*receipt.Logs[2])
 		chkErr(err, fmt.Sprintf("req %d: ParseNewRequest", i+1))
 		log.Printf("req %d: reqId is %s", i+1, common.Bytes2Hex(req.Reqid[:]))
 	}
