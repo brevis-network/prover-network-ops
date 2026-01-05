@@ -1,6 +1,6 @@
 # How to Request a Proof
 
-This guide covers proof submissions for the mainnet beta launch.
+This guide covers proof submissions for the Base mainnet launch.
 
 ## Write the Application and Prepare Inputs
 
@@ -81,12 +81,12 @@ Persist these values—they flow directly into the proof-request transaction.
 
 ## Send a Proof Request
 
-The easiest way to submit requests is via the [CLI utility](./tools.md#request-proofs), which batches multiple entries and handles encoding. For the Base Mainnet Beta Launch you must hold sufficient `USDC` to cover the proof fee.
+The easiest way to submit requests is via the [CLI utility](./tools.md#request-proofs), which batches multiple entries and handles encoding. On Base mainnet, you must hold sufficient `BREV` to cover the proof fee.
 
 To send a single request through a block explorer instead:
 
-1. Approve USDC spending for `BrevisMarket` (address `0x64A364888eeafc0F72e7788DD2fBEc9a456b305e`) using the [USDC contract](https://basescan.org/token/0x833589fcd6edb6e08f4c7c32d4f71b54bda02913#writeProxyContract).
-2. Call `requestProof` on [BrevisMarket](https://basescan.org/address/0x64A364888eeafc0F72e7788DD2fBEc9a456b305e#writeProxyContract) with the parameters gathered above.
+1. Approve BREV spending for `BrevisMarket` (address `0xcCec2a9FE35b6B5F23bBF303A4e14e5895DeA127`) using the [BREV contract](https://basescan.org/token/0x086F405146Ce90135750Bbec9A063a8B20A8bfFb#writeProxyContract).
+2. Call `requestProof` on [BrevisMarket](https://basescan.org/address/0xcCec2a9FE35b6B5F23bBF303A4e14e5895DeA127#writeProxyContract) with the parameters gathered above.
 
 Use the checklist below to fill each field correctly:
 
@@ -97,7 +97,7 @@ Use the checklist below to fill each field correctly:
 5. **`inputData`** – Encoded input from the generator step.
 6. **`inputURL`** – Optional URL pointing to the input payload when it is too large to inline. Provide either `inputData` or `inputURL` (or both).
 7. **`fee` tuple (`maxFee`, `minStake`, `deadline`)**:
-	- `maxFee`: Maximum amount (USDC on Base) you are willing to pay for the proof.
+	- `maxFee`: Maximum amount (BREV on Base) you are willing to pay for the proof.
 	- `minStake`: Minimum prover stake required to bid on this request.
 	- `deadline`: Unix timestamp by which the proof must be submitted. The deadline must be within 30 days of the request time.
 8. **`version`** - Version of the Pico verfifier to use, default to 0.
