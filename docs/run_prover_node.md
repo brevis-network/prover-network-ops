@@ -79,7 +79,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    - OS: `ubuntu-24.04-amd64-server`.
    - Install prerequisites:
      - [Rust](https://www.rust-lang.org/tools/install) (restart the shell after installation).
-     - Build tools: `sudo apt-get install -y build-essential cmake git pkg-config libssl-dev`
+     - Build tools: `sudo apt-get update && sudo apt-get install -y build-essential cmake git pkg-config libssl-dev protobuf-compiler`
      - [sqlx-cli](https://github.com/launchbadge/sqlx/tree/main/sqlx-cli): `cargo install sqlx-cli`
 2. Install Docker and add your user to the `docker` group:
    ```bash
