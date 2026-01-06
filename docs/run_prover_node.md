@@ -266,6 +266,8 @@ To join the proving network, initialize your prover on the [StakingController](h
    Commission rates support both a default and per-source overrides via `setCommissionRate(source, rate)`:
    - Default commission rate: your global fallback rate, applied to any reward source without a specific override.
    - Per-source override: a rate specific to a given reward source (for example, you may set a higher rate for BrevisMarket rewards to cover GPU costs, while keeping a lower rate for other reward sources to remain competitive for stakers).
+   
+   Example operation: after `initializeProver`, set a 50% commission for BrevisMarket rewards by calling `setCommissionRate(brevisMarketAddr, 5000)` (50% = 5000 bps), where `brevisMarketAddr` is the BrevisMarket contract address.
 3. Call `setProverProfile` to publish your metadata.
 4. If the submitter uses a different account:
    - As the submitter, call `setSubmitterConsent` on [BrevisMarket](https://basescan.org/address/0xcCec2a9FE35b6B5F23bBF303A4e14e5895DeA127#writeProxyContract).
