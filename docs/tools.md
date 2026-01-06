@@ -1,6 +1,6 @@
 # Tools instruction
 
-Brevis provides CLI utilities that streamline on-chain operations for the mainnet launch. Provers can:
+Brevis provides CLI utilities that streamline on-chain operations for the Base mainnet launch. Provers can:
 - [Init prover](#init-prover), note that this step will also auto stake a configured minimum amount to ensure prover meets the minimum self-stake requirement. Prover can use [`stake`](#stake) command to stake more on demand.
 - [Claim commission](#claim-commission)
 - [Stake more](#stake)

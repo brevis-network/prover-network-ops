@@ -1,6 +1,17 @@
 # Prover operation manual
 
-This manual explains how to spin up a prover node for the Brevis Proving Network during the mainnet beta launch. A prover node must run both the Pico proving service (to generate proofs) and the bidder service (to interact with the proving network).
+This manual explains how to spin up a prover node for the Brevis Proving Network on Base mainnet. A prover node must run both the Pico proving service (to generate proofs) and the bidder service (to interact with the proving network).
+
+## Table of contents
+
+- [Up the pico proving service](#up-the-pico-proving-service)
+   - [GPU Machine](#gpu-machine)
+   - [CPU Machine](#cpu-machine)
+- [Up the bidder service](#up-the-bidder-service)
+   - [Prepare EC2 machine and install dependencies](#prepare-ec2-machine-and-install-dependencies)
+   - [Setup binary, db, config and accounts](#setup-binary-db-config-and-accounts)
+   - [Initialize Prover (StakingController)](#initialize-prover-stakingcontroller)
+   - [Run the bidder node](#run-the-bidder-node)
 
 ## Up the pico proving service
 
@@ -223,6 +234,8 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
    You may use separate accounts for staking (`prover`) and for bidding/submitting proofs (`submitter`), or reuse the same Ethereum account for both.
 
+   Because the prover and submitter roles are decoupled, you can keep the **prover** account in a hardware/HD wallet (or any setup you do not want online), and run the bidder service with a separate **submitter** account that is allowed to sign and submit proofs. In this setup, the prover account is used for staking and identity, while the submitter account is used operationally by the bidder.
+
    | Field | Description |
    | ----- | ----------- |
    | `prover_url` | Pico proving service gRPC endpoint (`${pico-ip}:${port}`, default port `50052`). |
@@ -243,15 +256,19 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
    > Note: (1) Fees are denominated in the staking token. (2) A VK digest is generated when building the ELF and uniquely identifies a zk program.
 
-### Staking as a bidder
+### Initialize Prover (StakingController)
 
-To join the proving network as a bidder, you must initialize yourself as a prover in the [StakingController](https://basescan.org/address/0x435f3Ee9673d6a1c73AddD8F5B6bF643E882E0B3#writeProxyContract). USDC is the staking token during the current mainnet beta; the official mainnet launch will use the BREV token for staking. The CLI command [`tools init-prover`](./tools.md#init-prover) automates this, but you can also use a block explorer. Perform the first three steps with your **prover** account:
+To join the proving network, initialize your prover on the [StakingController](https://basescan.org/address/0x9c0D8C5F10f0d3A02D04556a4499964a75DBf4A3#writeProxyContract). BREV is the staking token on Base mainnet (token address `0x086F405146Ce90135750Bbec9A063a8B20A8bfFb`). The CLI command [`tools init-prover`](./tools.md#init-prover) automates this, but you can also use a block explorer. Perform the first three steps with your **prover** account:
 
-1. Approve the StakingController to spend your USDC: [USDC contract](https://basescan.org/token/0x833589fcd6edb6e08f4c7c32d4f71b54bda02913#writeProxyContract) → `approve(0x435f..., amount)`.
-2. Call `initializeProver` on the [StakingController](https://basescan.org/address/0x435f3Ee9673d6a1c73AddD8F5B6bF643E882E0B3#writeProxyContract) with a commission rate 10000 bps (100%). The current mainnet beta is limited to prover-operated staking, so keeping the commission at 100% prevents losing collected fees. This call also transfers the minimum stake.
+1. Approve the StakingController to spend your BREV: [BREV contract](https://basescan.org/token/0x086F405146Ce90135750Bbec9A063a8B20A8bfFb#writeProxyContract) → `approve(0x9c0D..., amount)`.
+2. Call `initializeProver` on the [StakingController](https://basescan.org/address/0x9c0D8C5F10f0d3A02D04556a4499964a75DBf4A3#writeProxyContract) with a commission rate in basis points (e.g., 500 bps = 5%). Choose a commission rate that matches your policy. This call also transfers the minimum stake.
+
+   Commission rates support both a default and per-source overrides via `setCommissionRate(source, rate)`:
+   - Default commission rate: your global fallback rate, applied to any reward source without a specific override.
+   - Per-source override: a rate specific to a given reward source (for example, you may set a higher rate for BrevisMarket rewards to cover GPU costs, while keeping a lower rate for other reward sources to remain competitive for stakers).
 3. Call `setProverProfile` to publish your metadata.
 4. If the submitter uses a different account:
-   - As the submitter, call `setSubmitterConsent` on [BrevisMarket](https://basescan.org/token/0x64A364888eeafc0F72e7788DD2fBEc9a456b305e#writeProxyContract).
+   - As the submitter, call `setSubmitterConsent` on [BrevisMarket](https://basescan.org/address/0xcCec2a9FE35b6B5F23bBF303A4e14e5895DeA127#writeProxyContract).
    - As the prover, call `registerSubmitter` on the same contract.
 
 ### Run the bidder node
