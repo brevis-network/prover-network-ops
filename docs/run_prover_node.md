@@ -2,6 +2,17 @@
 
 This manual explains how to spin up a prover node for the Brevis Proving Network on Base mainnet. A prover node must run both the Pico proving service (to generate proofs) and the bidder service (to interact with the proving network).
 
+## Table of contents
+
+- [Up the pico proving service](#up-the-pico-proving-service)
+   - [GPU Machine](#gpu-machine)
+   - [CPU Machine](#cpu-machine)
+- [Up the bidder service](#up-the-bidder-service)
+   - [Prepare EC2 machine and install dependencies](#prepare-ec2-machine-and-install-dependencies)
+   - [Setup binary, db, config and accounts](#setup-binary-db-config-and-accounts)
+   - [Initialize Prover (StakingController)](#initialize-prover-stakingcontroller)
+   - [Run the bidder node](#run-the-bidder-node)
+
 ## Up the pico proving service
 
 A GPU host is strongly recommended. For small workloads or experimentation, a CPU host also works. The subsections below outline each setup.
