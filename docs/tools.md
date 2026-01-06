@@ -1,7 +1,11 @@
 # Tools instruction
 
-Brevis provides CLI utilities that streamline on-chain operations for the Base mainnet launch. Provers can:
-- [Init prover](#init-prover), note that this step will also auto stake a configured minimum amount to ensure prover meets the minimum self-stake requirement. Prover can use [`stake`](#stake) command to stake more on demand.
+Brevis provides preliminary CLI utilities to streamline common on-chain operations for the Base mainnet launch.
+
+For complete prover and staking functionality, use the BaseScan explorer contract UI.
+
+Provers can:
+- [Init prover](#init-prover)
 - [Claim commission](#claim-commission)
 - [Stake more](#stake)
 - [Unstake](#unstake)
@@ -39,6 +43,8 @@ Users can:
     ```
     ./tools init-prover --config ./config.toml
     ```
+
+Note: `init-prover` will also auto-stake the configured minimum amount to ensure the prover meets the minimum self-stake requirement. Use the [`stake`](#stake) command to add more stake later.
 
 ## Claim commission
 
@@ -87,6 +93,8 @@ Users can:
     ```
 
 ## Unstake
+
+This command unstakes all of your stake/shares from the specified prover.
 
 Unstaking happens in two stages: submit the request, wait for the delay period, then complete the withdrawal.
 
