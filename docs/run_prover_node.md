@@ -19,8 +19,6 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
 ### GPU Machine
 
-***Re-deploy from step 3 for upgrade from mainnet beta to mainnet.***
-
 1. Follow [multi-machine-setup.md](https://github.com/brevis-network/pico-ethproofs/blob/main/docs/multi-machine-setup.md) to prepare the GPU box.
 2. Install [Docker](https://docs.docker.com/engine/install) and add your user to the `docker` group:
    ```bash
@@ -32,25 +30,21 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```
 3. Download the GPU Pico proving service image from `/home/ubuntu`:
    ```bash
-   # mainnet
    curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/mainnet/pico-proving-service-gpu.tar
-
-   # mainnet beta
-   curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/testnet/pico-proving-service-gpu.tar
    ```
 4. Delete the old image from Docker and load the new image:
+   If old image exists, delete it firstly
    ```bash
    docker rmi -f pico-proving-service-gpu:latest
+   ```
+
+   Load the new downloaded image
+   ```bash
    docker load -i pico-proving-service-gpu.tar
    ```
 5. Clone the repository and enter the GPU docker folder:
    ```bash
-   # mainnet
    git clone --branch v1.2.2 https://github.com/brevis-network/pico-proving-service
-
-   # mainnet beta
-   git clone --branch v1.1.8 https://github.com/brevis-network/pico-proving-service
-
    cd pico-proving-service/docker/gpu
    ```
 6. Copy the environment template:
@@ -58,13 +52,13 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    cp .env.example .env
    ```
    - Fix `PROVER_COUNT` to the number of GPUs on your machine.
-   - (Only for mainnet) The `SPLIT_THRESHOLD`, `CHUNK_SIZE`, `MEM_POOL_RESERVE_SIZE` and `PICO_GPU_MEM` are set to default for RTX 5090. For RTX 4090, comment the settings for 5090 and enable the settings for 4090.
+   - The `SPLIT_THRESHOLD`, `CHUNK_SIZE`, `MEM_POOL_RESERVE_SIZE` and `PICO_GPU_MEM` are set to default for RTX 5090. For RTX 4090, comment the settings for 5090 and enable the settings for 4090.
    Leave the others unless you are sure they need to change.
    If you encounter a GPU memory allocation issue, you could enable `MAX_EMULATION_CYCLES` to give a try, its value is machine specific.
 
 7. Download dependencies and bring up the containers:
    ```bash
-   # delete the old gnark files for upgrade
+   # delete the old gnark files for upgrade if exist
    rm -rf ../gnark_downloads
 
    make download-gnark
@@ -83,8 +77,6 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
 ### CPU Machine
 
-***Re-deploy from step 3 for upgrade from mainnet beta to mainnet.***
-
 1. Prepare the host:
    - Instance: AWS `r7i.16xlarge` (64 vCPUs) or equivalent.
    - OS: `ubuntu-24.04-amd64-server`.
@@ -98,25 +90,21 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```
 3. Download the CPU image from `/home/ubuntu`:
    ```bash
-   # mainnet
    curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/mainnet/pico-proving-service-cpu.tar
-
-   # mainnet beta
-   curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/testnet/pico-proving-service-cpu.tar
    ```
 4. Delete the old image from Docker and load the new image:
+   If old image exists, delete it firstly
    ```bash
    docker rmi -f pico-proving-service-cpu:latest
+   ```
+
+   Load the new downloaded image
+   ```bash
    docker load -i pico-proving-service-cpu.tar
    ```
 5. Clone the repository and enter the CPU docker folder:
    ```bash
-   # mainnet
    git clone --branch v1.2.2 https://github.com/brevis-network/pico-proving-service
-
-   # mainnet beta
-   git clone --branch v1.1.8 https://github.com/brevis-network/pico-proving-service
-
    cd pico-proving-service/docker/cpu
    ```
 6. Copy the environment template:
@@ -126,7 +114,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    Keep the default values unless you have a specific reason to override them.
 7. Download dependencies and start the containers:
    ```bash
-   # delete the old gnark files for upgrade
+   # delete the old gnark files for upgrade if exist
    rm -rf ../gnark_downloads
 
    make download-gnark
@@ -218,17 +206,9 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    cd ~
    ```
 4. Copy bidder configs:
-
-   - for mainnet deployment
    ```bash
    git clone https://github.com/brevis-network/prover-network-ops
    cp -a prover-network-ops/node-configs ~/.bidder
-   ```
-
-   - for mainnet beta deployment
-   ```bash
-   git clone https://github.com/brevis-network/prover-network-ops
-   cp -a prover-network-ops/node-configs/beta ~/.bidder
    ```
 5. Edit `~/.bidder/config.toml`:
 
