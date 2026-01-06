@@ -21,10 +21,12 @@ import (
 )
 
 type InitializeProverConfig struct {
-	SubmitterKeystore   string `mapstructure:"submitter_keystore"`
-	SubmitterPassphrase string `mapstructure:"submitter_passphrase"`
-	ProverName          string `mapstructure:"prover_name"`
-	ProverIcon          string `mapstructure:"prover_icon"`
+	SubmitterKeystore         string  `mapstructure:"submitter_keystore"`
+	SubmitterPassphrase       string  `mapstructure:"submitter_passphrase"`
+	ProverName                string  `mapstructure:"prover_name"`
+	ProverIcon                string  `mapstructure:"prover_icon"`
+	DefaultCommissionRateBps  *uint64 `mapstructure:"default_commission_rate_bps"`
+	ProofFeeCommissionRateBps *uint64 `mapstructure:"proof_fee_commission_rate_bps"`
 }
 
 func InitializeProverCmd() *cobra.Command {
@@ -83,6 +85,26 @@ func initProver() error {
 		log.Fatalln("please fill in both prover_name and prover_icon")
 	}
 
+	var defaultCommissionRateBps uint64
+	if s.DefaultCommissionRateBps != nil {
+		defaultCommissionRateBps = *s.DefaultCommissionRateBps
+	} else {
+		log.Fatalln("please set init_prover.default_commission_rate_bps")
+	}
+	if defaultCommissionRateBps > 10000 {
+		log.Fatalln("default_commission_rate_bps must be between 0 and 10000")
+	}
+	proofFeeCommissionRateBps := uint64(0)
+	if s.ProofFeeCommissionRateBps != nil {
+		proofFeeCommissionRateBps = *s.ProofFeeCommissionRateBps
+	}
+	if proofFeeCommissionRateBps > 10000 {
+		log.Fatalln("proof_fee_commission_rate_bps must be between 0 and 10000")
+	}
+	if proofFeeCommissionRateBps != 0 && proofFeeCommissionRateBps <= defaultCommissionRateBps {
+		log.Fatalln("proof_fee_commission_rate_bps must be greater than default_commission_rate_bps")
+	}
+
 	if s.SubmitterKeystore != "" {
 		submitterAuth, submitter, err = CreateTransactOpts(s.SubmitterKeystore, s.SubmitterPassphrase, chid)
 		chkErr(err, "submitter CreateTransactOpts")
@@ -103,7 +125,7 @@ func initProver() error {
 	}
 	time.Sleep(1 * time.Second)
 
-	tx, err = stakingController.InitializeProver(proverAuth, 10000) /*defaults to 100% commission for now*/
+	tx, err = stakingController.InitializeProver(proverAuth, defaultCommissionRateBps)
 	checkBrevisCustomError(err, "InitializeProver", bindings.IStakingControllerABI)
 	chkErr(err, "InitializeProver")
 	log.Printf("InitializeProver tx: %s", tx.Hash())
@@ -113,6 +135,19 @@ func initProver() error {
 		log.Fatalln("InitializeProver tx status is not success")
 	}
 	time.Sleep(1 * time.Second)
+
+	if proofFeeCommissionRateBps != 0 {
+		tx, err = stakingController.SetCommissionRate(proverAuth, common.HexToAddress(c.BrevisMarketAddr), proofFeeCommissionRateBps)
+		checkBrevisCustomError(err, "SetCommissionRate", bindings.IStakingControllerABI)
+		chkErr(err, "SetCommissionRate")
+		log.Printf("SetCommissionRate(BrevisMarket) tx: %s", tx.Hash())
+		receipt, err = bind.WaitMined(context.Background(), ec, tx)
+		chkErr(err, "WaitMined")
+		if receipt.Status != types.ReceiptStatusSuccessful {
+			log.Fatalln("SetCommissionRate tx status is not success")
+		}
+		time.Sleep(1 * time.Second)
+	}
 
 	tx, err = stakingController.SetProverProfile(proverAuth, proverName, proverIcon)
 	checkBrevisCustomError(err, "SetProverProfile", bindings.IStakingControllerABI)

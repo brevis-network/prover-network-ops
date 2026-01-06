@@ -34,6 +34,8 @@ submitter_keystore=""
 submitter_passphrase=""
 prover_name=""
 prover_icon=""
+default_commission_rate_bps=500 # default (fallback) commission rate in bps. Example: 500 = 5%
+proof_fee_commission_rate_bps=0 # optional BrevisMarket-specific commission in bps; set to non-zero to enable. Example: 5000 = 50%
 
 # for stake command
 [stake]

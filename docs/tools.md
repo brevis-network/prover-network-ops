@@ -31,6 +31,8 @@ Users can:
     | init_prover | submitter_passphrase | (Optional) Passphrase for the submitter account |
     | init_prover | prover_name | Name that identifies you or your organization |
     | init_prover | prover_icon | URL of the icon that represents you or your organization |
+    | init_prover | default_commission_rate_bps | Default (fallback) commission rate in basis points (e.g., 500 = 5%) |
+    | init_prover | proof_fee_commission_rate_bps | (Optional) BrevisMarket-specific commission rate in basis points (e.g., 5000 = 50%). Set to `0` to skip setting a per-source override; typically set this higher than `default_commission_rate_bps`. |
 
 3. Run:
 
