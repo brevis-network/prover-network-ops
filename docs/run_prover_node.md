@@ -30,7 +30,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
    ```
 3. Download the GPU Pico proving service image from `/home/ubuntu`:
    ```bash
-   curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/mainnet/pico-proving-service-gpu.tar
+   curl -sL -O https://pico-proofs.s3.us-west-2.amazonaws.com/prover-network/mainnet/pico_proving_service_gpu_v1_0_1.tar
    ```
 4. Delete the old image from Docker and load the new image:
    If old image exists, delete it firstly
@@ -40,11 +40,13 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 
    Load the new downloaded image
    ```bash
-   docker load -i pico-proving-service-gpu.tar
+   docker load -i pico_proving_service_gpu_v1_0_1.tar
+   docker tag pico-proving-service-gpu:v1.0.1 pico-proving-service-gpu:latest
    ```
 5. Clone the repository and enter the GPU docker folder:
    ```bash
-   git clone --branch v1.2.2 https://github.com/brevis-network/pico-proving-service
+   # must switch to tag `v1.0.1` if you have already cloned pico-proving-service
+   git clone --branch v1.0.1 https://github.com/brevis-network/pico-proving-service
    cd pico-proving-service/docker/gpu
    ```
 6. Copy the environment template:
