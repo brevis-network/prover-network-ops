@@ -115,6 +115,14 @@ func initProver() error {
 	chkErr(err, "MinSelfStake")
 	approveAmt.Add(approveAmt, minSelfStake)
 
+	balance, err := stakingToken.BalanceOf(nil, prover)
+	chkErr(err, "BalanceOf")
+
+	if balance.Cmp(minSelfStake) == -1 {
+		amount := big.NewInt(0).Div(minSelfStake, big.NewInt(1e18))
+		log.Fatalf("You don't have at least %s BREV in your account to meet minimum self-stake requirement", amount.String())
+	}
+
 	tx, err := stakingToken.Approve(proverAuth, common.HexToAddress(c.StakingControllerAddr), approveAmt)
 	chkErr(err, "Approve")
 	log.Printf("approve tx: %s", tx.Hash())
