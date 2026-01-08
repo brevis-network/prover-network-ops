@@ -243,7 +243,7 @@ A GPU host is strongly recommended. For small workloads or experimentation, a CP
 To join the proving network, initialize your prover on the [StakingController](https://basescan.org/address/0x9c0D8C5F10f0d3A02D04556a4499964a75DBf4A3#writeProxyContract). BREV is the staking token on Base mainnet (token address `0x086F405146Ce90135750Bbec9A063a8B20A8bfFb`). The CLI command [`tools init-prover`](./tools.md#init-prover) automates this, but you can also use a block explorer. Perform the first three steps with your **prover** account:
 
 1. Approve the StakingController to spend your BREV: [BREV contract](https://basescan.org/token/0x086F405146Ce90135750Bbec9A063a8B20A8bfFb#writeProxyContract) → `approve(0x9c0D..., amount)`.
-2. Call `initializeProver` on the [StakingController](https://basescan.org/address/0x9c0D8C5F10f0d3A02D04556a4499964a75DBf4A3#writeProxyContract) with a commission rate in basis points (e.g., 500 bps = 5%). Choose a commission rate that matches your policy. This call also transfers the minimum stake.
+2. Call `initializeProver` on the [StakingController](https://basescan.org/address/0x9c0D8C5F10f0d3A02D04556a4499964a75DBf4A3#writeProxyContract) with a commission rate in basis points (e.g., 500 bps = 5%). Choose a commission rate that matches your policy. This call also transfers the minimum stake. At the present time, please make sure your prover account has at least 1000 BREV.
 
    Commission rates support both a default and per-source overrides via `setCommissionRate(source, rate)`:
    - Default commission rate: your global fallback rate, applied to any reward source without a specific override.
