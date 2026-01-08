@@ -18,6 +18,8 @@ Users can:
 
 ## Init prover
 
+Note: `init-prover` will also auto-stake the configured minimum amount to ensure the prover meets the minimum self-stake requirement. Because the BREV token is originally issued on Ethereum, you must bridge your tokens to Base to meet the self-staking requirements (currently 1000 BREV).
+
 1. From the `tools` directory in this repo, build the binary:
 
     ```
@@ -44,7 +46,7 @@ Users can:
     ./tools init-prover --config ./config.toml
     ```
 
-Note: `init-prover` will also auto-stake the configured minimum amount to ensure the prover meets the minimum self-stake requirement. Use the [`stake`](#stake) command to add more stake later.
+To add more stake after initialization, please use the [`stake`](#stake) command.
 
 ## Claim commission
 
